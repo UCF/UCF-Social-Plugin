@@ -34,14 +34,14 @@ gulp.task('scss-lint', function() {
 
 // Compile + bless primary scss files
 gulp.task('css-main', function() {
-  return gulp.src(config.src.scssPath + '/ucf-alert.scss')
+  return gulp.src(config.src.scssPath + '/ucf-social.scss')
     .pipe(sass().on('error', sass.logError))
     .pipe(cleanCSS())
     .pipe(autoprefixer({
       browsers: ['last 2 versions'],
       cascade: false
     }))
-    .pipe(rename('ucf-alert.min.css'))
+    .pipe(rename('ucf-social.min.css'))
     .pipe(gulp.dest(config.dist.cssPath))
     .pipe(browserSync.stream());
 });
