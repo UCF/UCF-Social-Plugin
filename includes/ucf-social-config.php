@@ -9,19 +9,8 @@ if ( !class_exists( 'UCF_Social_Config' ) ) {
 		public static
 			$option_prefix = 'ucf_social_',
 			$option_defaults = array(
-				'layout'           => 'default',
-				'include_css'      => true,
+				'include_css' => true,
 			);
-
-		public static function get_layouts() {
-			$layouts = array(
-				'default' => 'Default Layout',
-			);
-
-			$layouts = apply_filters( self::$option_prefix . 'get_layouts', $layouts );
-
-			return $layouts;
-		}
 
 		/**
 		 * Creates options via the WP Options API that are utilized by the

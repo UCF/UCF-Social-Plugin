@@ -1,26 +1,22 @@
 <?php
 /**
- * Handles the registration of the UCF Social Shortcode
+ * Registers the social shortcode
+ * @author RJ Bruneel
+ * @since 1.0
+ * @param array $atts | Assoc. array of shortcode options
+ * @return array
  **/
-if ( !function_exists( 'sc_ucf_social' ) ) {
-	function sc_ucf_social( $atts, $content='' ) {
-		$atts = shortcode_atts( UCF_Social_Config::get_option_defaults(), $atts, 'sc_ucf_social' );
-		ob_start();
-		echo UCF_Social_Common::display_social( $atts['layout'] );
-		return ob_get_clean(); // Shortcode must *return*!  Do not echo the result!
+
+if ( ! class_exists( 'UCF_Social_Shortcode' ) ) {
+	class UCF_Social_Shortcode {
+		public static function shortcode( $atts ) {
+			$atts = shortcode_atts( array(
+				'color'  => 'color',
+				'size'   => 'md'
+			), $atts );
+
+			return UCF_Social_Common::display_social_icons( $atts );
+		}
 	}
-	add_shortcode( 'ucf-social', 'sc_ucf_social' );
-}
-if ( ! function_exists( 'ucf_social_shortcode_interface' ) ) {
-	function ucf_social_shortcode_interface( $shortcodes ) {
-		$settings = array(
-			'command' => 'ucf-social',
-			'name'    => 'UCF Social',
-			'desc'    => 'Displays social icons.',
-			'fields'  => array(),
-			'content' => false
-		);
-		$shortcodes[] = $settings;
-		return $shortcodes;
-	}
+	add_shortcode( 'ucf-social-icons', array( 'UCF_Social_Shortcode', 'shortcode' ) );
 }

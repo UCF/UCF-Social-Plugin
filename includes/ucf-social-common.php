@@ -2,67 +2,144 @@
 /**
  * Place common functions here.
  **/
-if ( !class_exists( 'UCF_Social_Common' ) ) {
+
+if ( ! class_exists( 'UCF_Social_Common' ) ) {
 	class UCF_Social_Common {
-		public static function display_social( $layout='default' ) {
-			if ( has_action( 'ucf_social_display_' . $layout . '_before' ) ) {
-				do_action( 'ucf_social_display_' . $layout . '_before' );
-			}
-			if ( has_action( 'ucf_social_display_' . $layout  ) ) {
-				do_action( 'ucf_social_display_' . $layout );
-			}
-			if ( has_action( 'ucf_social_display_' . $layout . '_after' ) ) {
-				do_action( 'ucf_social_display_' . $layout . '_after' );
+
+		/**
+		* Displays the social social icons
+		* @author RJ Bruneel
+		* @since 1.0
+		* @param array $atts | Assoc. array of shortcode options
+		* @return string
+		**/
+		public static function display_social_icons( $atts ) {
+				$before = self::ucf_social_icons_display_before();
+				if ( has_filter( 'ucf_social_display_before' ) ) {
+					$before = apply_filters( 'ucf_social_display_before', $before );
+				}
+
+				$content = self::ucf_social_icons_display( $atts );
+				if ( has_filter( 'ucf_social_display' ) ) {
+					$content = apply_filters( 'ucf_social_display', $content );
+				}
+
+				$after = self::ucf_social_icons_display_after( );
+				if ( has_filter( 'ucf_social_display_after' ) ) {
+					$after = apply_filters( 'ucf_social_display_after', $after );
+				}
+
+				return $before . $content . $after;
+
+		}
+
+		/**
+		* Display the content before the social icons
+		* @author RJ Bruneel
+		* @since 1.0
+		* @return string
+		**/
+		function ucf_social_icons_display_before() {
+			ob_start();
+		?>
+			<div class="ucf-social-icons">
+		<?php
+			echo ob_get_clean();
+		}
+
+		/**
+		* Display the social icons content
+		* @author RJ Bruneel
+		* @since 1.0
+		* @param array $atts | Assoc. array of shortcode options
+		* @return string
+		**/
+		function ucf_social_icons_display( $atts ) {
+				$atts = shortcode_atts( array(
+					'size'  => 'md',
+					'color' => 'color'
+				), $atts );
+
+			$prefix = UCF_Social_Config::$option_prefix;
+
+			$google_url     = UCF_Social_Config::get_option_or_default( $prefix . 'google_url' );
+			$linkedin_url   = UCF_Social_Config::get_option_or_default( $prefix . 'linkedin_url' );
+			$twitter_url    = UCF_Social_Config::get_option_or_default( $prefix . 'twitter_url' );
+			$facebook_url   = UCF_Social_Config::get_option_or_default( $prefix . 'facebook_url' );
+			$instagram_url  = UCF_Social_Config::get_option_or_default( $prefix . 'instagram_url' );
+			$youtube_url    = UCF_Social_Config::get_option_or_default( $prefix . 'youtube_url' );
+
+			ob_start();
+		?>
+			<?php if ( $google_url ) : ?>
+				<a class="ucf-social-link btn-google <?php echo $atts['size'] . ' ' . $atts['color']; ?>" target="_blank" href="<?php echo $google_url; ?>">
+					<span class="fa fa-google-plus" aria-hidden="true"></span>
+					<p class="sr-only">Follow us on Google+</p>
+				</a>
+			<?php endif; ?>
+			<?php if ( $linkedin_url ) : ?>
+				<a class="ucf-social-link btn-linkedin <?php echo $atts['size'] . ' ' . $atts['color']; ?>" target="_blank" href="<?php echo $linkedin_url; ?>">
+					<span class="fa fa-linkedin" aria-hidden="true"></span>
+					<p class="sr-only">View our LinkedIn page</p>
+				</a>
+			<?php endif; ?>
+			<?php if ( $twitter_url ) : ?>
+				<a class="ucf-social-link btn-twitter <?php echo $atts['size'] . ' ' . $atts['color']; ?>" target="_blank" href="<?php echo $twitter_url; ?>">
+					<span class="fa fa-twitter" aria-hidden="true"></span>
+					<p class="sr-only">Follow us on Twitter</p>
+				</a>
+			<?php endif; ?>
+			<?php if ( $facebook_url ) : ?>
+				<a class="ucf-social-link btn-facebook <?php echo $atts['size'] . ' ' . $atts['color']; ?>" target="_blank" href="<?php echo $facebook_url; ?>">
+					<span class="fa fa-facebook" aria-hidden="true"></span>
+					<p class="sr-only">Like us on Facebook</p>
+				</a>
+			<?php endif; ?>
+			<?php if ( $instagram_url ) : ?>
+				<a class="ucf-social-link btn-instagram <?php echo $atts['size'] . ' ' . $atts['color']; ?>" target="_blank" href="<?php echo $instagram_url; ?>">
+					<span class="fa fa-instagram" aria-hidden="true"></span>
+					<p class="sr-only">Find us on Instagram</p>
+				</a>
+			<?php endif; ?>
+			<?php if ( $youtube_url ) : ?>
+				<a class="ucf-social-link btn-youtube <?php echo $atts['size'] . ' ' . $atts['color']; ?>" target="_blank" href="<?php echo $youtube_url; ?>">
+					<span class="fa fa-youtube" aria-hidden="true"></span>
+					<p class="sr-only">Follow us on YouTube</p>
+				</a>
+			<?php endif; ?>
+		<?php
+			echo ob_get_clean();
+		}
+
+		/**
+		* Display the content after the social icons
+		* @author RJ Bruneel
+		* @since 1.0
+		* @return string
+		**/
+		function ucf_social_icons_display_after() {
+			ob_start();
+		?>
+			</div>
+		<?php
+			echo ob_get_clean();
+		}
+
+		/**
+		* Enqueue css for the social icons
+		* @author RJ Bruneel
+		* @since 1.0
+		* @return string
+		**/
+		function add_css() {
+			// CSS
+			$include_css = UCF_social_Config::get_option_or_default( 'include_css' );
+			$css_deps = apply_filters( 'ucf_social_style_deps', array() );
+
+			if ( $include_css ) {
+				wp_enqueue_style( 'ucf_social_css', plugins_url( 'static/css/ucf-social.min.css', UCF_SOCIAL__PLUGIN_FILE ), $css_deps, false, 'screen' );
 			}
 		}
 	}
-}
-if ( !function_exists( 'ucf_social_display_default_before' ) ) {
-	function ucf_social_display_default_before() {
-		ob_start();
-	?>
-		<div class="ucf-social ucf-social-default">
-	<?php
-		echo ob_get_clean();
-	}
-
-	add_action( 'ucf_social_display_default_before', 'ucf_social_display_default_before', 10, 0 );
-
-}
-
-if ( !function_exists( 'ucf_social_display_default' ) ) {
-
-	function ucf_social_display_default() {
-		ob_start();
-	?>
-		<!-- TODO -->
-	<?php
-		echo ob_get_clean();
-	}
-
-	add_action( 'ucf_social_display_default', 'ucf_social_display_default', 10, 0 );
-
-}
-
-if ( !function_exists( 'ucf_social_display_default_after' ) ) {
-
-	function ucf_social_display_default_after() {
-		ob_start();
-	?>
-		</div>
-	<?php
-		echo ob_get_clean();
-	}
-	add_action( 'ucf_social_display_default_after', 'ucf_social_display_default_after', 10, 0 );
-}
-if ( ! function_exists( 'ucf_social_enqueue_assets' ) ) {
-	function ucf_social_enqueue_assets() {
-		// CSS
-		$include_css = UCF_social_Config::get_option_or_default( 'include_css' );
-		$css_deps = apply_filters( 'ucf_social_style_deps', array() );
-		if ( $include_css ) {
-			wp_enqueue_style( 'ucf_social_css', plugins_url( 'static/css/ucf-social.min.css', UCF_SOCIAL__PLUGIN_FILE ), $css_deps, false, 'screen' );
-		}
-	}
-	add_action( 'wp_enqueue_scripts', 'ucf_social_enqueue_assets' );
+	add_action( 'wp_enqueue_scripts', array( 'UCF_Social_Common', 'add_css' ) );
 }
