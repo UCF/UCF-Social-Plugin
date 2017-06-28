@@ -174,7 +174,9 @@ if ( ! class_exists( 'UCF_Social_Common' ) ) {
 				'size'  => 'md'
 			), $atts );
 
-			$permalink = urlencode( get_permalink( $_POST->ID ) );
+			global $post;
+			if ( !$post ) { return; }  // back out if there's no post data to reference
+			$permalink = urlencode( get_permalink( $post->ID ) );
 
 			ob_start();
 		?>
