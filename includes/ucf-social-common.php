@@ -14,19 +14,19 @@ if ( ! class_exists( 'UCF_Social_Common' ) ) {
 		* @return string
 		**/
 		public static function display_social_icons( $atts ) {
-				$before = self::ucf_social_icons_display_before();
+				$before = self::ucf_social_icons_display_before( $atts );
 				if ( has_filter( 'ucf_social_display_before' ) ) {
-					$before = apply_filters( 'ucf_social_display_before', $before );
+					$before = apply_filters( 'ucf_social_display_before', $before, $atts );
 				}
 
 				$content = self::ucf_social_icons_display( $atts );
 				if ( has_filter( 'ucf_social_display' ) ) {
-					$content = apply_filters( 'ucf_social_display', $content );
+					$content = apply_filters( 'ucf_social_display', $content, $atts );
 				}
 
-				$after = self::ucf_social_icons_display_after( );
+				$after = self::ucf_social_icons_display_after( $atts );
 				if ( has_filter( 'ucf_social_display_after' ) ) {
-					$after = apply_filters( 'ucf_social_display_after', $after );
+					$after = apply_filters( 'ucf_social_display_after', $after, $atts );
 				}
 
 				return $before . $content . $after;
@@ -39,7 +39,7 @@ if ( ! class_exists( 'UCF_Social_Common' ) ) {
 		* @since 1.0
 		* @return string
 		**/
-		function ucf_social_icons_display_before() {
+		function ucf_social_icons_display_before( $atts ) {
 			ob_start();
 		?>
 			<div class="ucf-social-icons">
@@ -60,14 +60,12 @@ if ( ! class_exists( 'UCF_Social_Common' ) ) {
 					'color' => 'color'
 				), $atts );
 
-			$prefix = UCF_Social_Config::$option_prefix;
-
-			$google_url     = UCF_Social_Config::get_option_or_default( $prefix . 'google_url' );
-			$linkedin_url   = UCF_Social_Config::get_option_or_default( $prefix . 'linkedin_url' );
-			$twitter_url    = UCF_Social_Config::get_option_or_default( $prefix . 'twitter_url' );
-			$facebook_url   = UCF_Social_Config::get_option_or_default( $prefix . 'facebook_url' );
-			$instagram_url  = UCF_Social_Config::get_option_or_default( $prefix . 'instagram_url' );
-			$youtube_url    = UCF_Social_Config::get_option_or_default( $prefix . 'youtube_url' );
+			$google_url     = UCF_Social_Config::get_option_or_default( 'google_url' );
+			$linkedin_url   = UCF_Social_Config::get_option_or_default( 'linkedin_url' );
+			$twitter_url    = UCF_Social_Config::get_option_or_default( 'twitter_url' );
+			$facebook_url   = UCF_Social_Config::get_option_or_default( 'facebook_url' );
+			$instagram_url  = UCF_Social_Config::get_option_or_default( 'instagram_url' );
+			$youtube_url    = UCF_Social_Config::get_option_or_default( 'youtube_url' );
 
 			ob_start();
 		?>
@@ -117,7 +115,7 @@ if ( ! class_exists( 'UCF_Social_Common' ) ) {
 		* @since 1.0
 		* @return string
 		**/
-		function ucf_social_icons_display_after() {
+		function ucf_social_icons_display_after( $atts ) {
 			ob_start();
 		?>
 			</div>

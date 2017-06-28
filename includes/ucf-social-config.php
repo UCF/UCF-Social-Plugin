@@ -10,6 +10,12 @@ if ( !class_exists( 'UCF_Social_Config' ) ) {
 			$option_prefix = 'ucf_social_',
 			$option_defaults = array(
 				'include_css' => true,
+				'facebook_url' => '',
+				'twitter_url' => '',
+				'google_url' => '',
+				'linkedin_url' => '',
+				'instagram_url' => '',
+				'youtube_url' => ''
 			);
 
 		/**
@@ -82,6 +88,7 @@ if ( !class_exists( 'UCF_Social_Config' ) ) {
 			foreach ( $list as $key => $val ) {
 				switch ( $key ) {
 					case 'include_css':
+						$list[$key] = filter_var( $val, FILTER_VALIDATE_BOOLEAN );
 					default:
 						break;
 				}

@@ -19,6 +19,9 @@ This plugin provides a shortcode, helper functions, and default styles for displ
 1. `$ wp plugin install --activate https://github.com/UCF/UCF-Social-Plugin/archive/master.zip`.  See [WP-CLI Docs](http://wp-cli.org/commands/plugin/install/) for more command options.
 2. Configure plugin settings from the WordPress admin under "Settings > UCF Social".
 
+## Dependencies ##
+
+1. Athena-Framework with Bootstrap 4 and FontAwesome are required for this plugin to work properly with the included css.
 
 ## Changelog ##
 

@@ -13,7 +13,7 @@ if ( ! class_exists( 'UCF_Social_Shortcode' ) ) {
 			$atts = shortcode_atts( array(
 				'color'  => 'color',
 				'size'   => 'md'
-			), $atts );
+			), $atts, 'ucf-social-icons' );
 
 			return UCF_Social_Common::display_social_icons( $atts );
 		}
