@@ -28,7 +28,8 @@ This plugin provides a shortcode, helper functions, and default styles for displ
 
 == Dependencies ==
 
-1. Athena-Framework with Bootstrap 4 and FontAwesome are required for this plugin to work properly with default css.
+* Athena-Framework or Bootstrap 4
+* FontAwesome
 
 == Changelog ==
 
