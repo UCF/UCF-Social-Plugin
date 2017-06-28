@@ -1,0 +1,9 @@
+@mixin social-bg-colors ($color) {
+  &.color {
+    background-color: $color;
+
+    &:hover {
+      background-color: darken($color, 10%);
+    }
+  }
+}

@@ -43,75 +43,70 @@
     padding-left: .2rem;
     padding-top: .1rem;
 
-    &.color {
-      background-color: $color-googleplus;
-
-      &:hover {
-        background-color: darken($color-googleplus, 10%);
-      }
-    }
+    @include social-bg-colors($color-googleplus);
   }
 
   .btn-facebook {
     padding-top: .1rem;
 
-    &.color {
-      background-color: $color-facebook;
-
-      &:hover {
-        background-color: darken($color-facebook, 10%);
-      }
-    }
+    @include social-bg-colors($color-facebook);
   }
 
   .btn-linkedin {
     padding-left: .1rem;
     padding-top: .05rem;
 
-    &.color {
-      background-color: $color-linkedin;
-
-      &:hover {
-        background-color: darken($color-linkedin, 10%);
-      }
-    }
+    @include social-bg-colors($color-linkedin);
   }
 
   .btn-twitter {
     padding-left: .1rem;
     padding-top: .1rem;
 
-    &.color {
-      background-color: $color-twitter;
-
-      &:hover {
-        background-color: darken($color-twitter, 10%);
-      }
-    }
+    @include social-bg-colors($color-twitter);
   }
 
   .btn-instagram {
     padding-left: .05rem;
     padding-top: .1rem;
 
-    &.color {
-      background-color: $color-instagram;
-
-      &:hover {
-        background-color: darken($color-instagram, 10%);
-      }
-    }
+    @include social-bg-colors($color-instagram);
   }
 
   .btn-youtube {
     padding-top: .05rem;
 
-    &.color {
-      background-color: $color-youtube;
+    @include social-bg-colors($color-youtube);
+  }
+}
 
-      &:hover {
-        background-color: darken($color-youtube, 10%);
-      }
-    }
+.ucf-social-links {
+
+  .btn {
+    color: $white;
+  }
+
+  .btn-google {
+    @include social-bg-colors($color-googleplus);
+  }
+
+  .btn-facebook {
+    @include social-bg-colors($color-facebook);
+  }
+
+  .btn-linkedin {
+    @include social-bg-colors($color-linkedin);
+  }
+
+  .btn-twitter {
+    @include social-bg-colors($color-twitter);
+  }
+
+  .btn-instagram {
+    @include social-bg-colors($color-instagram);
+  }
+
+  .btn-youtube {
+    @include social-bg-colors($color-youtube);
   }
 }
