@@ -30,7 +30,6 @@ if ( ! class_exists( 'UCF_Social_Common' ) ) {
 				}
 
 				return $before . $content . $after;
-
 		}
 
 		/**
@@ -124,7 +123,92 @@ if ( ! class_exists( 'UCF_Social_Common' ) ) {
 		}
 
 		/**
-		* Enqueue css for the social icons
+		* Displays the social social links
+		* @author RJ Bruneel
+		* @since 1.0
+		* @param array $atts | Assoc. array of shortcode options
+		* @return string
+		**/
+		public static function display_social_links( $atts ) {
+			$before = self::ucf_social_links_display_before( $atts );
+			if ( has_filter( 'ucf_social_display_before' ) ) {
+				$before = apply_filters( 'ucf_social_display_before', $before, $atts );
+			}
+
+			$content = self::ucf_social_links_display( $atts );
+			if ( has_filter( 'ucf_social_display' ) ) {
+				$content = apply_filters( 'ucf_social_display', $content, $atts );
+			}
+
+			$after = self::ucf_social_links_display_after( $atts );
+			if ( has_filter( 'ucf_social_display_after' ) ) {
+				$after = apply_filters( 'ucf_social_display_after', $after, $atts );
+			}
+
+			return $before . $content . $after;
+		}
+
+		/**
+		* Display the content before the social links
+		* @author RJ Bruneel
+		* @since 1.0
+		* @return string
+		**/
+		function ucf_social_links_display_before( $atts ) {
+			ob_start();
+		?>
+			<aside class="ucf-social-links">
+		<?php
+			echo ob_get_clean();
+		}
+
+		/**
+		* Display the social links content
+		* @author RJ Bruneel
+		* @since 1.0
+		* @param array $atts | Assoc. array of shortcode options
+		* @return string
+		**/
+		function ucf_social_links_display( $atts ) {
+			$atts = shortcode_atts( array(
+				'size'  => 'md'
+			), $atts );
+
+			global $post;
+			if ( !$post ) { return; }  // back out if there's no post data to reference
+			$permalink = urlencode( get_permalink( $post->ID ) );
+
+			ob_start();
+		?>
+			<a class="btn btn-facebook color btn-<?php echo $atts['size']; ?>" target="_blank" href="https://www.facebook.com/sharer.php?u=<?php echo $permalink; ?>" title="Like this story on Facebook">
+				<span class="fa fa-facebook"></span> Like
+			</a>
+			<a class="btn btn-twitter color btn-<?php echo $atts['size']; ?>" target="_blank" href="https://twitter.com/intent/tweet?text=<?php echo get_the_title(); ?>&amp;url=<?php echo $permalink; ?>" title="Tweet this story">
+				<span class="fa fa-twitter"></span> Tweet
+			</a>
+			<a class="btn btn-google color btn-<?php echo $atts['size']; ?>" target="_blank" href="https://plus.google.com/share?url=<?php echo $permalink; ?>" title="Share this story on Google+">
+				<span class="fa fa-google-plus"></span> Share
+			</a>
+		<?php
+			echo ob_get_clean();
+		}
+
+		/**
+		* Display the content after the social links
+		* @author RJ Bruneel
+		* @since 1.0
+		* @return string
+		**/
+		function ucf_social_links_display_after( $atts ) {
+			ob_start();
+		?>
+			</aside>
+		<?php
+			echo ob_get_clean();
+		}
+
+		/**
+		* Enqueue css for the social shortcodes
 		* @author RJ Bruneel
 		* @since 1.0
 		* @return string
