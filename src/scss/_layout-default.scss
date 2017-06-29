@@ -1,0 +1,112 @@
+.ucf-social-icons {
+
+  .ucf-social-link {
+    border-radius: 50%;
+    display: inline-block;
+    text-align: center;
+    transition: all .2s ease-in-out;
+    vertical-align: middle;
+
+    &.grey {
+      background-color: $grey;
+      color: $black;
+
+      &:hover {
+        background-color: lighten($grey, 20%);
+      }
+    }
+
+    &.color {
+      color: $white;
+    }
+  }
+
+  .sm {
+    font-size: 1rem;
+    height: 1.6rem;
+    width: 1.6rem;
+  }
+
+  .md {
+    font-size: 1.3rem;
+    height: 2.3rem;
+    width: 2.3rem;
+  }
+
+  .lg {
+    font-size: 2.2rem;
+    height: 3.5rem;
+    width: 3.5rem;
+  }
+
+  .btn-google {
+    padding-left: .2rem;
+    padding-top: .1rem;
+
+    @include social-bg-colors($color-googleplus);
+  }
+
+  .btn-facebook {
+    padding-top: .1rem;
+
+    @include social-bg-colors($color-facebook);
+  }
+
+  .btn-linkedin {
+    padding-left: .1rem;
+    padding-top: .05rem;
+
+    @include social-bg-colors($color-linkedin);
+  }
+
+  .btn-twitter {
+    padding-left: .1rem;
+    padding-top: .1rem;
+
+    @include social-bg-colors($color-twitter);
+  }
+
+  .btn-instagram {
+    padding-left: .05rem;
+    padding-top: .1rem;
+
+    @include social-bg-colors($color-instagram);
+  }
+
+  .btn-youtube {
+    padding-top: .05rem;
+
+    @include social-bg-colors($color-youtube);
+  }
+}
+
+.ucf-social-links {
+
+  .btn {
+    color: $white;
+  }
+
+  .btn-google {
+    @include social-bg-colors($color-googleplus);
+  }
+
+  .btn-facebook {
+    @include social-bg-colors($color-facebook);
+  }
+
+  .btn-linkedin {
+    @include social-bg-colors($color-linkedin);
+  }
+
+  .btn-twitter {
+    @include social-bg-colors($color-twitter);
+  }
+
+  .btn-instagram {
+    @include social-bg-colors($color-instagram);
+  }
+
+  .btn-youtube {
+    @include social-bg-colors($color-youtube);
+  }
+}
