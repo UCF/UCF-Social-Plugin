@@ -2,7 +2,7 @@
 /**
  * Registers the social shortcode
  * @author RJ Bruneel
- * @since 1.0
+ * @since 1.0.0
  * @param array $atts | Assoc. array of shortcode options
  * @return array
  **/
@@ -15,7 +15,9 @@ if ( ! class_exists( 'UCF_Social_Shortcode' ) ) {
 				'size'   => 'md'
 			), $atts, 'ucf-social-icons' );
 
-			return UCF_Social_Common::display_social_icons( $atts );
+			ob_start();
+			echo UCF_Social_Common::display_social_icons( $atts );
+			return ob_get_clean();
 		}
 
 		public static function links_shortcode( $atts ) {
@@ -23,7 +25,9 @@ if ( ! class_exists( 'UCF_Social_Shortcode' ) ) {
 				'size'   => 'sm'
 			), $atts, 'ucf-social-links' );
 
-			return UCF_Social_Common::display_social_links( $atts );
+			ob_start();
+			echo UCF_Social_Common::display_social_links( $atts );
+			return ob_get_clean();
 		}
 	}
 
