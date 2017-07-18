@@ -26,6 +26,9 @@ This plugin provides a shortcode, helper functions, and default styles for displ
 
 ## Changelog ##
 
+### 1.0.1 ###
+* Fixed shortcode output buffering issues.
+
 ### 1.0.0 ###
 * Initial release
 
