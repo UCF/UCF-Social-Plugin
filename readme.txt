@@ -33,6 +33,9 @@ This plugin provides a shortcode, helper functions, and default styles for displ
 
 == Changelog ==
 
+= 1.0.2 =
+* Bug Fixes.
+
 = 1.0.1 =
 * Fixed shortcode output buffering issues.
 
