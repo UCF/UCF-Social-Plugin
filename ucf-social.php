@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: UCF Social
-Description:
+Description: Provides a shortcode, functions, and default styles for displaying UCF social assets.
 Version: 1.0.2
 Author: UCF Web Communications
 License: GPL3
