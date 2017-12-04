@@ -40,43 +40,37 @@
   }
 
   .btn-google {
+    @include social-bg-colors($color-googleplus);
     padding-left: .2rem;
     padding-top: .1rem;
-
-    @include social-bg-colors($color-googleplus);
   }
 
   .btn-facebook {
-    padding-top: .1rem;
-
     @include social-bg-colors($color-facebook);
+    padding-top: .1rem;
   }
 
   .btn-linkedin {
+    @include social-bg-colors($color-linkedin);
     padding-left: .1rem;
     padding-top: .05rem;
-
-    @include social-bg-colors($color-linkedin);
   }
 
   .btn-twitter {
+    @include social-bg-colors($color-twitter);
     padding-left: .1rem;
     padding-top: .1rem;
-
-    @include social-bg-colors($color-twitter);
   }
 
   .btn-instagram {
+    @include social-bg-colors($color-instagram);
     padding-left: .05rem;
     padding-top: .1rem;
-
-    @include social-bg-colors($color-instagram);
   }
 
   .btn-youtube {
-    padding-top: .05rem;
-
     @include social-bg-colors($color-youtube);
+    padding-top: .05rem;
   }
 }
 
