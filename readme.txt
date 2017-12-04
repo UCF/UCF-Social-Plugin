@@ -3,7 +3,7 @@ Contributors: ucfwebcom
 Tags: ucf, social
 Requires at least: 4.7.3
 Tested up to: 4.7.3
-Stable tag: 1.0.2
+Stable tag: 1.0.3
 License: GPLv3 or later
 License URI: http://www.gnu.org/copyleft/gpl-3.0.html
 
@@ -32,6 +32,11 @@ This plugin provides a shortcode, helper functions, and default styles for displ
 * FontAwesome
 
 == Changelog ==
+
+= 1.0.3 =
+Enhancements:
+* Added margin-bottom to social link buttons to accommodate vertical stacking
+* Added missing plugin description
 
 = 1.0.2 =
 * Bug Fixes.

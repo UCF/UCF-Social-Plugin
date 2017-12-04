@@ -26,6 +26,11 @@ This plugin provides a shortcode, helper functions, and default styles for displ
 
 ## Changelog ##
 
+### 1.0.3 ###
+Enhancements:
+* Added margin-bottom to social link buttons to accommodate vertical stacking
+* Added missing plugin description
+
 ### 1.0.2 ###
 * Bug Fixes.
 
