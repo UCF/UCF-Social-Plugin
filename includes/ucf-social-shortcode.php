@@ -29,8 +29,20 @@ if ( ! class_exists( 'UCF_Social_Shortcode' ) ) {
 			echo UCF_Social_Common::display_social_links( $atts );
 			return ob_get_clean();
 		}
+
+		public static function feed_shortcode( $atts ) {
+			$atts = shortcode_atts( array(
+				'feed'      => '',
+				'container' => 'ucf-social-feed'
+			), $atts, 'ucf-social-feed' );
+
+			ob_start();
+			echo UCF_Social_Common::display_social_feed( $atts );
+			return ob_get_clean();
+		}
 	}
 
 	add_shortcode( 'ucf-social-icons', array( 'UCF_Social_Shortcode', 'icons_shortcode' ) );
 	add_shortcode( 'ucf-social-links', array( 'UCF_Social_Shortcode', 'links_shortcode' ) );
+	add_shortcode( 'ucf-social-feed', array( 'UCF_Social_Shortcode', 'feed_shortcode' ) );
 }
