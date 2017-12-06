@@ -61,7 +61,7 @@ if ( ! class_exists( 'UCF_Social_Common' ) ) {
 		/**
 		* Displays the social feed
 		* @author RJ Bruneel
-		* @since 1.0
+		* @since 1.0.4
 		* @param array $atts | Assoc. array of shortcode options
 		* @return string
 		**/
