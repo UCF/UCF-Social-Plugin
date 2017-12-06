@@ -338,14 +338,17 @@ if ( ! function_exists( 'ucf_social_feed_display_after' ) ) {
 **/
 if ( ! function_exists( 'ucf_social_enqueue_assets' ) ) {
 	function ucf_social_enqueue_assets() {
+		global $post;
 		$include_css = UCF_Social_Config::get_option_or_default( 'include_css' );
 
 		if ( $include_css ) {
 			wp_enqueue_style( 'ucf_social_css', plugins_url( 'static/css/ucf-social.min.css', UCF_SOCIAL__PLUGIN_FILE ), false, false, 'all' );
 		}
 
-		wp_enqueue_style( 'ucf_social_curator_css', 'https://cdn.curator.io/1.3/css/curator.css', false, false, 'all' );
-		wp_enqueue_script( 'ucf_social_script', 'https://cdn.curator.io/1.3/js/curator.js', false, false, true );
+		if( is_a( $post, 'WP_Post' ) && has_shortcode( $post->post_content, 'ucf-social-feed') ) {
+			wp_enqueue_style( 'ucf_social_curator_css', 'https://cdn.curator.io/1.3/css/curator.css', false, false, 'all' );
+			wp_enqueue_script( 'ucf_social_script', 'https://cdn.curator.io/1.3/js/curator.js', false, false, true );
+		}
 	}
 	add_action( 'wp_enqueue_scripts', 'ucf_social_enqueue_assets' );
 }
