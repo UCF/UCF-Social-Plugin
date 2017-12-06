@@ -288,7 +288,7 @@ if ( ! function_exists( 'ucf_social_feed_display' ) ) {
 			<a href="https://curator.io" target="_blank" class="crt-logo">Powered by Curator.io</a>
 		</div>
 		<script type="text/javascript">
-			function initCurator() {
+			$(function() {
 				Curator.Templates.gridPostTemplate = ' \
 				<div class="crt-post post<%=id%> <%=this.contentImageClasses()%> <%=this.contentTextClasses()%>"> \
 					<div class="crt-hitarea" > \
@@ -305,8 +305,7 @@ if ( ! function_exists( 'ucf_social_feed_display' ) ) {
 					container:'#<?php echo $atts['container']; ?>',
 					feedId:'<?php echo $atts['feed']; ?>'
 				});
-			}
-			$(initCurator);
+			});
 		</script>
 	<?php
 		echo ob_get_clean();
