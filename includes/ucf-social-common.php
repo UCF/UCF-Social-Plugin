@@ -290,18 +290,16 @@ if ( ! function_exists( 'ucf_social_feed_display' ) ) {
 		<script type="text/javascript">
 			function initCurator() {
 				Curator.Templates.gridPostTemplate = ' \
-				<div>\
-					<div class="crt-post post<%=id%> <%=this.contentImageClasses()%> <%=this.contentTextClasses()%>"> \
-							<div class="crt-hitarea" > \
-								<span class="social-icon social-icon-normal"><i class="crt-icon-<%=this.networkIcon()%>"></i></span> \
-								<div class="crt-post-header"> \
-									<img src="<%=user_image%>"  /> \
-									<div class="crt-post-name"><span><%=user_full_name%></span><br/><a href="<%=this.userUrl()%>" target="_blank">@<%=user_screen_name%></a></div> \
-								</div> \
-								<div class="crt-copy"><%=this.parseText(text)%></div> \
-								<div class="crt-image"><img src="<%=image%>" /></div> \
-							</div> \
-					</div>\
+				<div class="crt-post post<%=id%> <%=this.contentImageClasses()%> <%=this.contentTextClasses()%>"> \
+					<div class="crt-hitarea" > \
+						<span class="social-icon social-icon-normal"><i class="crt-icon-<%=this.networkIcon()%>"></i></span> \
+						<div class="crt-post-header"> \
+							<img src="<%=user_image%>"  /> \
+							<div class="crt-post-name"><strong><%=user_full_name%></strong><br/><a href="<%=this.userUrl()%>" target="_blank">@<%=user_screen_name%></a></div> \
+						</div> \
+						<div class="crt-copy"><%=this.parseText(text)%></div> \
+						<div class="crt-image"><img src="<%=image%>" /></div> \
+					</div> \
 				</div>';
 				var widget = new Curator.Grid({
 					container:'#<?php echo $atts['container']; ?>',
