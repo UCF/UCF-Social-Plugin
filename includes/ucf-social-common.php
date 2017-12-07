@@ -274,8 +274,10 @@ if ( ! function_exists( 'ucf_social_feed_display_before' ) ) {
 if ( ! function_exists( 'ucf_social_feed_display' ) ) {
 	function ucf_social_feed_display( $atts ) {
 		$atts = shortcode_atts( array(
-			'feed'  => '',
-			'container' => 'ucf-social-feed'
+			'feed'       => '',
+			'container'  => 'ucf-social-feed',
+			'layout'     => 'waterfall',
+			'grid-width' => 320
 		), $atts );
 
 		global $post;
@@ -284,27 +286,46 @@ if ( ! function_exists( 'ucf_social_feed_display' ) ) {
 
 		ob_start();
 	?>
-		<div id="<?php echo $atts['container']; ?>">
-			<a href="https://curator.io" target="_blank" class="crt-logo">Powered by Curator.io</a>
-		</div>
+		<div id="<?php echo $atts['container']; ?>"></div>
 		<script type="text/javascript">
 			$(function() {
-				Curator.Templates.gridPostTemplate = ' \
-				<div class="crt-post post<%=id%> <%=this.contentImageClasses()%> <%=this.contentTextClasses()%>"> \
-					<div class="crt-hitarea" > \
-						<span class="social-icon social-icon-normal"><i class="crt-icon-<%=this.networkIcon()%>"></i></span> \
-						<div class="crt-post-header"> \
-							<img src="<%=user_image%>"  /> \
-							<div class="crt-post-name"><strong><%=user_full_name%></strong><br/><a href="<%=this.userUrl()%>" target="_blank">@<%=user_screen_name%></a></div> \
+			<?php if($atts['layout'] === 'list') : ?>
+				Curator.Templates.postTemplate = ' \
+					<div class="crt-post post<%=id%> <%=this.contentImageClasses()%> <%=this.contentTextClasses()%>"> \
+						<div class="crt-hitarea" > \
+							<span class="social-icon social-icon-normal"><i class="crt-icon-<%=this.networkIcon()%>"></i></span> \
+							<div class="crt-post-header"> \
+								<img src="<%=user_image%>"  /> \
+								<div class="crt-post-name"><strong><%=user_full_name%></strong><br/><a href="<%=this.userUrl()%>" target="_blank">@<%=user_screen_name%></a></div> \
+							</div> \
+							<div class="crt-copy"><%=this.parseText(text)%></div> \
+							<div class="crt-image"><img src="<%=image%>" /></div> \
 						</div> \
-						<div class="crt-copy"><%=this.parseText(text)%></div> \
-						<div class="crt-image"><img src="<%=image%>" /></div> \
-					</div> \
-				</div>';
-				var widget = new Curator.Grid({
+					</div>';
+				var widget = new Curator.Waterfall({
 					container:'#<?php echo $atts['container']; ?>',
 					feedId:'<?php echo $atts['feed']; ?>'
 				});
+			<?php endif;
+			if($atts['layout'] === 'waterfall') : ?>
+				var widget = new Curator.Waterfall({
+					container:'#<?php echo $atts['container']; ?>',
+					feedId:'<?php echo $atts['feed']; ?>',
+					waterfall: {
+						gridWidth:<?php echo $atts['grid-width']; ?>
+					}
+				});
+			<?php endif;
+			if($atts['layout'] === 'grid') : ?>
+				var widget = new Curator.Grid({
+					container:'#<?php echo $atts['container']; ?>',
+					feedId:'<?php echo $atts['feed']; ?>',
+					grid: {
+						minWidth:<?php echo $atts['grid-width']; ?>,
+						rows: 3
+					}
+				});
+			<?php endif; ?>
 			});
 		</script>
 	<?php
@@ -343,8 +364,8 @@ if ( ! function_exists( 'ucf_social_enqueue_assets' ) ) {
 		}
 
 		if( is_a( $post, 'WP_Post' ) && has_shortcode( $post->post_content, 'ucf-social-feed') ) {
-			wp_enqueue_style( 'ucf_social_curator_css', 'https://cdn.curator.io/1.3/css/curator.css', false, false, 'all' );
-			wp_enqueue_script( 'ucf_social_script', 'https://cdn.curator.io/1.3/js/curator.js', false, false, true );
+			wp_enqueue_style( 'ucf_social_curator_css', '//cdn.curator.io/2.1/css/curator.css', false, false, 'all' );
+			wp_enqueue_script( 'ucf_social_script', '//cdn.curator.io/2.1/js/curator.js', false, false, true );
 		}
 	}
 	add_action( 'wp_enqueue_scripts', 'ucf_social_enqueue_assets' );
