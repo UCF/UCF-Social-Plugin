@@ -277,7 +277,8 @@ if ( ! function_exists( 'ucf_social_feed_display' ) ) {
 			'feed'       => '',
 			'container'  => 'ucf-social-feed',
 			'layout'     => 'waterfall',
-			'grid-width' => 320
+			'grid-width' => 320,
+			'grid-rows'  => 3
 		), $atts );
 
 		global $post;
@@ -306,7 +307,7 @@ if ( ! function_exists( 'ucf_social_feed_display' ) ) {
 					feedId:'<?php echo $atts['feed']; ?>',
 					grid: {
 						minWidth:<?php echo $atts['grid-width']; ?>,
-						rows: 3
+						rows: <?php echo $atts['grid-rows']; ?>
 					}
 				});
 			<?php endif; ?>
