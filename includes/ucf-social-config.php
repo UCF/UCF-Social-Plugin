@@ -15,7 +15,9 @@ if ( !class_exists( 'UCF_Social_Config' ) ) {
 				'google_url' => '',
 				'linkedin_url' => '',
 				'instagram_url' => '',
-				'youtube_url' => ''
+				'youtube_url' => '',
+				'curator_css_url' => '',
+				'curator_js_url' => ''
 			);
 
 		/**
@@ -34,6 +36,8 @@ if ( !class_exists( 'UCF_Social_Config' ) ) {
 			add_option( self::$option_prefix . 'linkedin_url', $defaults['linkedin_url'] );
 			add_option( self::$option_prefix . 'instagram_url', $defaults['instagram_url'] );
 			add_option( self::$option_prefix . 'youtube_url', $defaults['youtube_url'] );
+			add_option( self::$option_prefix . 'curator_css_url', $defaults['curator_css_url'] );
+			add_option( self::$option_prefix . 'curator_js_url', $defaults['curator_js_url'] );
 		}
 
 		/**
@@ -50,6 +54,8 @@ if ( !class_exists( 'UCF_Social_Config' ) ) {
 			delete_option( self::$option_prefix . 'linkedin_url' );
 			delete_option( self::$option_prefix . 'instagram_url' );
 			delete_option( self::$option_prefix . 'youtube_url' );
+			delete_option( self::$option_prefix . 'curator_css_url' );
+			delete_option( self::$option_prefix . 'curator_js_url' );
 		}
 
 		/**
@@ -70,6 +76,8 @@ if ( !class_exists( 'UCF_Social_Config' ) ) {
 				'linkedin_url'     => get_option( self::$option_prefix . 'linkedin_url', $defaults['linkedin_url'] ),
 				'instagram_url'    => get_option( self::$option_prefix . 'instagram_url', $defaults['instagram_url'] ),
 				'youtube_url'      => get_option( self::$option_prefix . 'youtube_url', $defaults['youtube_url'] ),
+				'curator_css_url'  => get_option( self::$option_prefix . 'curator_css_url', $defaults['curator_css_url'] ),
+				'curator_js_url'   => get_option( self::$option_prefix . 'curator_js_url', $defaults['curator_js_url'] ),
 			);
 
 			// Force configurable options to override $defaults, even if they are empty:
@@ -156,6 +164,8 @@ if ( !class_exists( 'UCF_Social_Config' ) ) {
 			register_setting( 'ucf_social', self::$option_prefix . 'linkedin_url' );
 			register_setting( 'ucf_social', self::$option_prefix . 'instagram_url' );
 			register_setting( 'ucf_social', self::$option_prefix . 'youtube_url' );
+			register_setting( 'ucf_social', self::$option_prefix . 'curator_css_url' );
+			register_setting( 'ucf_social', self::$option_prefix . 'curator_js_url' );
 
 			// Register setting sections
 			add_settings_section(
@@ -247,6 +257,30 @@ if ( !class_exists( 'UCF_Social_Config' ) ) {
 				array(  // extra arguments to pass to the callback function
 					'label_for'   => self::$option_prefix . 'youtube_url',
 					'description' => 'The Youtube URL to use for social assets.',
+					'type'        => 'text'
+				)
+			);
+			add_settings_field(
+				self::$option_prefix . 'curator_css_url',
+				'Curator CSS URL',  // formatted field title
+				array( 'UCF_Social_Config', 'display_settings_field' ), // display callback
+				'ucf_social',  // settings page slug
+				'ucf_social_section_general',  // option section slug
+				array(  // extra arguments to pass to the callback function
+					'label_for'   => self::$option_prefix . 'curator_css_url',
+					'description' => 'The Curator CSS URL.',
+					'type'        => 'text'
+				)
+			);
+			add_settings_field(
+				self::$option_prefix . 'curator_js_url',
+				'Curator JS URL',  // formatted field title
+				array( 'UCF_Social_Config', 'display_settings_field' ), // display callback
+				'ucf_social',  // settings page slug
+				'ucf_social_section_general',  // option section slug
+				array(  // extra arguments to pass to the callback function
+					'label_for'   => self::$option_prefix . 'curator_js_url',
+					'description' => 'The Curator JS URL.',
 					'type'        => 'text'
 				)
 			);
