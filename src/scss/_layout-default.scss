@@ -34,42 +34,48 @@
   }
 
   .lg {
-    font-size: 2.2rem;
+    font-size: 2.1rem;
     height: 3.5rem;
     width: 3.5rem;
   }
 
   .btn-google {
     @include social-bg-colors($color-googleplus);
+
     padding-left: .2rem;
     padding-top: .1rem;
   }
 
   .btn-facebook {
     @include social-bg-colors($color-facebook);
+
     padding-top: .1rem;
   }
 
   .btn-linkedin {
     @include social-bg-colors($color-linkedin);
+
     padding-left: .1rem;
     padding-top: .05rem;
   }
 
   .btn-twitter {
     @include social-bg-colors($color-twitter);
+
     padding-left: .1rem;
     padding-top: .1rem;
   }
 
   .btn-instagram {
     @include social-bg-colors($color-instagram);
+
     padding-left: .05rem;
     padding-top: .1rem;
   }
 
   .btn-youtube {
     @include social-bg-colors($color-youtube);
+
     padding-top: .05rem;
   }
 }

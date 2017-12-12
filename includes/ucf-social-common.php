@@ -7,7 +7,7 @@ if ( ! class_exists( 'UCF_Social_Common' ) ) {
 	class UCF_Social_Common {
 
 		/**
-		* Displays the social social icons
+		* Displays the social icons
 		* @author RJ Bruneel
 		* @since 1.0
 		* @param array $atts | Assoc. array of shortcode options
@@ -33,7 +33,7 @@ if ( ! class_exists( 'UCF_Social_Common' ) ) {
 		}
 
 		/**
-		* Displays the social social links
+		* Displays the social links
 		* @author RJ Bruneel
 		* @since 1.0
 		* @param array $atts | Assoc. array of shortcode options
@@ -51,6 +51,32 @@ if ( ! class_exists( 'UCF_Social_Common' ) ) {
 			}
 
 			$after = ucf_social_links_display_after( $atts );
+			if ( has_filter( 'ucf_social_display_after' ) ) {
+				$after = apply_filters( 'ucf_social_display_after', $after, $atts );
+			}
+
+			return $before . $content . $after;
+		}
+
+		/**
+		* Displays the social feed
+		* @author RJ Bruneel
+		* @since 1.0.4
+		* @param array $atts | Assoc. array of shortcode options
+		* @return string
+		**/
+		public static function display_social_feed( $atts ) {
+			$before = ucf_social_feed_display_before( $atts );
+			if ( has_filter( 'ucf_social_display_before' ) ) {
+				$before = apply_filters( 'ucf_social_display_before', $before, $atts );
+			}
+
+			$content = ucf_social_feed_display( $atts );
+			if ( has_filter( 'ucf_social_display' ) ) {
+				$content = apply_filters( 'ucf_social_display', $content, $atts );
+			}
+
+			$after = ucf_social_feed_display_after( $atts );
 			if ( has_filter( 'ucf_social_display_after' ) ) {
 				$after = apply_filters( 'ucf_social_display_after', $after, $atts );
 			}
@@ -223,16 +249,77 @@ if ( ! function_exists( 'ucf_social_links_display_after' ) ) {
 }
 
 /**
+* Display the content before the social feed
+* @author RJ Bruneel
+* @since 1.0.4
+* @return string
+**/
+if ( ! function_exists( 'ucf_social_feed_display_before' ) ) {
+	function ucf_social_feed_display_before( $atts ) {
+		ob_start();
+	?>
+		<aside class="ucf-social-feed">
+	<?php
+		echo ob_get_clean();
+	}
+}
+
+/**
+* Display the social feed content
+* @author RJ Bruneel
+* @since 1.0.4
+* @param array $atts | Assoc. array of shortcode options
+* @return string
+**/
+if ( ! function_exists( 'ucf_social_feed_display' ) ) {
+	function ucf_social_feed_display( $atts ) {
+		$atts = shortcode_atts( array(
+			'feed'       => '',
+			'container'  => 'ucf-social-feed',
+			'layout'     => 'waterfall',
+			'grid-width' => 320,
+			'grid-rows'  => 3
+		), $atts );
+
+		global $post;
+		if ( !$post ) { return; }  // back out if there's no post data to reference
+
+		ob_start();
+		if ( has_filter( 'ucf_social_feed_display_' . $atts['layout'] ) ) {
+			echo apply_filters( 'ucf_social_feed_display_' . $atts['layout'], '', $atts );
+		}
+		echo ob_get_clean();
+	}
+}
+
+/**
+* Display the content after the social feed
+* @author RJ Bruneel
+* @since 1.0.4
+* @return string
+**/
+if ( ! function_exists( 'ucf_social_feed_display_after' ) ) {
+	function ucf_social_feed_display_after( $atts ) {
+		ob_start();
+	?>
+		</aside>
+	<?php
+		echo ob_get_clean();
+	}
+}
+
+/**
 * Enqueue css assets for the plugin
 * @author RJ Bruneel
 * @since 1.0
 **/
 if ( ! function_exists( 'ucf_social_enqueue_assets' ) ) {
 	function ucf_social_enqueue_assets() {
-		$include_css = UCF_Social_Config::get_option_or_default( 'include_css' );
+		global $post;
 
-		if ( $include_css ) {
-			wp_enqueue_style( 'ucf_social_css', plugins_url( 'static/css/ucf-social.min.css', UCF_SOCIAL__PLUGIN_FILE ), false, false, 'all' );
+		if( is_a( $post, 'WP_Post' ) && has_shortcode( $post->post_content, 'ucf-social-feed') ) {
+			wp_enqueue_style( 'ucf_social_curator', UCF_Social_Config::get_option_or_default( 'ucf_social_curator_css_url' ), false, false, 'all' );
+			wp_enqueue_script( 'ucf_social_script', UCF_Social_Config::get_option_or_default( 'ucf_social_curator_js_url' ), false, false, true );
 		}
 	}
 	add_action( 'wp_enqueue_scripts', 'ucf_social_enqueue_assets' );
