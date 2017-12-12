@@ -283,37 +283,11 @@ if ( ! function_exists( 'ucf_social_feed_display' ) ) {
 
 		global $post;
 		if ( !$post ) { return; }  // back out if there's no post data to reference
-		$permalink = urlencode( get_permalink( $post->ID ) );
 
 		ob_start();
-	?>
-		<div id="<?php echo $atts['container']; ?>"></div>
-		<script type="text/javascript">
-			$(function() {
-			<?php if($atts['layout'] === 'waterfall') : ?>
-				var widget = new Curator.Waterfall({
-					container:'#<?php echo $atts['container']; ?>',
-					feedId:'<?php echo $atts['feed']; ?>',
-				<?php if($atts['grid-width'] > 0) : ?>
-					waterfall: {
-						gridWidth:<?php echo $atts['grid-width']; ?>
-					}
-				<?php endif; ?>
-				});
-			<?php endif;
-			if($atts['layout'] === 'grid') : ?>
-				var widget = new Curator.Grid({
-					container:'#<?php echo $atts['container']; ?>',
-					feedId:'<?php echo $atts['feed']; ?>',
-					grid: {
-						minWidth:<?php echo $atts['grid-width']; ?>,
-						rows: <?php echo $atts['grid-rows']; ?>
-					}
-				});
-			<?php endif; ?>
-			});
-		</script>
-	<?php
+		if ( has_filter( 'ucf_social_feed_display_' . $atts['layout'] ) ) {
+			echo apply_filters( 'ucf_social_feed_display_' . $atts['layout'], '', $atts );
+		}
 		echo ob_get_clean();
 	}
 }
