@@ -84,6 +84,32 @@ if ( ! class_exists( 'UCF_Social_Common' ) ) {
 			return $before . $content . $after;
 		}
 
+		/**
+		 * Determines whether the provided content contains a [ucf-social-feed]
+		 * shortcode.
+		 * @author Jo Dickson
+		 * @since 1.0.6
+		 * @param string $content | arbitrary string of content
+		 * @return boolean
+		 */
+		public static function has_social_feed( $content ) {
+			$has_feed = false;
+			$content_processed = do_shortcode( $content );
+
+			// Check against unprocessed string contents for the
+			// [ucf-social-feed] shortcode, as well as processed string
+			// contents for substrings that are likely to be present in social
+			// feed templates
+			if (
+				has_shortcode( $content, 'ucf-social-feed' )
+				|| ( strpos( $content_processed, 'new Curator.' ) !== false || strpos( $content_processed, 'ucf-social-feed' ) !== false )
+			) {
+				$has_feed = true;
+			}
+
+			return $has_feed;
+		}
+
 	}
 }
 
@@ -322,7 +348,7 @@ if ( ! function_exists( 'ucf_social_enqueue_assets' ) ) {
 			wp_enqueue_style( 'ucf_social_css', plugins_url( 'static/css/ucf-social.min.css', UCF_SOCIAL__PLUGIN_FILE ), false, false, 'all' );
 		}
 
-		if( is_a( $post, 'WP_Post' ) && has_shortcode( $post->post_content, 'ucf-social-feed') ) {
+		if ( is_a( $post, 'WP_Post' ) && UCF_Social_Common::has_social_feed( $post->post_content ) ) {
 			wp_enqueue_style( 'ucf_social_curator', UCF_Social_Config::get_option_or_default( 'ucf_social_curator_css_url' ), false, false, 'all' );
 			wp_enqueue_script( 'ucf_social_script', UCF_Social_Config::get_option_or_default( 'ucf_social_curator_js_url' ), false, false, true );
 		}
