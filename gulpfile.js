@@ -4,19 +4,25 @@ var gulp = require('gulp'),
     sass = require('gulp-sass'),
     rename = require('gulp-rename'),
     scsslint = require('gulp-scss-lint'),
+    isFixed = require('gulp-eslint-if-fixed'),
     autoprefixer = require('gulp-autoprefixer'),
     cleanCSS = require('gulp-clean-css'),
     include = require('gulp-include'),
+    eslint = require('gulp-eslint'),
+    babel = require('gulp-babel'),
     uglify = require('gulp-uglify'),
+    runSequence = require('run-sequence'),
     readme = require('gulp-readme-to-markdown'),
     browserSync = require('browser-sync').create();
 
 var configDefault = {
     src: {
-      scssPath: './src/scss'
+      scssPath: './src/scss',
+      js: './src/js'
     },
     dist: {
-      cssPath: './static/css'
+      cssPath: './static/css',
+      js: './static/js'
     }
   },
   config = merge(configDefault, configLocal);
@@ -51,6 +57,33 @@ gulp.task('css', ['scss-lint', 'css-main']);
 
 
 //
+// JS
+//
+
+gulp.task('es-lint', function() {
+  return gulp.src(config.src.js + '/*.js')
+    .pipe(eslint({fix: true}))
+    .pipe(eslint.format())
+    .pipe(isFixed(config.src.js));
+});
+
+gulp.task('js-build', function() {
+  return gulp.src(config.src.js + '/ucf-social.js')
+    .pipe(include({
+      includePaths: [config.src.js]
+    }))
+    .on('error', console.log)
+    .pipe(babel())
+    .pipe(uglify())
+    .pipe(rename('ucf-social.min.js'))
+    .pipe(gulp.dest(config.dist.js));
+});
+
+gulp.task('js', function() {
+  runSequence('es-lint', 'js-build');
+});
+
+//
 // Readme
 //
 
@@ -76,9 +109,10 @@ gulp.task('watch', function() {
   }
 
   gulp.watch(config.src.scssPath + '/**/*.scss', ['css']);
+  gulp.watch(config.src.js + '/**/*.js', ['js']).on('change', browserSync.reload);
   gulp.watch('./**/*.php').on('change', browserSync.reload);
   gulp.watch('readme.txt', ['readme']);
 });
 
 // Default task
-gulp.task('default', ['css', 'readme']);
+gulp.task('default', ['css', 'js', 'readme']);

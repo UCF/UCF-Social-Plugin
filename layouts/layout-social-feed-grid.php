@@ -12,13 +12,15 @@ function ucf_social_feed_display_grid( $content='', $atts ) {
 	<div id="<?php echo $atts['container']; ?>"></div>
 	<script type="text/javascript">
 		$(function() {
-			var widget = new Curator.Grid({
-				container:'#<?php echo $atts['container']; ?>',
-				feedId:'<?php echo $atts['feed']; ?>',
-				grid: {
-					minWidth:<?php echo $atts['grid-width']; ?>,
-					rows: <?php echo $atts['grid-rows']; ?>
-				}
+			scrollToggleInit('<?php echo $atts['container']; ?>', () => {
+				var widget = new Curator.Grid({
+					container:'#<?php echo $atts['container']; ?>',
+					feedId:'<?php echo $atts['feed']; ?>',
+					grid: {
+						minWidth:<?php echo $atts['grid-width']; ?>,
+						rows: <?php echo $atts['grid-rows']; ?>
+					}
+				});
 			});
 		});
 	</script>

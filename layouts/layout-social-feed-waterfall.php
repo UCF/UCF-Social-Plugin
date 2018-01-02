@@ -12,14 +12,16 @@ function ucf_social_feed_display_waterfall( $content='', $atts ) {
 	<div id="<?php echo $atts['container']; ?>"></div>
 	<script type="text/javascript">
 		$(function() {
-			var widget = new Curator.Waterfall({
-				container:'#<?php echo $atts['container']; ?>',
-				feedId:'<?php echo $atts['feed']; ?>',
-			<?php if($atts['grid-width'] > 0) : ?>
-				waterfall: {
-					gridWidth:<?php echo $atts['grid-width']; ?>
-				}
-			<?php endif; ?>
+			scrollToggleInit('<?php echo $atts['container']; ?>', () => {
+				var widget = new Curator.Waterfall({
+					container:'#<?php echo $atts['container']; ?>',
+					feedId:'<?php echo $atts['feed']; ?>',
+				<?php if($atts['grid-width'] > 0) : ?>
+					waterfall: {
+						gridWidth:<?php echo $atts['grid-width']; ?>
+					}
+				<?php endif; ?>
+				});
 			});
 		});
 	</script>
