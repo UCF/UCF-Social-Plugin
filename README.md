@@ -26,6 +26,10 @@ This plugin provides a shortcode, helper functions, and default styles for displ
 
 ## Changelog ##
 
+### 1.0.6 ###
+Bug Fix:
+* Added logic to lazy load social feeds
+
 ### 1.0.5 ###
 Bug Fix:
 * Added back logic to include the social css
