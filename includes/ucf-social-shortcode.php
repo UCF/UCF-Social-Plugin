@@ -36,7 +36,8 @@ if ( ! class_exists( 'UCF_Social_Shortcode' ) ) {
 				'container'  => 'ucf-social-feed',
 				'layout'     => 'waterfall',
 				'grid-width' => 320,
-				'grid-rows'  => 3
+				'grid-rows'  => 3,
+				'class'      => ''
 			), $atts, 'ucf-social-feed' );
 
 			ob_start();

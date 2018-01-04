@@ -284,7 +284,7 @@ if ( ! function_exists( 'ucf_social_feed_display_before' ) ) {
 	function ucf_social_feed_display_before( $atts ) {
 		ob_start();
 	?>
-		<aside class="ucf-social-feed">
+		<aside class="ucf-social-feed <?php echo $atts['class']; ?>">
 	<?php
 		echo ob_get_clean();
 	}
