@@ -94,7 +94,9 @@ if ( ! class_exists( 'UCF_Social_Common' ) ) {
 		 */
 		public static function has_social_feed( $content ) {
 			$has_feed = false;
-			$content_processed = do_shortcode( $content );
+			ob_start();
+			do_shortcode( $content );
+			$content_processed = ob_get_clean();
 
 			// Check against unprocessed string contents for the
 			// [ucf-social-feed] shortcode, as well as processed string
