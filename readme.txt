@@ -3,7 +3,7 @@ Contributors: ucfwebcom
 Tags: ucf, social
 Requires at least: 4.7.3
 Tested up to: 4.7.3
-Stable tag: 1.0.5
+Stable tag: 1.0.7
 License: GPLv3 or later
 License URI: http://www.gnu.org/copyleft/gpl-3.0.html
 
@@ -33,8 +33,12 @@ This plugin provides a shortcode, helper functions, and default styles for displ
 
 == Changelog ==
 
+= 1.0.7 =
+Bug Fixes:
+* Fixed potential issues with `do_shortcode()` call in `UCF_Social_Common::has_social_feed()` by wrapping it within an output buffer to ensure all returned contents are captured/not echoed when called in `ucf_social_enqueued_assets`.
+
 = 1.0.6 =
-Bug Fix:
+Enhancements:
 * Added logic to lazy load social feeds
 
 = 1.0.5 =
