@@ -15,18 +15,18 @@ if ( ! class_exists( 'UCF_Social_Common' ) ) {
 		**/
 		public static function display_social_icons( $atts ) {
 				$before = ucf_social_icons_display_before( $atts );
-				if ( has_filter( 'ucf_social_display_before' ) ) {
-					$before = apply_filters( 'ucf_social_display_before', $before, $atts );
+				if ( has_filter( 'ucf_social_icons_display_before' ) ) {
+					$before = apply_filters( 'ucf_social_icons_display_before', $before, $atts );
 				}
 
 				$content = ucf_social_icons_display( $atts );
-				if ( has_filter( 'ucf_social_display' ) ) {
-					$content = apply_filters( 'ucf_social_display', $content, $atts );
+				if ( has_filter( 'ucf_social_icons_display' ) ) {
+					$content = apply_filters( 'ucf_social_icons_display', $content, $atts );
 				}
 
 				$after = ucf_social_icons_display_after( $atts );
-				if ( has_filter( 'ucf_social_display_after' ) ) {
-					$after = apply_filters( 'ucf_social_display_after', $after, $atts );
+				if ( has_filter( 'ucf_social_icons_display_after' ) ) {
+					$after = apply_filters( 'ucf_social_icons_display_after', $after, $atts );
 				}
 
 				return $before . $content . $after;
@@ -41,18 +41,18 @@ if ( ! class_exists( 'UCF_Social_Common' ) ) {
 		**/
 		public static function display_social_links( $atts ) {
 			$before = ucf_social_links_display_before( $atts );
-			if ( has_filter( 'ucf_social_display_before' ) ) {
-				$before = apply_filters( 'ucf_social_display_before', $before, $atts );
+			if ( has_filter( 'ucf_social_links_display_before' ) ) {
+				$before = apply_filters( 'ucf_social_links_display_before', $before, $atts );
 			}
 
 			$content = ucf_social_links_display( $atts );
-			if ( has_filter( 'ucf_social_display' ) ) {
-				$content = apply_filters( 'ucf_social_display', $content, $atts );
+			if ( has_filter( 'ucf_social_links_display' ) ) {
+				$content = apply_filters( 'ucf_social_links_display', $content, $atts );
 			}
 
 			$after = ucf_social_links_display_after( $atts );
-			if ( has_filter( 'ucf_social_display_after' ) ) {
-				$after = apply_filters( 'ucf_social_display_after', $after, $atts );
+			if ( has_filter( 'ucf_social_links_display_after' ) ) {
+				$after = apply_filters( 'ucf_social_links_display_after', $after, $atts );
 			}
 
 			return $before . $content . $after;
@@ -68,17 +68,17 @@ if ( ! class_exists( 'UCF_Social_Common' ) ) {
 		public static function display_social_feed( $atts ) {
 			$before = ucf_social_feed_display_before( $atts );
 			if ( has_filter( 'ucf_social_feed_display_before' ) ) {
-				$before = apply_filters( 'ucf_social_display_before', $before, $atts );
+				$before = apply_filters( 'ucf_social_feed_display_before', $before, $atts );
 			}
 
 			$content = ucf_social_feed_display( $atts );
-			if ( has_filter( 'ucf_social_display' ) ) {
-				$content = apply_filters( 'ucf_social_display', $content, $atts );
+			if ( has_filter( 'ucf_social_feed_display' ) ) {
+				$content = apply_filters( 'ucf_social_feed_display', $content, $atts );
 			}
 
 			$after = ucf_social_feed_display_after( $atts );
-			if ( has_filter( 'ucf_social_display_after' ) ) {
-				$after = apply_filters( 'ucf_social_display_after', $after, $atts );
+			if ( has_filter( 'ucf_social_feed_display_after' ) ) {
+				$after = apply_filters( 'ucf_social_feed_display_after', $after, $atts );
 			}
 
 			return $before . $content . $after;
@@ -127,7 +127,7 @@ if ( ! function_exists( 'ucf_social_icons_display_before' ) ) {
 	?>
 		<div class="ucf-social-icons">
 	<?php
-		echo ob_get_clean();
+		return ob_get_clean();
 	}
 }
 
@@ -186,7 +186,7 @@ if ( ! function_exists( 'ucf_social_icons_display' ) ) {
 			</a>
 		<?php endif; ?>
 	<?php
-		echo ob_get_clean();
+		return ob_get_clean();
 	}
 }
 
@@ -202,7 +202,7 @@ if ( ! function_exists( 'ucf_social_icons_display_after' ) ) {
 	?>
 		</div>
 	<?php
-		echo ob_get_clean();
+		return ob_get_clean();
 	}
 }
 
@@ -218,7 +218,7 @@ if ( ! function_exists( 'ucf_social_links_display_before' ) ) {
 		if ( has_filter( 'ucf_social_links_display_' . $atts['layout'] . '_before' ) ) {
 			echo apply_filters( 'ucf_social_links_display_' . $atts['layout'] . '_before', '', $atts );
 		}
-		echo ob_get_clean();
+		return ob_get_clean();
 	}
 }
 
@@ -235,7 +235,7 @@ if ( ! function_exists( 'ucf_social_links_display' ) ) {
 		if ( has_filter( 'ucf_social_links_display_' . $atts['layout'] ) ) {
 			echo apply_filters( 'ucf_social_links_display_' . $atts['layout'], '', $atts );
 		}
-		echo ob_get_clean();
+		return ob_get_clean();
 	}
 }
 
@@ -251,7 +251,7 @@ if ( ! function_exists( 'ucf_social_links_display_after' ) ) {
 		if ( has_filter( 'ucf_social_links_display_' . $atts['layout'] . '_after' ) ) {
 			echo apply_filters( 'ucf_social_links_display_' . $atts['layout'] . '_after', '', $atts );
 		}
-		echo ob_get_clean();
+		return ob_get_clean();
 	}
 }
 
@@ -267,7 +267,7 @@ if ( ! function_exists( 'ucf_social_feed_display_before' ) ) {
 	?>
 		<aside class="ucf-social-feed <?php echo $atts['class']; ?>">
 	<?php
-		echo ob_get_clean();
+		return ob_get_clean();
 	}
 }
 
@@ -287,7 +287,7 @@ if ( ! function_exists( 'ucf_social_feed_display' ) ) {
 		if ( has_filter( 'ucf_social_feed_display_' . $atts['layout'] ) ) {
 			echo apply_filters( 'ucf_social_feed_display_' . $atts['layout'], '', $atts );
 		}
-		echo ob_get_clean();
+		return ob_get_clean();
 	}
 }
 
@@ -303,7 +303,7 @@ if ( ! function_exists( 'ucf_social_feed_display_after' ) ) {
 	?>
 		</aside>
 	<?php
-		echo ob_get_clean();
+		return ob_get_clean();
 	}
 }
 
