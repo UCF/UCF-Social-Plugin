@@ -67,7 +67,7 @@ if ( ! class_exists( 'UCF_Social_Common' ) ) {
 		**/
 		public static function display_social_feed( $atts ) {
 			$before = ucf_social_feed_display_before( $atts );
-			if ( has_filter( 'ucf_social_display_before' ) ) {
+			if ( has_filter( 'ucf_social_feed_display_before' ) ) {
 				$before = apply_filters( 'ucf_social_display_before', $before, $atts );
 			}
 
@@ -140,11 +140,6 @@ if ( ! function_exists( 'ucf_social_icons_display_before' ) ) {
 **/
 if ( ! function_exists( 'ucf_social_icons_display' ) ) {
 	function ucf_social_icons_display( $atts ) {
-			$atts = shortcode_atts( array(
-				'size'  => 'md',
-				'color' => 'color'
-			), $atts );
-
 		$google_url     = UCF_Social_Config::get_option_or_default( 'google_url' );
 		$linkedin_url   = UCF_Social_Config::get_option_or_default( 'linkedin_url' );
 		$twitter_url    = UCF_Social_Config::get_option_or_default( 'twitter_url' );
@@ -220,9 +215,9 @@ if ( ! function_exists( 'ucf_social_icons_display_after' ) ) {
 if ( ! function_exists( 'ucf_social_links_display_before' ) ) {
 	function ucf_social_links_display_before( $atts ) {
 		ob_start();
-	?>
-		<aside class="ucf-social-links">
-	<?php
+		if ( has_filter( 'ucf_social_links_display_' . $atts['layout'] . '_before' ) ) {
+			echo apply_filters( 'ucf_social_links_display_' . $atts['layout'] . '_before', '', $atts );
+		}
 		echo ob_get_clean();
 	}
 }
@@ -236,26 +231,10 @@ if ( ! function_exists( 'ucf_social_links_display_before' ) ) {
 **/
 if ( ! function_exists( 'ucf_social_links_display' ) ) {
 	function ucf_social_links_display( $atts ) {
-		$atts = shortcode_atts( array(
-			'size'  => 'md'
-		), $atts );
-
-		global $post;
-		if ( !$post ) { return; }  // back out if there's no post data to reference
-		$permalink = urlencode( get_permalink( $post->ID ) );
-
 		ob_start();
-	?>
-		<a class="btn btn-facebook color btn-<?php echo $atts['size']; ?>" target="_blank" href="https://www.facebook.com/sharer.php?u=<?php echo $permalink; ?>" title="Like this story on Facebook">
-			<span class="fa fa-facebook"></span> Like
-		</a>
-		<a class="btn btn-twitter color btn-<?php echo $atts['size']; ?>" target="_blank" href="https://twitter.com/intent/tweet?text=<?php echo get_the_title(); ?>&amp;url=<?php echo $permalink; ?>" title="Tweet this story">
-			<span class="fa fa-twitter"></span> Tweet
-		</a>
-		<a class="btn btn-google color btn-<?php echo $atts['size']; ?>" target="_blank" href="https://plus.google.com/share?url=<?php echo $permalink; ?>" title="Share this story on Google+">
-			<span class="fa fa-google-plus"></span> Share
-		</a>
-	<?php
+		if ( has_filter( 'ucf_social_links_display_' . $atts['layout'] ) ) {
+			echo apply_filters( 'ucf_social_links_display_' . $atts['layout'], '', $atts );
+		}
 		echo ob_get_clean();
 	}
 }
@@ -269,9 +248,9 @@ if ( ! function_exists( 'ucf_social_links_display' ) ) {
 if ( ! function_exists( 'ucf_social_links_display_after' ) ) {
 	function ucf_social_links_display_after( $atts ) {
 		ob_start();
-	?>
-		</aside>
-	<?php
+		if ( has_filter( 'ucf_social_links_display_' . $atts['layout'] . '_after' ) ) {
+			echo apply_filters( 'ucf_social_links_display_' . $atts['layout'] . '_after', '', $atts );
+		}
 		echo ob_get_clean();
 	}
 }
@@ -301,14 +280,6 @@ if ( ! function_exists( 'ucf_social_feed_display_before' ) ) {
 **/
 if ( ! function_exists( 'ucf_social_feed_display' ) ) {
 	function ucf_social_feed_display( $atts ) {
-		$atts = shortcode_atts( array(
-			'feed'       => '',
-			'container'  => 'ucf-social-feed',
-			'layout'     => 'waterfall',
-			'grid-width' => 320,
-			'grid-rows'  => 3
-		), $atts );
-
 		global $post;
 		if ( !$post ) { return; }  // back out if there's no post data to reference
 

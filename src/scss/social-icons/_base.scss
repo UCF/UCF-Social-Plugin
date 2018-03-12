@@ -79,35 +79,3 @@
     padding-top: .05rem;
   }
 }
-
-.ucf-social-links {
-
-  .btn {
-    color: $white;
-    margin-bottom: .25rem;
-  }
-
-  .btn-google {
-    @include social-bg-colors($color-googleplus);
-  }
-
-  .btn-facebook {
-    @include social-bg-colors($color-facebook);
-  }
-
-  .btn-linkedin {
-    @include social-bg-colors($color-linkedin);
-  }
-
-  .btn-twitter {
-    @include social-bg-colors($color-twitter);
-  }
-
-  .btn-instagram {
-    @include social-bg-colors($color-instagram);
-  }
-
-  .btn-youtube {
-    @include social-bg-colors($color-youtube);
-  }
-}

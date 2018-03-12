@@ -22,7 +22,8 @@ if ( ! class_exists( 'UCF_Social_Shortcode' ) ) {
 
 		public static function links_shortcode( $atts ) {
 			$atts = shortcode_atts( array(
-				'size'   => 'sm'
+				'size'   => 'sm',
+				'layout' => 'default'
 			), $atts, 'ucf-social-links' );
 
 			ob_start();
