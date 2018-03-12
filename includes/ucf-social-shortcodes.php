@@ -35,7 +35,7 @@ if ( ! class_exists( 'UCF_Social_Shortcode' ) ) {
 			$atts = shortcode_atts( array(
 				'feed'       => '',
 				'container'  => 'ucf-social-feed',
-				'layout'     => 'waterfall',
+				'layout'     => 'default',
 				'grid-width' => 320,
 				'grid-rows'  => 3,
 				'class'      => ''
