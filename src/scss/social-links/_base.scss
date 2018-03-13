@@ -4,6 +4,10 @@
     margin-bottom: .25rem;
   }
 
+  .btn-text {
+    margin-left: 5px;
+  }
+
   .btn-google {
     @include social-bg-colors($color-googleplus);
   }
