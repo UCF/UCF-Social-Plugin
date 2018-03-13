@@ -22,9 +22,18 @@ if ( ! class_exists( 'UCF_Social_Shortcode' ) ) {
 		}
 
 		public static function links_shortcode( $atts ) {
+			global $post;
+			$permalink = $share_text = '';
+			if ( $post ) {
+				$permalink = get_permalink( $post );
+				$share_text = get_the_title( $post );
+			}
+
 			$atts = shortcode_atts( array(
-				'layout' => 'default',
-				'size'   => 'sm'
+				'layout'     => 'default',
+				'size'       => 'sm',
+				'permalink'  => $permalink,
+				'share_text' => $share_text
 			), $atts, 'ucf-social-links' );
 
 			ob_start();
