@@ -16,6 +16,7 @@ add_action( 'plugins_loaded', function() {
 	define( 'UCF_SOCIAL__PLUGIN_FILE', __FILE__ );
 
 	// Layouts - social feed
+	require_once 'layouts/social-feed/default.php';
 	require_once 'layouts/social-feed/grid.php';
 	require_once 'layouts/social-feed/waterfall.php';
 

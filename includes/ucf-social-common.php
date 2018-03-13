@@ -16,17 +16,17 @@ if ( ! class_exists( 'UCF_Social_Common' ) ) {
 		public static function display_social_icons( $atts ) {
 			$before = ucf_social_icons_display_default_before( $atts );
 			if ( has_filter( 'ucf_social_icons_display_' . $atts['layout'] . '_before' ) ) {
-				$before = apply_filters( 'ucf_social_icons_display_' . $atts['layout'] . '_before', $before, $atts );
+				$before = apply_filters( 'ucf_social_icons_display_' . $atts['layout'] . '_before', $atts );
 			}
 
 			$content = ucf_social_icons_display_default( $atts );
 			if ( has_filter( 'ucf_social_icons_display_' . $atts['layout'] ) ) {
-				$content = apply_filters( 'ucf_social_icons_display_' . $atts['layout'], $content, $atts );
+				$content = apply_filters( 'ucf_social_icons_display_' . $atts['layout'], $atts );
 			}
 
 			$after = ucf_social_icons_display_default_after( $atts );
 			if ( has_filter( 'ucf_social_icons_display_' . $atts['layout'] . '_after' ) ) {
-				$after = apply_filters( 'ucf_social_icons_display_' . $atts['layout'] . '_after', $after, $atts );
+				$after = apply_filters( 'ucf_social_icons_display_' . $atts['layout'] . '_after', $atts );
 			}
 
 			return $before . $content . $after;
@@ -42,7 +42,7 @@ if ( ! class_exists( 'UCF_Social_Common' ) ) {
 		public static function display_social_links( $atts ) {
 			$before = ucf_social_links_display_default_before( $atts );
 			if ( has_filter( 'ucf_social_links_display_' . $atts['layout'] . '_before' ) ) {
-				$before = apply_filters( 'ucf_social_links_display_' . $atts['layout'] . '_before', $before, $atts );
+				$before = apply_filters( 'ucf_social_links_display_' . $atts['layout'] . '_before', $atts );
 			}
 
 			$content = ucf_social_links_display_default( '', $atts );
@@ -52,7 +52,7 @@ if ( ! class_exists( 'UCF_Social_Common' ) ) {
 
 			$after = ucf_social_links_display_default_after( $atts );
 			if ( has_filter( 'ucf_social_links_display_' . $atts['layout'] . '_after' ) ) {
-				$after = apply_filters( 'ucf_social_links_display_' . $atts['layout'] . '_after', $after, $atts );
+				$after = apply_filters( 'ucf_social_links_display_' . $atts['layout'] . '_after', $atts );
 			}
 
 			return $before . $content . $after;
@@ -68,7 +68,7 @@ if ( ! class_exists( 'UCF_Social_Common' ) ) {
 		public static function display_social_feed( $atts ) {
 			$before = ucf_social_feed_display_default_before( $atts );
 			if ( has_filter( 'ucf_social_feed_display_' . $atts['layout'] . '_before' ) ) {
-				$before = apply_filters( 'ucf_social_feed_display_' . $atts['layout'] . '_before', $before, $atts );
+				$before = apply_filters( 'ucf_social_feed_display_' . $atts['layout'] . '_before', $atts );
 			}
 
 			$content = ucf_social_feed_display_default( '', $atts );
@@ -78,7 +78,7 @@ if ( ! class_exists( 'UCF_Social_Common' ) ) {
 
 			$after = ucf_social_feed_display_default_after( $atts );
 			if ( has_filter( 'ucf_social_feed_display_' . $atts['layout'] . '_after' ) ) {
-				$after = apply_filters( 'ucf_social_feed_display_' . $atts['layout'] . '_after', $after, $atts );
+				$after = apply_filters( 'ucf_social_feed_display_' . $atts['layout'] . '_after', $atts );
 			}
 
 			return $before . $content . $after;

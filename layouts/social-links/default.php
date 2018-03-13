@@ -13,7 +13,7 @@ if ( ! function_exists( 'ucf_social_links_display_default_before' ) ) {
 	?>
 		<aside class="ucf-social-links ucf-social-links-default">
 	<?php
-		echo ob_get_clean();
+		return ob_get_clean();
 	}
 }
 
@@ -45,7 +45,7 @@ if ( ! function_exists( 'ucf_social_links_display_default' ) ) {
 			<span class="fa fa-google-plus"></span> Share
 		</a>
 	<?php
-		echo ob_get_clean();
+		return ob_get_clean();
 	}
 }
 
@@ -65,7 +65,7 @@ if ( ! function_exists( 'ucf_social_links_display_default_after' ) ) {
 	?>
 		</aside>
 	<?php
-		echo ob_get_clean();
+		return ob_get_clean();
 	}
 }
 
