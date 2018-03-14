@@ -7,7 +7,7 @@
  * @return string
  **/
 if ( ! function_exists( 'ucf_social_feed_display_default_before' ) ) {
-	function ucf_social_feed_display_default_before( $atts ) {
+	function ucf_social_feed_display_default_before( $content='', $atts ) {
 		ob_start();
 	?>
 		<aside class="ucf-social-feed <?php echo $atts['class']; ?>">
@@ -16,7 +16,7 @@ if ( ! function_exists( 'ucf_social_feed_display_default_before' ) ) {
 	}
 }
 
-add_filter( 'ucf_social_feed_display_default_before', 'ucf_social_feed_display_default_before', 10, 1 );
+add_filter( 'ucf_social_feed_display_default_before', 'ucf_social_feed_display_default_before', 10, 2 );
 
 
 /**
@@ -64,7 +64,7 @@ add_filter( 'ucf_social_feed_display_default', 'ucf_social_feed_display_default'
  * @return string
  **/
 if ( ! function_exists( 'ucf_social_feed_display_default_after' ) ) {
-	function ucf_social_feed_display_default_after( $atts ) {
+	function ucf_social_feed_display_default_after( $content='', $atts ) {
 		ob_start();
 	?>
 		</aside>
@@ -73,4 +73,4 @@ if ( ! function_exists( 'ucf_social_feed_display_default_after' ) ) {
 	}
 }
 
-add_filter( 'ucf_social_feed_display_default_after', 'ucf_social_feed_display_default_after', 10, 1 );
+add_filter( 'ucf_social_feed_display_default_after', 'ucf_social_feed_display_default_after', 10, 2 );
