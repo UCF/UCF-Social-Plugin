@@ -5,6 +5,7 @@ Description: Provides a shortcode, functions, and default styles for displaying 
 Version: 1.0.7
 Author: UCF Web Communications
 License: GPL3
+GitHub Plugin URI: https://github.com/UCF/UCF-Social-Plugin
 */
 
 if ( ! defined( 'WPINC' ) ) {
