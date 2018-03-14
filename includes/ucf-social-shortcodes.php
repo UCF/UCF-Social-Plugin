@@ -11,6 +11,7 @@ if ( ! class_exists( 'UCF_Social_Shortcode' ) ) {
 	class UCF_Social_Shortcode {
 		public static function icons_shortcode( $atts ) {
 			$atts = shortcode_atts( array(
+				'layout' => 'default',
 				'color'  => 'color',
 				'size'   => 'md'
 			), $atts, 'ucf-social-icons' );
@@ -22,6 +23,7 @@ if ( ! class_exists( 'UCF_Social_Shortcode' ) ) {
 
 		public static function links_shortcode( $atts ) {
 			$atts = shortcode_atts( array(
+				'layout' => 'default',
 				'size'   => 'sm'
 			), $atts, 'ucf-social-links' );
 
@@ -33,8 +35,8 @@ if ( ! class_exists( 'UCF_Social_Shortcode' ) ) {
 		public static function feed_shortcode( $atts ) {
 			$atts = shortcode_atts( array(
 				'feed'       => '',
-				'container'  => 'ucf-social-feed',
-				'layout'     => 'waterfall',
+				'container'  => 'ucf-social-feed-' . wp_rand(),
+				'layout'     => 'default',
 				'grid-width' => 320,
 				'grid-rows'  => 3,
 				'class'      => ''
