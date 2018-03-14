@@ -11,6 +11,7 @@ if ( ! class_exists( 'UCF_Social_Shortcode' ) ) {
 	class UCF_Social_Shortcode {
 		public static function icons_shortcode( $atts ) {
 			$atts = shortcode_atts( array(
+				'layout' => 'default',
 				'color'  => 'color',
 				'size'   => 'md'
 			), $atts, 'ucf-social-icons' );
@@ -21,8 +22,18 @@ if ( ! class_exists( 'UCF_Social_Shortcode' ) ) {
 		}
 
 		public static function links_shortcode( $atts ) {
+			global $post;
+			$permalink = $share_text = '';
+			if ( $post ) {
+				$permalink = get_permalink( $post );
+				$share_text = get_the_title( $post );
+			}
+
 			$atts = shortcode_atts( array(
-				'size'   => 'sm'
+				'layout'     => 'default',
+				'size'       => 'sm',
+				'permalink'  => $permalink,
+				'share_text' => $share_text
 			), $atts, 'ucf-social-links' );
 
 			ob_start();
@@ -33,8 +44,8 @@ if ( ! class_exists( 'UCF_Social_Shortcode' ) ) {
 		public static function feed_shortcode( $atts ) {
 			$atts = shortcode_atts( array(
 				'feed'       => '',
-				'container'  => 'ucf-social-feed',
-				'layout'     => 'waterfall',
+				'container'  => 'ucf-social-feed-' . wp_rand(),
+				'layout'     => 'default',
 				'grid-width' => 320,
 				'grid-rows'  => 3,
 				'class'      => ''
