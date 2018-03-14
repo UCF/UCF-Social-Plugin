@@ -3,7 +3,7 @@ Contributors: ucfwebcom
 Tags: ucf, social
 Requires at least: 4.7.3
 Tested up to: 4.7.3
-Stable tag: 1.0.7
+Stable tag: 2.0.0
 License: GPLv3 or later
 License URI: http://www.gnu.org/copyleft/gpl-3.0.html
 
@@ -32,6 +32,38 @@ This plugin provides a shortcode, helper functions, and default styles for displ
 * FontAwesome
 
 == Changelog ==
+
+= 2.0.0 =
+Enhancements:
+- Adds a non-nested layout system for all shortcodes.  All shortcodes now support the 'layout' attribute, and all have a standard 'default' layout.  All `before` and `after` layout parts can now be overridden via hooks.
+- Re-organized layout functions and styles into separate files.
+- Added `permalink` and `share_text` attributes to the [ucf-social-links] shortcode, which allow you to specify a custom URL that should be shared (in lieu of the current global `$post`'s permalink), and adjust the contents of a generated tweet message, respectively.
+- Updated markup for social links to add `aria-hidden` to FA icons, genericize the share titles for each button ("share this content" vs "share this story"), and wrap the inner text of each button in a span (`.btn-text`) to make it easier to apply style overrides.
+
+Bug fixes:
+- Updated all layout functions to _return_ instead of _echo_ their results
+- Fixed duplicate ID issue with the social feed shortcode's generated placeholder div by implementing a unique ID by default (using `wp_rand()`)
+- Fixed `has_filter()` checks in includes/ucf-social-common.php that all checked the same set of filters (instead of shortcode-specific filters)
+
+Breaking changes:
+
+Because this version removes existing functions and hooks, it is tagged with a major version bump; however, you should be able to seamlessly upgrade to this version from 1.0.7 as long as you weren't utilizing any of those functions/hooks directly.  See list below for a list of what's been removed.
+
+Removed/renamed functions:
+- `ucf_social_icons_display_before()` -> `ucf_social_icons_display_default_before()`
+- `ucf_social_icons_display()` -> `ucf_social_icons_display_default()`
+- `ucf_social_icons_display_after()` -> `ucf_social_icons_display_default_after()`
+- `ucf_social_links_display_before()` -> `ucf_social_links_display_default_before()`
+- `ucf_social_links_display()` -> `ucf_social_links_display_default()`
+- `ucf_social_links_display_after()` -> `ucf_social_links_display_default_after()`
+- `ucf_social_feed_display_before()` -> `ucf_social_feed_display_default_before()`
+- `ucf_social_feed_display()` -> `ucf_social_feed_display_default()`
+- `ucf_social_feed_display_after()` -> `ucf_social_feed_display_default_after()`
+
+Removed hooks:
+- `ucf_social_display_before` (use shortcode-specific `before` hook instead)
+- `ucf_social_display` (use shortcode-specific hook instead)
+- `ucf_social_display_after` (use shortcode-specific `after` hook instead)
 
 = 1.0.7 =
 Bug Fixes:
