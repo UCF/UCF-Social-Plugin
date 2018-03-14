@@ -7,7 +7,7 @@
 * @return string
 **/
 if ( ! function_exists( 'ucf_social_icons_display_default_before' ) ) {
-	function ucf_social_icons_display_default_before( $atts ) {
+	function ucf_social_icons_display_default_before( $content='', $atts ) {
 		ob_start();
 	?>
 		<div class="ucf-social-icons">
@@ -15,6 +15,9 @@ if ( ! function_exists( 'ucf_social_icons_display_default_before' ) ) {
 		return ob_get_clean();
 	}
 }
+
+add_filter( 'ucf_social_icons_display_default_before', 'ucf_social_icons_display_default_before', 10, 2 );
+
 
 /**
 * Display the social icons content
@@ -24,7 +27,7 @@ if ( ! function_exists( 'ucf_social_icons_display_default_before' ) ) {
 * @return string
 **/
 if ( ! function_exists( 'ucf_social_icons_display_default' ) ) {
-	function ucf_social_icons_display_default( $atts ) {
+	function ucf_social_icons_display_default( $content='', $atts ) {
 		$google_url     = UCF_Social_Config::get_option_or_default( 'google_url' );
 		$linkedin_url   = UCF_Social_Config::get_option_or_default( 'linkedin_url' );
 		$twitter_url    = UCF_Social_Config::get_option_or_default( 'twitter_url' );
@@ -75,6 +78,9 @@ if ( ! function_exists( 'ucf_social_icons_display_default' ) ) {
 	}
 }
 
+add_filter( 'ucf_social_icons_display_default', 'ucf_social_icons_display_default', 10, 2 );
+
+
 /**
 * Display the content after the social icons
 * @author RJ Bruneel
@@ -82,7 +88,7 @@ if ( ! function_exists( 'ucf_social_icons_display_default' ) ) {
 * @return string
 **/
 if ( ! function_exists( 'ucf_social_icons_display_default_after' ) ) {
-	function ucf_social_icons_display_default_after( $atts ) {
+	function ucf_social_icons_display_default_after( $content='', $atts ) {
 		ob_start();
 	?>
 		</div>
@@ -90,3 +96,5 @@ if ( ! function_exists( 'ucf_social_icons_display_default_after' ) ) {
 		return ob_get_clean();
 	}
 }
+
+add_filter( 'ucf_social_icons_display_default_after', 'ucf_social_icons_display_default_after', 10, 2 );
