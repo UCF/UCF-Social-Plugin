@@ -29,8 +29,8 @@ add_filter( 'ucf_social_links_display_default_before', 'ucf_social_links_display
  **/
 if ( ! function_exists( 'ucf_social_links_display_default' ) ) {
 	function ucf_social_links_display_default( $content='', $atts ) {
-		$permalink = substr( urlencode( $atts['permalink'] ), 0, 1024 );  // linkedin requires a max char limit
-		$share_text = substr( urlencode( $atts['share_text'] ), 0, 200 );  // linkedin requires a max char limit
+		$permalink = substr( urlencode( $atts['permalink'] ), 0, 1024 );  // linkedin max char limit
+		$share_text = substr( urlencode( html_entity_decode( $atts['share_text'] ) ), 0, 140 );  // twitter max char limit
 		$share_text_email = esc_attr( $atts['share_text'] );
 		$site_title_email = esc_attr( get_bloginfo( 'site_title' ) );
 
