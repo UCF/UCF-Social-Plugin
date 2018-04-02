@@ -31,4 +31,8 @@
   .btn-youtube {
     @include social-bg-colors($color-youtube);
   }
+
+  .btn-email {
+    @include social-bg-colors($color-email);
+  }
 }
