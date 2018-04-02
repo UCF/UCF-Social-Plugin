@@ -26,6 +26,13 @@ This plugin provides a shortcode, helper functions, and default styles for displ
 
 ## Changelog ##
 
+### 2.1.0 ###
+Enhancements:
+- Added plugin options and attributes to the `[ucf-social-links]` shortcode that allow you to specify what social sharing links you'd like to include/exclude.  For backward compatibility, Facebook, Twitter, and Google+ are enabled by default.
+- Added LinkedIn and Email link options for `[ucf-social-links]`
+- Split existing plugins options out into grouped sections
+- Removed unused shortcode attr formatting hook + method (`UCF_Social_Config::format_sc_atts()`)
+
 ### 2.0.0 ###
 Enhancements:
 - Adds a non-nested layout system for all shortcodes.  All shortcodes now support the 'layout' attribute, and all have a standard 'default' layout.  All `before` and `after` layout parts can now be overridden via hooks.

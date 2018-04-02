@@ -3,7 +3,7 @@ Contributors: ucfwebcom
 Tags: ucf, social
 Requires at least: 4.7.3
 Tested up to: 4.7.3
-Stable tag: 2.0.0
+Stable tag: 2.1.0
 License: GPLv3 or later
 License URI: http://www.gnu.org/copyleft/gpl-3.0.html
 
@@ -32,6 +32,13 @@ This plugin provides a shortcode, helper functions, and default styles for displ
 * FontAwesome
 
 == Changelog ==
+
+= 2.1.0 =
+Enhancements:
+- Added plugin options and attributes to the `[ucf-social-links]` shortcode that allow you to specify what social sharing links you'd like to include/exclude.  For backward compatibility, Facebook, Twitter, and Google+ are enabled by default.
+- Added LinkedIn and Email link options for `[ucf-social-links]`
+- Split existing plugins options out into grouped sections
+- Removed unused shortcode attr formatting hook + method (`UCF_Social_Config::format_sc_atts()`)
 
 = 2.0.0 =
 Enhancements:
