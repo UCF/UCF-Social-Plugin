@@ -310,7 +310,7 @@ if ( !class_exists( 'UCF_Social_Config' ) ) {
 				'ucf_social_section_links',  // option section slug
 				array(  // extra arguments to pass to the callback function
 					'label_for'   => self::$option_prefix . 'include_facebook_sharing',
-					'description' => 'Include a Facebook share link in the [ucf-social-links] shortcode output by default. Can be overridden per-shortcode with the <code>facebook</code> attribute.',
+					'description' => 'Include a Facebook share link in the [ucf-social-links] shortcode output by default.<br>Can be overridden per-shortcode with the <code>facebook</code> attribute.',
 					'type'        => 'checkbox'
 				)
 			);
@@ -322,7 +322,7 @@ if ( !class_exists( 'UCF_Social_Config' ) ) {
 				'ucf_social_section_links',  // option section slug
 				array(  // extra arguments to pass to the callback function
 					'label_for'   => self::$option_prefix . 'include_twitter_sharing',
-					'description' => 'Include a Twitter share link in the [ucf-social-links] shortcode output by default. Can be overridden per-shortcode with the <code>twitter</code> attribute.',
+					'description' => 'Include a Twitter share link in the [ucf-social-links] shortcode output by default.<br>Can be overridden per-shortcode with the <code>twitter</code> attribute.',
 					'type'        => 'checkbox'
 				)
 			);
@@ -334,7 +334,7 @@ if ( !class_exists( 'UCF_Social_Config' ) ) {
 				'ucf_social_section_links',  // option section slug
 				array(  // extra arguments to pass to the callback function
 					'label_for'   => self::$option_prefix . 'include_google_sharing',
-					'description' => 'Include a Google+ share link in the [ucf-social-links] shortcode output by default. Can be overridden per-shortcode with the <code>google</code> attribute.',
+					'description' => 'Include a Google+ share link in the [ucf-social-links] shortcode output by default.<br>Can be overridden per-shortcode with the <code>google</code> attribute.',
 					'type'        => 'checkbox'
 				)
 			);
@@ -346,7 +346,7 @@ if ( !class_exists( 'UCF_Social_Config' ) ) {
 				'ucf_social_section_links',  // option section slug
 				array(  // extra arguments to pass to the callback function
 					'label_for'   => self::$option_prefix . 'include_linkedin_sharing',
-					'description' => 'Include a LinkedIn share link in the [ucf-social-links] shortcode output by default. Can be overridden per-shortcode with the <code>linkedin</code> attribute.',
+					'description' => 'Include a LinkedIn share link in the [ucf-social-links] shortcode output by default.<br>Can be overridden per-shortcode with the <code>linkedin</code> attribute.',
 					'type'        => 'checkbox'
 				)
 			);
@@ -358,7 +358,7 @@ if ( !class_exists( 'UCF_Social_Config' ) ) {
 				'ucf_social_section_links',  // option section slug
 				array(  // extra arguments to pass to the callback function
 					'label_for'   => self::$option_prefix . 'include_email_sharing',
-					'description' => 'Include an email share link in the [ucf-social-links] shortcode output by default. Can be overridden per-shortcode with the <code>email</code> attribute.',
+					'description' => 'Include an email share link in the [ucf-social-links] shortcode output by default.<br>Can be overridden per-shortcode with the <code>email</code> attribute.',
 					'type'        => 'checkbox'
 				)
 			);
