@@ -16,6 +16,11 @@ if ( !class_exists( 'UCF_Social_Config' ) ) {
 				'linkedin_url' => '',
 				'instagram_url' => '',
 				'youtube_url' => '',
+				'include_facebook_sharing' => true,
+				'include_twitter_sharing' => true,
+				'include_google_sharing' => true,
+				'include_linkedin_sharing' => false,
+				'include_email_sharing' => false,
 				'curator_css_url' => '',
 				'curator_js_url' => ''
 			);
@@ -36,6 +41,11 @@ if ( !class_exists( 'UCF_Social_Config' ) ) {
 			add_option( self::$option_prefix . 'linkedin_url', $defaults['linkedin_url'] );
 			add_option( self::$option_prefix . 'instagram_url', $defaults['instagram_url'] );
 			add_option( self::$option_prefix . 'youtube_url', $defaults['youtube_url'] );
+			add_option( self::$option_prefix . 'include_facebook_sharing', $defaults['include_facebook_sharing'] );
+			add_option( self::$option_prefix . 'include_twitter_sharing', $defaults['include_twitter_sharing'] );
+			add_option( self::$option_prefix . 'include_google_sharing', $defaults['include_google_sharing'] );
+			add_option( self::$option_prefix . 'include_linkedin_sharing', $defaults['include_linkedin_sharing'] );
+			add_option( self::$option_prefix . 'include_email_sharing', $defaults['include_email_sharing'] );
 			add_option( self::$option_prefix . 'curator_css_url', $defaults['curator_css_url'] );
 			add_option( self::$option_prefix . 'curator_js_url', $defaults['curator_js_url'] );
 		}
@@ -54,6 +64,11 @@ if ( !class_exists( 'UCF_Social_Config' ) ) {
 			delete_option( self::$option_prefix . 'linkedin_url' );
 			delete_option( self::$option_prefix . 'instagram_url' );
 			delete_option( self::$option_prefix . 'youtube_url' );
+			delete_option( self::$option_prefix . 'include_facebook_sharing' );
+			delete_option( self::$option_prefix . 'include_twitter_sharing' );
+			delete_option( self::$option_prefix . 'include_google_sharing' );
+			delete_option( self::$option_prefix . 'include_linkedin_sharing' );
+			delete_option( self::$option_prefix . 'include_email_sharing' );
 			delete_option( self::$option_prefix . 'curator_css_url' );
 			delete_option( self::$option_prefix . 'curator_js_url' );
 		}
@@ -69,15 +84,20 @@ if ( !class_exists( 'UCF_Social_Config' ) ) {
 
 			// Apply default values configurable within the options page:
 			$configurable_defaults = array(
-				'include_css'      => get_option( self::$option_prefix . 'include_css', $defaults['include_css'] ),
-				'facebook_url'     => get_option( self::$option_prefix . 'facebook_url', $defaults['facebook_url'] ),
-				'twitter_url'      => get_option( self::$option_prefix . 'twitter_url', $defaults['twitter_url'] ),
-				'google_url'       => get_option( self::$option_prefix . 'google_url', $defaults['google_url'] ),
-				'linkedin_url'     => get_option( self::$option_prefix . 'linkedin_url', $defaults['linkedin_url'] ),
-				'instagram_url'    => get_option( self::$option_prefix . 'instagram_url', $defaults['instagram_url'] ),
-				'youtube_url'      => get_option( self::$option_prefix . 'youtube_url', $defaults['youtube_url'] ),
-				'curator_css_url'  => get_option( self::$option_prefix . 'curator_css_url', $defaults['curator_css_url'] ),
-				'curator_js_url'   => get_option( self::$option_prefix . 'curator_js_url', $defaults['curator_js_url'] ),
+				'include_css'              => get_option( self::$option_prefix . 'include_css', $defaults['include_css'] ),
+				'facebook_url'             => get_option( self::$option_prefix . 'facebook_url', $defaults['facebook_url'] ),
+				'twitter_url'              => get_option( self::$option_prefix . 'twitter_url', $defaults['twitter_url'] ),
+				'google_url'               => get_option( self::$option_prefix . 'google_url', $defaults['google_url'] ),
+				'linkedin_url'             => get_option( self::$option_prefix . 'linkedin_url', $defaults['linkedin_url'] ),
+				'instagram_url'            => get_option( self::$option_prefix . 'instagram_url', $defaults['instagram_url'] ),
+				'youtube_url'              => get_option( self::$option_prefix . 'youtube_url', $defaults['youtube_url'] ),
+				'include_facebook_sharing' => get_option( self::$option_prefix . 'include_facebook_sharing', $defaults['include_facebook_sharing'] ),
+				'include_twitter_sharing'  => get_option( self::$option_prefix . 'include_twitter_sharing', $defaults['include_twitter_sharing'] ),
+				'include_google_sharing'   => get_option( self::$option_prefix . 'include_google_sharing', $defaults['include_google_sharing'] ),
+				'include_linkedin_sharing' => get_option( self::$option_prefix . 'include_linkedin_sharing', $defaults['include_linkedin_sharing'] ),
+				'include_email_sharing'    => get_option( self::$option_prefix . 'include_email_sharing', $defaults['include_email_sharing'] ),
+				'curator_css_url'          => get_option( self::$option_prefix . 'curator_css_url', $defaults['curator_css_url'] ),
+				'curator_js_url'           => get_option( self::$option_prefix . 'curator_js_url', $defaults['curator_js_url'] ),
 			);
 
 			// Force configurable options to override $defaults, even if they are empty:
@@ -96,6 +116,11 @@ if ( !class_exists( 'UCF_Social_Config' ) ) {
 			foreach ( $list as $key => $val ) {
 				switch ( $key ) {
 					case 'include_css':
+					case 'include_facebook_sharing':
+					case 'include_twitter_sharing':
+					case 'include_google_sharing':
+					case 'include_linkedin_sharing':
+					case 'include_email_sharing':
 						$list[$key] = filter_var( $val, FILTER_VALIDATE_BOOLEAN );
 					default:
 						break;
@@ -115,14 +140,6 @@ if ( !class_exists( 'UCF_Social_Config' ) ) {
 		}
 
 		/**
-		 * Applies formatting to an array of shortcode attributes. Intended to
-		 * be passed to the 'shortcode_atts_sc_ucf_social' hook.
-		 **/
-		public static function format_sc_atts( $out, $pairs, $atts, $shortcode ) {
-			return self::format_options( $out );
-		}
-
-		/**
 		 * Adds filters for shortcode and plugin options that apply our
 		 * formatting rules to attribute/option values.
 		 **/
@@ -132,8 +149,6 @@ if ( !class_exists( 'UCF_Social_Config' ) ) {
 			foreach ( $defaults as $option => $default ) {
 				add_filter( 'option_{$option}', array( 'UCF_Social_Config', 'format_option' ), 10, 2 );
 			}
-			// Shortcode atts
-			add_filter( 'shortcode_atts_sc_ucf_social', array( 'UCF_Social_Config', 'format_sc_atts' ), 10, 4 );
 		}
 
 		/**
@@ -164,6 +179,11 @@ if ( !class_exists( 'UCF_Social_Config' ) ) {
 			register_setting( 'ucf_social', self::$option_prefix . 'linkedin_url' );
 			register_setting( 'ucf_social', self::$option_prefix . 'instagram_url' );
 			register_setting( 'ucf_social', self::$option_prefix . 'youtube_url' );
+			register_setting( 'ucf_social', self::$option_prefix . 'include_facebook_sharing' );
+			register_setting( 'ucf_social', self::$option_prefix . 'include_twitter_sharing' );
+			register_setting( 'ucf_social', self::$option_prefix . 'include_google_sharing' );
+			register_setting( 'ucf_social', self::$option_prefix . 'include_linkedin_sharing' );
+			register_setting( 'ucf_social', self::$option_prefix . 'include_email_sharing' );
 			register_setting( 'ucf_social', self::$option_prefix . 'curator_css_url' );
 			register_setting( 'ucf_social', self::$option_prefix . 'curator_js_url' );
 
@@ -174,8 +194,26 @@ if ( !class_exists( 'UCF_Social_Config' ) ) {
 				'', // callback that echoes any content at the top of the section
 				'ucf_social' // settings page slug
 			);
+			add_settings_section(
+				'ucf_social_section_icons', // option section slug
+				'Social Icon Settings', // formatted title
+				'', // callback that echoes any content at the top of the section
+				'ucf_social' // settings page slug
+			);
+			add_settings_section(
+				'ucf_social_section_links', // option section slug
+				'Social Share Link Settings', // formatted title
+				'', // callback that echoes any content at the top of the section
+				'ucf_social' // settings page slug
+			);
+			add_settings_section(
+				'ucf_social_section_feed', // option section slug
+				'Social Feed (Curator.io) Settings', // formatted title
+				'', // callback that echoes any content at the top of the section
+				'ucf_social' // settings page slug
+			);
 
-			// Register fields
+			// Register fields - general
 			add_settings_field(
 				self::$option_prefix . 'include_css',
 				'Include Default CSS',  // formatted field title
@@ -188,15 +226,17 @@ if ( !class_exists( 'UCF_Social_Config' ) ) {
 					'type'        => 'checkbox'
 				)
 			);
+
+			// Register fields - icon settings
 			add_settings_field(
 				self::$option_prefix . 'facebook_url',
 				'Facebook URL',  // formatted field title
 				array( 'UCF_Social_Config', 'display_settings_field' ), // display callback
 				'ucf_social',  // settings page slug
-				'ucf_social_section_general',  // option section slug
+				'ucf_social_section_icons',  // option section slug
 				array(  // extra arguments to pass to the callback function
 					'label_for'   => self::$option_prefix . 'facebook_url',
-					'description' => 'The Facebook URL to use for social assets.',
+					'description' => 'The Facebook URL to use in the [ucf-social-icons] shortcode output.',
 					'type'        => 'text'
 				)
 			);
@@ -205,10 +245,10 @@ if ( !class_exists( 'UCF_Social_Config' ) ) {
 				'Twitter URL',  // formatted field title
 				array( 'UCF_Social_Config', 'display_settings_field' ), // display callback
 				'ucf_social',  // settings page slug
-				'ucf_social_section_general',  // option section slug
+				'ucf_social_section_icons',  // option section slug
 				array(  // extra arguments to pass to the callback function
 					'label_for'   => self::$option_prefix . 'twitter_url',
-					'description' => 'The Twitter URL to use for social assets.',
+					'description' => 'The Twitter URL to use in the [ucf-social-icons] shortcode output.',
 					'type'        => 'text'
 				)
 			);
@@ -217,10 +257,10 @@ if ( !class_exists( 'UCF_Social_Config' ) ) {
 				'Google+ URL',  // formatted field title
 				array( 'UCF_Social_Config', 'display_settings_field' ), // display callback
 				'ucf_social',  // settings page slug
-				'ucf_social_section_general',  // option section slug
+				'ucf_social_section_icons',  // option section slug
 				array(  // extra arguments to pass to the callback function
 					'label_for'   => self::$option_prefix . 'google_url',
-					'description' => 'The Google+ URL to use for social assets.',
+					'description' => 'The Google+ URL to use in the [ucf-social-icons] shortcode output.',
 					'type'        => 'text'
 				)
 			);
@@ -229,10 +269,10 @@ if ( !class_exists( 'UCF_Social_Config' ) ) {
 				'LinkedIn URL',  // formatted field title
 				array( 'UCF_Social_Config', 'display_settings_field' ), // display callback
 				'ucf_social',  // settings page slug
-				'ucf_social_section_general',  // option section slug
+				'ucf_social_section_icons',  // option section slug
 				array(  // extra arguments to pass to the callback function
 					'label_for'   => self::$option_prefix . 'linkedin_url',
-					'description' => 'The LinkedIn URL to use for social assets.',
+					'description' => 'The LinkedIn URL to use in the [ucf-social-icons] shortcode output.',
 					'type'        => 'text'
 				)
 			);
@@ -241,34 +281,98 @@ if ( !class_exists( 'UCF_Social_Config' ) ) {
 				'Instagram URL',  // formatted field title
 				array( 'UCF_Social_Config', 'display_settings_field' ), // display callback
 				'ucf_social',  // settings page slug
-				'ucf_social_section_general',  // option section slug
+				'ucf_social_section_icons',  // option section slug
 				array(  // extra arguments to pass to the callback function
 					'label_for'   => self::$option_prefix . 'instagram_url',
-					'description' => 'The Instagram URL to use for social assets.',
+					'description' => 'The Instagram URL to use in the [ucf-social-icons] shortcode output.',
 					'type'        => 'text'
 				)
 			);
 			add_settings_field(
 				self::$option_prefix . 'youtube_url',
-				'Youtube URL',  // formatted field title
+				'YouTube URL',  // formatted field title
 				array( 'UCF_Social_Config', 'display_settings_field' ), // display callback
 				'ucf_social',  // settings page slug
-				'ucf_social_section_general',  // option section slug
+				'ucf_social_section_icons',  // option section slug
 				array(  // extra arguments to pass to the callback function
 					'label_for'   => self::$option_prefix . 'youtube_url',
-					'description' => 'The Youtube URL to use for social assets.',
+					'description' => 'The YouTube URL to use in the [ucf-social-icons] shortcode output.',
 					'type'        => 'text'
 				)
 			);
+
+			// Register fields - share link settings
+			add_settings_field(
+				self::$option_prefix . 'include_facebook_sharing',
+				'Facebook',  // formatted field title
+				array( 'UCF_Social_Config', 'display_settings_field' ),  // display callback
+				'ucf_social',  // settings page slug
+				'ucf_social_section_links',  // option section slug
+				array(  // extra arguments to pass to the callback function
+					'label_for'   => self::$option_prefix . 'include_facebook_sharing',
+					'description' => 'Include a Facebook share link in the [ucf-social-links] shortcode output by default.<br>Can be overridden per-shortcode with the <code>facebook</code> attribute.',
+					'type'        => 'checkbox'
+				)
+			);
+			add_settings_field(
+				self::$option_prefix . 'include_twitter_sharing',
+				'Twitter',  // formatted field title
+				array( 'UCF_Social_Config', 'display_settings_field' ),  // display callback
+				'ucf_social',  // settings page slug
+				'ucf_social_section_links',  // option section slug
+				array(  // extra arguments to pass to the callback function
+					'label_for'   => self::$option_prefix . 'include_twitter_sharing',
+					'description' => 'Include a Twitter share link in the [ucf-social-links] shortcode output by default.<br>Can be overridden per-shortcode with the <code>twitter</code> attribute.',
+					'type'        => 'checkbox'
+				)
+			);
+			add_settings_field(
+				self::$option_prefix . 'include_google_sharing',
+				'Google+',  // formatted field title
+				array( 'UCF_Social_Config', 'display_settings_field' ),  // display callback
+				'ucf_social',  // settings page slug
+				'ucf_social_section_links',  // option section slug
+				array(  // extra arguments to pass to the callback function
+					'label_for'   => self::$option_prefix . 'include_google_sharing',
+					'description' => 'Include a Google+ share link in the [ucf-social-links] shortcode output by default.<br>Can be overridden per-shortcode with the <code>google</code> attribute.',
+					'type'        => 'checkbox'
+				)
+			);
+			add_settings_field(
+				self::$option_prefix . 'include_linkedin_sharing',
+				'LinkedIn',  // formatted field title
+				array( 'UCF_Social_Config', 'display_settings_field' ),  // display callback
+				'ucf_social',  // settings page slug
+				'ucf_social_section_links',  // option section slug
+				array(  // extra arguments to pass to the callback function
+					'label_for'   => self::$option_prefix . 'include_linkedin_sharing',
+					'description' => 'Include a LinkedIn share link in the [ucf-social-links] shortcode output by default.<br>Can be overridden per-shortcode with the <code>linkedin</code> attribute.',
+					'type'        => 'checkbox'
+				)
+			);
+			add_settings_field(
+				self::$option_prefix . 'include_email_sharing',
+				'Email',  // formatted field title
+				array( 'UCF_Social_Config', 'display_settings_field' ),  // display callback
+				'ucf_social',  // settings page slug
+				'ucf_social_section_links',  // option section slug
+				array(  // extra arguments to pass to the callback function
+					'label_for'   => self::$option_prefix . 'include_email_sharing',
+					'description' => 'Include an email share link in the [ucf-social-links] shortcode output by default.<br>Can be overridden per-shortcode with the <code>email</code> attribute.',
+					'type'        => 'checkbox'
+				)
+			);
+
+			// Register fields - social feed settings
 			add_settings_field(
 				self::$option_prefix . 'curator_css_url',
 				'Curator CSS URL',  // formatted field title
 				array( 'UCF_Social_Config', 'display_settings_field' ), // display callback
 				'ucf_social',  // settings page slug
-				'ucf_social_section_general',  // option section slug
+				'ucf_social_section_feed',  // option section slug
 				array(  // extra arguments to pass to the callback function
 					'label_for'   => self::$option_prefix . 'curator_css_url',
-					'description' => 'The Curator CSS URL.',
+					'description' => '',
 					'type'        => 'text'
 				)
 			);
@@ -277,10 +381,10 @@ if ( !class_exists( 'UCF_Social_Config' ) ) {
 				'Curator JS URL',  // formatted field title
 				array( 'UCF_Social_Config', 'display_settings_field' ), // display callback
 				'ucf_social',  // settings page slug
-				'ucf_social_section_general',  // option section slug
+				'ucf_social_section_feed',  // option section slug
 				array(  // extra arguments to pass to the callback function
 					'label_for'   => self::$option_prefix . 'curator_js_url',
-					'description' => 'The Curator JS URL.',
+					'description' => '',
 					'type'        => 'text'
 				)
 			);
