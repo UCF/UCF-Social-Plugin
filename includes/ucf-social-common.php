@@ -102,10 +102,7 @@ if ( ! class_exists( 'UCF_Social_Common' ) ) {
 			// [ucf-social-feed] shortcode, as well as processed string
 			// contents for substrings that are likely to be present in social
 			// feed templates
-			if (
-				has_shortcode( $content, 'ucf-social-feed' )
-				|| ( strpos( $content_processed, 'new Curator.' ) !== false || strpos( $content_processed, 'ucf-social-feed' ) !== false )
-			) {
+			if ( has_shortcode( $content, 'ucf-social-feed' ) || strpos( $content_processed, 'ucf-social-feed' ) !== false ) {
 				$has_feed = true;
 			}
 
@@ -113,15 +110,73 @@ if ( ! class_exists( 'UCF_Social_Common' ) ) {
 		}
 
 		/**
-		 * TODO Retrieves the container ID value for a given feed.
+		 * Retrieves data from Curator.io's API based on the API key provided
+		 * in plugin options.
+		 * Caches and references transient data.
 		 *
 		 * @author Jo Dickson
 		 * @since 3.0.0
 		 * @param string $feed_id | ID for a feed from curator.io
-		 * @return string
+		 * @return mixed | array or WP_Error object on failure
+		 */
+		private static function get_social_feed_data() {
+			$transient_name = 'ucf_social_curator_api_data';
+			$result         = get_transient( $transient_name );
+
+			if ( empty( $result ) ) {
+				$api_key = get_option( UCF_Social_Config::$option_prefix . 'curator_api_key' );
+
+				// Back out if we don't have an API key to use
+				if ( empty( $api_key ) ) {
+					return new WP_Error( 'ucf_social_invalid_curator_api_key', 'The Curator.io API key is either not set or is invalid.' );
+				}
+
+				$url           = 'https://api.curator.io/v1/feeds?api_key=' . $api_key;
+				$response      = wp_remote_get( $url, array( 'timeout' => 15 ) );
+				$response_code = wp_remote_retrieve_response_code( $response );
+
+				// Decode the JSON response, or return an error if the response
+				// is invalid
+				if ( is_array( $response ) && is_int( $response_code ) && $response_code < 400 ) {
+					$result = json_decode( wp_remote_retrieve_body( $response ) );
+					set_transient( $transient_name, $result, 12 * HOUR_IN_SECONDS );
+				}
+				else {
+					return new WP_Error( 'ucf_social_invalid_curator_api_response', 'The Curator.io API did not return a valid response. Make sure your Curator API key is valid, or wait and try again later.' );
+				}
+			}
+
+			return $result;
+		}
+
+		/**
+		 * Retrieves the container ID value for a given feed.
+		 *
+		 * @author Jo Dickson
+		 * @since 3.0.0
+		 * @param string $feed_id | ID for a feed from curator.io
+		 * @return mixed | string or WP_Error object on failure
 		 */
 		public static function get_social_feed_container_id( $feed_id ) {
-			return 'curator-feed';
+			$data = self::get_social_feed_data();
+			$container_id = '';
+
+			if ( !is_array( $data ) ) {
+				return new WP_Error( 'ucf_social_invalid_curator_api_data', 'The Curator.io API data that was retrieved is not valid.' );
+			}
+
+			foreach ( $data as $feed_obj ) {
+				if ( $feed_obj->public_key === $feed_id ) {
+					$container_id = $feed_obj->slug;
+					break;
+				}
+			}
+
+			if ( empty( $container_id ) ) {
+				return new WP_Error( 'ucf_social_invalid_curator_feed', 'The Curator.io feed ID provided is not valid.' );
+			}
+
+			return $container_id;
 		}
 
 	}

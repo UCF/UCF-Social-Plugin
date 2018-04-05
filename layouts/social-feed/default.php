@@ -33,6 +33,8 @@ if ( ! function_exists( 'ucf_social_feed_display_default' ) ) {
 
 		$container_id = UCF_Social_Common::get_social_feed_container_id( $atts['feed'] );
 
+		if ( is_wp_error( $container_id ) ) { return $container_id->get_error_message(); }
+
 		ob_start();
 	?>
 		<div id="<?php echo $container_id; ?>"></div>
