@@ -112,6 +112,18 @@ if ( ! class_exists( 'UCF_Social_Common' ) ) {
 			return $has_feed;
 		}
 
+		/**
+		 * TODO Retrieves the container ID value for a given feed.
+		 *
+		 * @author Jo Dickson
+		 * @since 3.0.0
+		 * @param string $feed_id | ID for a feed from curator.io
+		 * @return string
+		 */
+		public static function get_social_feed_container_id( $feed_id ) {
+			return 'curator-feed';
+		}
+
 	}
 }
 
@@ -131,8 +143,6 @@ if ( ! function_exists( 'ucf_social_enqueue_assets' ) ) {
 		}
 
 		if ( is_a( $post, 'WP_Post' ) && UCF_Social_Common::has_social_feed( $post->post_content ) ) {
-			wp_enqueue_style( 'ucf_social_curator_css', UCF_Social_Config::get_option_or_default( 'ucf_social_curator_css_url' ), false, false, 'all' );
-			wp_enqueue_script( 'ucf_social_curator', UCF_Social_Config::get_option_or_default( 'ucf_social_curator_js_url' ), false, false, true );
 			wp_enqueue_script( 'ucf_social_curator_js', plugins_url( 'static/js/ucf-social.min.js', UCF_SOCIAL__PLUGIN_FILE ), false, false, true );
 		}
 	}

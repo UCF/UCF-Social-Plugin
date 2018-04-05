@@ -21,8 +21,8 @@ if ( !class_exists( 'UCF_Social_Config' ) ) {
 				'include_google_sharing' => true,
 				'include_linkedin_sharing' => false,
 				'include_email_sharing' => false,
-				'curator_css_url' => '',
-				'curator_js_url' => ''
+				'curator_default_feed' => '',
+				'curator_api_key' => ''
 			);
 
 		/**
@@ -46,8 +46,8 @@ if ( !class_exists( 'UCF_Social_Config' ) ) {
 			add_option( self::$option_prefix . 'include_google_sharing', $defaults['include_google_sharing'] );
 			add_option( self::$option_prefix . 'include_linkedin_sharing', $defaults['include_linkedin_sharing'] );
 			add_option( self::$option_prefix . 'include_email_sharing', $defaults['include_email_sharing'] );
-			add_option( self::$option_prefix . 'curator_css_url', $defaults['curator_css_url'] );
-			add_option( self::$option_prefix . 'curator_js_url', $defaults['curator_js_url'] );
+			add_option( self::$option_prefix . 'curator_default_feed', $defaults['curator_default_feed'] );
+			add_option( self::$option_prefix . 'curator_api_key', $defaults['curator_api_key'] );
 		}
 
 		/**
@@ -69,8 +69,8 @@ if ( !class_exists( 'UCF_Social_Config' ) ) {
 			delete_option( self::$option_prefix . 'include_google_sharing' );
 			delete_option( self::$option_prefix . 'include_linkedin_sharing' );
 			delete_option( self::$option_prefix . 'include_email_sharing' );
-			delete_option( self::$option_prefix . 'curator_css_url' );
-			delete_option( self::$option_prefix . 'curator_js_url' );
+			delete_option( self::$option_prefix . 'curator_default_feed' );
+			delete_option( self::$option_prefix . 'curator_api_key' );
 		}
 
 		/**
@@ -96,8 +96,8 @@ if ( !class_exists( 'UCF_Social_Config' ) ) {
 				'include_google_sharing'   => get_option( self::$option_prefix . 'include_google_sharing', $defaults['include_google_sharing'] ),
 				'include_linkedin_sharing' => get_option( self::$option_prefix . 'include_linkedin_sharing', $defaults['include_linkedin_sharing'] ),
 				'include_email_sharing'    => get_option( self::$option_prefix . 'include_email_sharing', $defaults['include_email_sharing'] ),
-				'curator_css_url'          => get_option( self::$option_prefix . 'curator_css_url', $defaults['curator_css_url'] ),
-				'curator_js_url'           => get_option( self::$option_prefix . 'curator_js_url', $defaults['curator_js_url'] ),
+				'curator_default_feed'     => get_option( self::$option_prefix . 'curator_default_feed', $defaults['curator_default_feed'] ),
+				'curator_api_key'          => get_option( self::$option_prefix . 'curator_api_key', $defaults['curator_api_key'] ),
 			);
 
 			// Force configurable options to override $defaults, even if they are empty:
@@ -184,8 +184,8 @@ if ( !class_exists( 'UCF_Social_Config' ) ) {
 			register_setting( 'ucf_social', self::$option_prefix . 'include_google_sharing' );
 			register_setting( 'ucf_social', self::$option_prefix . 'include_linkedin_sharing' );
 			register_setting( 'ucf_social', self::$option_prefix . 'include_email_sharing' );
-			register_setting( 'ucf_social', self::$option_prefix . 'curator_css_url' );
-			register_setting( 'ucf_social', self::$option_prefix . 'curator_js_url' );
+			register_setting( 'ucf_social', self::$option_prefix . 'curator_api_key' );
+			register_setting( 'ucf_social', self::$option_prefix . 'curator_default_feed' );
 
 			// Register setting sections
 			add_settings_section(
@@ -365,26 +365,26 @@ if ( !class_exists( 'UCF_Social_Config' ) ) {
 
 			// Register fields - social feed settings
 			add_settings_field(
-				self::$option_prefix . 'curator_css_url',
-				'Curator CSS URL',  // formatted field title
+				self::$option_prefix . 'curator_api_key',
+				'Curator API Key*',  // formatted field title
 				array( 'UCF_Social_Config', 'display_settings_field' ), // display callback
 				'ucf_social',  // settings page slug
 				'ucf_social_section_feed',  // option section slug
 				array(  // extra arguments to pass to the callback function
-					'label_for'   => self::$option_prefix . 'curator_css_url',
-					'description' => '',
-					'type'        => 'text'
+					'label_for'   => self::$option_prefix . 'curator_api_key',
+					'description' => 'API key for Curator API access.<br><strong>*Required</strong> for social feeds to work properly.',
+					'type'        => 'password'
 				)
 			);
 			add_settings_field(
-				self::$option_prefix . 'curator_js_url',
-				'Curator JS URL',  // formatted field title
+				self::$option_prefix . 'curator_default_feed',
+				'Curator Default Feed ID',  // formatted field title
 				array( 'UCF_Social_Config', 'display_settings_field' ), // display callback
 				'ucf_social',  // settings page slug
 				'ucf_social_section_feed',  // option section slug
 				array(  // extra arguments to pass to the callback function
-					'label_for'   => self::$option_prefix . 'curator_js_url',
-					'description' => '',
+					'label_for'   => self::$option_prefix . 'curator_default_feed',
+					'description' => 'A default feed ID to use in [ucf-social-feed] shortcodes when an explicit <code>feed</code> attribute isn\'t provided.',
 					'type'        => 'text'
 				)
 			);
@@ -405,6 +405,17 @@ if ( !class_exists( 'UCF_Social_Config' ) ) {
 					ob_start();
 				?>
 					<input type="checkbox" id="<?php echo $option_name; ?>" name="<?php echo $option_name; ?>" <?php echo ( $current_value == true ) ? 'checked' : ''; ?>>
+					<p class="description">
+						<?php echo $description; ?>
+					</p>
+				<?php
+					$markup = ob_get_clean();
+					break;
+
+				case 'password':
+					ob_start();
+				?>
+					<input type="password" id="<?php echo $option_name; ?>" name="<?php echo $option_name; ?>" class="regular-text" value="<?php echo $current_value; ?>">
 					<p class="description">
 						<?php echo $description; ?>
 					</p>
