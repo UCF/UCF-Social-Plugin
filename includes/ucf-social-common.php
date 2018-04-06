@@ -166,7 +166,7 @@ if ( ! class_exists( 'UCF_Social_Common' ) ) {
 			}
 
 			foreach ( $data as $feed_obj ) {
-				if ( $feed_obj->public_key === $feed_id ) {
+				if ( strtolower( $feed_obj->public_key ) === strtolower( $feed_id ) ) {
 					$container_id = $feed_obj->slug;
 					break;
 				}
