@@ -65,8 +65,21 @@ if ( ! class_exists( 'UCF_Social_Shortcode' ) ) {
 				'class'        => '', // classes to be applied to parent elem
 				'container'    => 'ucf-social-feed-' . wp_rand(), // ID to be applied to the feed container elem
 				'options'      => '', // JSON string of widget options
-				'options_file' => '' // attachment ID of a JSON file that contains widget options
+				'options_file' => '', // attachment ID of a JSON file that contains widget options
 			), $atts, 'ucf-social-feed' );
+
+			// START backward compatibility
+			switch ( $atts['layout'] ) {
+				case 'grid':
+					$atts['layout'] = 'default';
+					$atts['type'] = 'Grid';
+					break;
+				case 'waterfall':
+					$atts['layout'] = 'default';
+					$atts['type'] = 'Waterfall';
+					break;
+			}
+			// END backward compatibility
 
 			ob_start();
 			echo UCF_Social_Common::display_social_feed( $atts );
