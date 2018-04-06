@@ -1,5 +1,3 @@
-const curatorFeedIds = [];
-
 const socialDebounce = function (func, wait, immediate) {
   let timeout;
 
@@ -48,14 +46,8 @@ const scrollToggleInit = function (elementId, callback) {
   $document.on('scroll.curator', socialDebounce(curatorScroll, debouceTime));
 };
 
-function socialFeedInit(parentId, feedId) {
-  const scriptId = `curator-js-${feedId}`;
-
-  if (curatorFeedIds.indexOf(feedId) === -1) {
-    curatorFeedIds.push(feedId);
-
-    scrollToggleInit(parentId, () => {
-      $(`<script id="${scriptId}" src="https://cdn.curator.io/published/${feedId}.js" async>`).insertBefore($('script').first());
-    });
-  }
+function socialFeedInit(containerId, options) {
+  scrollToggleInit(containerId, () => {
+    Curator.loadWidget(options);
+  });
 }

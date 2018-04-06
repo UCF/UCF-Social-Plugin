@@ -59,10 +59,13 @@ if ( ! class_exists( 'UCF_Social_Shortcode' ) ) {
 
 		public static function feed_shortcode( $atts ) {
 			$atts = shortcode_atts( array(
-				'feed'   => UCF_Social_Config::get_option_or_default( 'curator_default_feed' ), // feed ID
-				'layout' => 'default', // layout for social feed wrapper elem(s)
-				'class'  => '', // classes to be applied to wrapper elem
-				'id'     => 'ucf-social-feed-' . wp_rand() // ID to be applied to wrapper elem
+				'feed'         => UCF_Social_Config::get_option_or_default( 'curator_default_feed' ), // feed ID
+				'layout'       => 'default', // layout for social feed parent elem
+				'type'         => '', // override the feed type to use
+				'class'        => '', // classes to be applied to parent elem
+				'container'    => 'ucf-social-feed-' . wp_rand(), // ID to be applied to the feed container elem
+				'options'      => '', // JSON string of widget options
+				'options_file' => '' // attachment ID of a JSON file that contains widget options
 			), $atts, 'ucf-social-feed' );
 
 			ob_start();
