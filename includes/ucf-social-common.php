@@ -201,7 +201,7 @@ if ( ! class_exists( 'UCF_Social_Common' ) ) {
 		public static function get_social_feed_options( $sc_atts ) {
 			$feed_id          = $sc_atts['feed'];
 			$type_default     = UCF_Social_Config::get_option_or_default( 'curator_default_type' );
-			$type             = $sc_atts['type'];
+			$type             = ucfirst( $sc_atts['type'] );
 			$container_id     = $sc_atts['container'];
 			$option_attr      = $sc_atts['options'];
 			$option_file_attr = $sc_atts['options_file'];
