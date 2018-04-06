@@ -31,7 +31,8 @@ if ( ! function_exists( 'ucf_social_feed_display_default' ) ) {
 		global $post;
 		if ( !$post ) { return; }  // back out if there's no post data to reference
 
-		$container_id = UCF_Social_Common::get_social_feed_container_id( $atts['feed'] );
+		$feed = strtolower( $atts['feed'] );
+		$container_id = UCF_Social_Common::get_social_feed_container_id( $feed );
 
 		if ( is_wp_error( $container_id ) ) { return $container_id->get_error_message(); }
 
@@ -40,7 +41,7 @@ if ( ! function_exists( 'ucf_social_feed_display_default' ) ) {
 		<div id="<?php echo $container_id; ?>"></div>
 		<script type="text/javascript">
 		$(function() {
-			socialFeedInit('<?php echo $atts['id']; ?>', '<?php echo $atts['feed']; ?>');
+			socialFeedInit('<?php echo $atts['id']; ?>', '<?php echo $feed; ?>');
 		});
 		</script>
 	<?php
