@@ -18,8 +18,9 @@ add_action( 'plugins_loaded', function() {
 
 	// Layouts - social feed
 	require_once 'layouts/social-feed/default.php';
-	require_once 'layouts/social-feed/grid.php';
-	require_once 'layouts/social-feed/waterfall.php';
+	require_once 'layouts/social-feed/scrollbox.php';
+	require_once 'layouts/social-feed/scrollbox_sm.php';
+	require_once 'layouts/social-feed/scrollbox_lg.php';
 
 	// Layouts - social icons
 	require_once 'layouts/social-icons/default.php';
