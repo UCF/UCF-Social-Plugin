@@ -3,6 +3,7 @@
     border: $scrollbox-border-style;
     -webkit-overflow-scrolling: touch;
     overflow-y: scroll;
+    padding: .5rem;
     width: 100%;
   }
 }
