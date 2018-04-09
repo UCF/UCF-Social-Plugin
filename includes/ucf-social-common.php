@@ -85,6 +85,20 @@ if ( ! class_exists( 'UCF_Social_Common' ) ) {
 		}
 
 		/**
+		 * Allow extra file types to be uploaded to the media library.
+		 * @author Jim Barnes
+		 * @since 3.0.0
+		 * @param array $mimes The array of mime types allowed to be uploaded to wp media
+		 * @return array The modified array of mime types
+		 */
+		public static function custom_mimes( $mimes ) {
+			if ( ! key_exists( 'json', $mimes ) ) {
+				$mimes['json'] = 'application/json';
+			}
+			return $mimes;
+		}
+
+		/**
 		 * Determines whether the provided content contains a [ucf-social-feed]
 		 * shortcode.
 		 * @author Jo Dickson
@@ -247,6 +261,11 @@ if ( ! class_exists( 'UCF_Social_Common' ) ) {
 
 	}
 }
+
+/**
+ * Add hook to allow for json uploads
+ */
+add_filter( 'upload_mimes', array( 'UCF_Social_Common', 'custom_mimes' ), 10, 1 );
 
 
 /**
