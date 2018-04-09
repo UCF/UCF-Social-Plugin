@@ -1,0 +1,27 @@
+.ucf-social-feed-scrollbox {
+  @media (min-width: $scrollbox-breakpoint-min) {
+    border: $scrollbox-border-style;
+    -webkit-overflow-scrolling: touch;
+    overflow-y: scroll;
+    width: 100%;
+  }
+}
+
+.ucf-social-feed-scrollbox-sm {
+  @media (min-width: $scrollbox-breakpoint-min) {
+    height: 350px;
+  }
+}
+
+.ucf-social-feed-scrollbox-md {
+  @media (min-width: $scrollbox-breakpoint-min) {
+    height: 500px;
+  }
+}
+
+.ucf-social-feed-scrollbox-lg {
+  @media (min-width: $scrollbox-breakpoint-min) {
+    height: 90vh;
+    min-height: 500px;
+  }
+}

@@ -10,7 +10,7 @@ if ( ! function_exists( 'ucf_social_feed_display_default_before' ) ) {
 	function ucf_social_feed_display_default_before( $content='', $atts ) {
 		ob_start();
 	?>
-		<aside class="ucf-social-feed <?php echo $atts['class']; ?>">
+		<aside class="ucf-social-feed ucf-social-feed-default <?php echo $atts['class']; ?>">
 	<?php
 		return ob_get_clean();
 	}
@@ -20,7 +20,7 @@ add_filter( 'ucf_social_feed_display_default_before', 'ucf_social_feed_display_d
 
 
 /**
- * Returns the social feed HTML for the default (waterfall) layout.
+ * Returns the social feed HTML for the default layout.
  * @author RJ Bruneel
  * @since 1.0.4
  * @param array $atts | contains the various elements of the social feed.
@@ -31,23 +31,15 @@ if ( ! function_exists( 'ucf_social_feed_display_default' ) ) {
 		global $post;
 		if ( !$post ) { return; }  // back out if there's no post data to reference
 
+		$options = UCF_Social_Common::get_social_feed_options( $atts );
+
 		ob_start();
 	?>
 		<div id="<?php echo $atts['container']; ?>"></div>
 		<script type="text/javascript">
-			$(function() {
-				scrollToggleInit('<?php echo $atts['container']; ?>', () => {
-					var widget = new Curator.Waterfall({
-						container:'#<?php echo $atts['container']; ?>',
-						feedId:'<?php echo $atts['feed']; ?>',
-					<?php if($atts['grid-width'] > 0) : ?>
-						waterfall: {
-							gridWidth:<?php echo $atts['grid-width']; ?>
-						}
-					<?php endif; ?>
-					});
-				});
-			});
+		$(function() {
+			socialFeedInit('<?php echo $atts['container']; ?>', <?php echo $options; ?>);
+		});
 		</script>
 	<?php
 		return ob_get_clean();
