@@ -218,6 +218,7 @@ if ( ! class_exists( 'UCF_Social_Common' ) ) {
 			$type             = ucfirst( $sc_atts['type'] );
 			$container_id     = $sc_atts['container'];
 			$option_file_attr = $sc_atts['options_file'];
+			$option_file      = '';
 
 			$base_options     = array( 'type' => $type_default, 'feedId' => $feed_id );
 			$data_options     = (array) self::get_social_feed_option_data( $feed_id );
@@ -225,8 +226,14 @@ if ( ! class_exists( 'UCF_Social_Common' ) ) {
 			$core_options     = array( 'container' => '#' . $container_id );
 
 			if ( !empty( $option_file_attr ) ) {
-				if ( $attachment_url = wp_get_attachment_url( intval( $option_file_attr ) ) ) {
-					$option_file = self::fetch_json( $attachment_url );
+				// If the option file value looks like an attachment ID,
+				// fetch the attachment url
+				if ( is_numeric( $option_file_attr ) ) {
+					$option_file_attr = wp_get_attachment_url( intval( $option_file_attr ) );
+				}
+
+				if ( $option_file_attr ) {
+					$option_file = self::fetch_json( $option_file_attr );
 					if ( $option_file ) {
 						$file_options = (array) $option_file;
 					}
