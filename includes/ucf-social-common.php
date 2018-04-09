@@ -203,13 +203,11 @@ if ( ! class_exists( 'UCF_Social_Common' ) ) {
 			$type_default     = UCF_Social_Config::get_option_or_default( 'curator_default_type' );
 			$type             = ucfirst( $sc_atts['type'] );
 			$container_id     = $sc_atts['container'];
-			$option_attr      = $sc_atts['options'];
 			$option_file_attr = $sc_atts['options_file'];
 
 			$base_options     = array( 'type' => $type_default, 'feedId' => $feed_id );
 			$data_options     = (array) self::get_social_feed_option_data( $feed_id );
 			$file_options     = array();
-			$attr_options     = array();
 			$core_options     = array( 'container' => '#' . $container_id );
 
 			if ( !empty( $option_file_attr ) ) {
@@ -221,15 +219,11 @@ if ( ! class_exists( 'UCF_Social_Common' ) ) {
 				}
 			}
 
-			if ( !empty( $option_attr ) ) {
-				$attr_options = (array) json_decode( $option_attr );
-			}
-
 			if ( !empty( $type ) ) {
 				$core_options['type'] = $type;
 			}
 
-			return json_encode( array_merge( $base_options, $data_options, $file_options, $attr_options, $core_options ) );
+			return json_encode( array_merge( $base_options, $data_options, $file_options, $core_options ) );
 		}
 
 		/**

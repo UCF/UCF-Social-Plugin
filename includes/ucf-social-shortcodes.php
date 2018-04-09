@@ -64,7 +64,6 @@ if ( ! class_exists( 'UCF_Social_Shortcode' ) ) {
 				'type'         => '', // override the feed type to use
 				'class'        => '', // classes to be applied to parent elem
 				'container'    => 'ucf-social-feed-' . wp_rand(), // ID to be applied to the feed container elem
-				'options'      => '', // JSON string of widget options
 				'options_file' => '', // attachment ID of a JSON file that contains widget options
 			), $atts, 'ucf-social-feed' );
 
