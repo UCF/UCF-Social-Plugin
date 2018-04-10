@@ -133,7 +133,7 @@ if ( ! class_exists( 'UCF_Social_Common' ) ) {
 		 * @return mixed JSON-decoded object or false on failure
 		 */
 		private static function fetch_json( $url ) {
-			$response      = wp_remote_get( $url, array( 'timeout' => 15 ) );
+			$response      = wp_remote_get( $url, array( 'timeout' => 5 ) );
 			$response_code = wp_remote_retrieve_response_code( $response );
 			$result        = false;
 
@@ -191,16 +191,24 @@ if ( ! class_exists( 'UCF_Social_Common' ) ) {
 		 */
 		private static function get_social_feed_option_data( $feed_id ) {
 			$data = self::get_social_feed_data();
-			$options = '{}';
+			$options_str = '{}';
+			$options = null;
 
 			foreach ( $data as $feed_obj ) {
 				if ( strtolower( $feed_obj->public_key ) === strtolower( $feed_id ) ) {
-					$options = $feed_obj->widget_options;
+					$options_str = $feed_obj->widget_options;
 					break;
 				}
 			}
 
-			return json_decode( $options );
+			$options = json_decode( $options_str );
+
+			// Handle decoding errors and/or if $options is null
+			if ( JSON_ERROR_NONE !== json_last_error() || $options === null ) {
+				$options = (object)[];
+			}
+
+			return $options;
 		}
 
 		/**
