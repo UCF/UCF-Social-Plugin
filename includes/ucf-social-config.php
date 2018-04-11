@@ -25,7 +25,8 @@ if ( !class_exists( 'UCF_Social_Config' ) ) {
 				'curator_default_type' => 'Waterfall',
 				'curator_api_key' => '',
 				'curator_widget_version' => '3.1'
-			);
+			),
+			$curator_data_transient = 'ucf_social_curator_api_data';
 
 		/**
 		 * Creates options via the WP Options API that are utilized by the
@@ -551,10 +552,53 @@ if ( !class_exists( 'UCF_Social_Config' ) ) {
 				submit_button();
 				?>
 			</form>
+			<hr>
+			<form method="post" action="admin-post.php">
+				<h2>Flush Curator.io Transient Data</h2>
+				<p class="description">
+					If a Curator API key is provided above, feed customization settings will be imported from Curator and applied to feeds embedded via the [ucf-social-feed] shortcode. Those settings are then saved as transient data, and will be referenced until the transient either expires, or is flushed using the button below.
+				</p>
+				<p class="description">
+					If you make changes to your feed's customization settings within Curator, you'll need to flush this transient data to immediately see your changes on this site.
+				</p>
+
+				<br>
+
+				<p class="description">
+					Click the button below to flush any existing Curator feed data and re-request fresh data.
+				</p>
+
+				<?php if ( isset( $_GET['ucf_social_transient_data_flushed'] ) && $_GET['ucf_social_transient_data_flushed'] === '1' ): ?>
+				<div class="notice notice-success is-dismissible">
+					<p>Curator transient data was flushed successfully.</p>
+				</div>
+				<?php endif; ?>
+
+				<input type="hidden" name="action" value="ucf_social_flush_transient_data">
+
+				<br>
+				<button class="button" id="ucf_social_flush_transient_data">Flush Transient Data</button>
+			</form>
 		</div>
 
 		<?php
 			echo ob_get_clean();
+		}
+
+
+		/**
+		 * Plugin settings page action that flushes Curator.io transient data.
+		 *
+		 * @since 3.0.0
+		 * @return void
+		 */
+		public static function flush_transient_data() {
+			delete_transient( self::$curator_data_transient );
+
+			$data = UCF_Social_Common::get_social_feed_data();
+
+			wp_redirect( admin_url( 'options-general.php?page=ucf_social&ucf_social_transient_data_flushed=1' ) );
+			exit;
 		}
 
 	}
@@ -562,6 +606,7 @@ if ( !class_exists( 'UCF_Social_Config' ) ) {
 	// Register settings and options.
 	add_action( 'admin_init', array( 'UCF_Social_Config', 'settings_init' ) );
 	add_action( 'admin_menu', array( 'UCF_Social_Config', 'add_options_page' ) );
+	add_action( 'admin_post_ucf_social_flush_transient_data', array( 'UCF_Social_Config', 'flush_transient_data' ) );
 
 	// Apply custom formatting to shortcode attributes and options.
 	UCF_Social_Config::add_option_formatting_filters();
