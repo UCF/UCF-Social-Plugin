@@ -153,8 +153,8 @@ if ( ! class_exists( 'UCF_Social_Common' ) ) {
 		 * @since 3.0.0
 		 * @return array
 		 */
-		private static function get_social_feed_data() {
-			$transient_name = 'ucf_social_curator_api_data';
+		public static function get_social_feed_data() {
+			$transient_name = UCF_Social_Config::$curator_data_transient;
 			$transient      = get_transient( $transient_name );
 			$result         = array();
 
