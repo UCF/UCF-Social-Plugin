@@ -45,3 +45,9 @@ const scrollToggleInit = function (elementId, callback) {
   $window.on('load.curator resize.curator', socialDebounce(curatorResize, debouceTime));
   $document.on('scroll.curator', socialDebounce(curatorScroll, debouceTime));
 };
+
+function socialFeedInit(containerId, options) {
+  scrollToggleInit(containerId, () => {
+    Curator.loadWidget(options);
+  });
+}
