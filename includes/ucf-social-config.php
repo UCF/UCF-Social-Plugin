@@ -28,6 +28,62 @@ if ( !class_exists( 'UCF_Social_Config' ) ) {
 			),
 			$curator_data_transient = 'ucf_social_curator_api_data';
 
+		public static function get_social_icon_layouts() {
+			$layouts = array(
+				'default' => 'Default Layout',
+			);
+			$layouts = apply_filters( self::$option_prefix . 'get_social_icon_layouts', $layouts );
+			return $layouts;
+		}
+
+		public static function get_social_icon_colors() {
+			$options = array(
+				'color' => 'Color',
+				'grey'  => 'Grey'
+			);
+			$options = apply_filters( self::$option_prefix . 'get_social_icon_colors', $options );
+			return $options;
+		}
+
+		public static function get_social_icon_sizes() {
+			$options = array(
+				'sm' => 'Small',
+				'md' => 'Medium',
+				'lg' => 'Large'
+			);
+			$options = apply_filters( self::$option_prefix . 'get_social_icon_sizes', $options );
+			return $options;
+		}
+
+		public static function get_social_link_layouts() {
+			$layouts = array(
+				'default' => 'Default Layout',
+			);
+			$layouts = apply_filters( self::$option_prefix . 'get_social_link_layouts', $layouts );
+			return $layouts;
+		}
+
+		public static function get_social_link_sizes() {
+			$options = array(
+				'sm' => 'Small',
+				'md' => 'Medium',
+				'lg' => 'Large'
+			);
+			$options = apply_filters( self::$option_prefix . 'get_social_link_sizes', $options );
+			return $options;
+		}
+
+		public static function get_social_feed_layouts() {
+			$layouts = array(
+				'default'      => 'Default Layout',
+				'scrollbox_sm' => 'Scrollbox - Small',
+				'scrollbox'    => 'Scrollbox - Medium',
+				'scrollbox_lg' => 'Scrollbox - Large'
+			);
+			$layouts = apply_filters( self::$option_prefix . 'get_social_feed_layouts', $layouts );
+			return $layouts;
+		}
+
 		/**
 		 * Creates options via the WP Options API that are utilized by the
 		 * plugin.  Intended to be run on plugin activation.
@@ -603,11 +659,13 @@ if ( !class_exists( 'UCF_Social_Config' ) ) {
 
 	}
 
-	// Register settings and options.
-	add_action( 'admin_init', array( 'UCF_Social_Config', 'settings_init' ) );
-	add_action( 'admin_menu', array( 'UCF_Social_Config', 'add_options_page' ) );
-	add_action( 'admin_post_ucf_social_flush_transient_data', array( 'UCF_Social_Config', 'flush_transient_data' ) );
-
-	// Apply custom formatting to shortcode attributes and options.
-	UCF_Social_Config::add_option_formatting_filters();
 }
+
+
+// Register settings and options.
+add_action( 'admin_init', array( 'UCF_Social_Config', 'settings_init' ) );
+add_action( 'admin_menu', array( 'UCF_Social_Config', 'add_options_page' ) );
+add_action( 'admin_post_ucf_social_flush_transient_data', array( 'UCF_Social_Config', 'flush_transient_data' ) );
+
+// Apply custom formatting to shortcode attributes and options.
+UCF_Social_Config::add_option_formatting_filters();
