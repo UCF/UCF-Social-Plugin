@@ -5,7 +5,7 @@ Provides a shortcode, functions, and default styles for displaying UCF social as
 
 ## Description ##
 
-This plugin provides a shortcode, helper functions, and default styles for displaying social assets.  It is written to work out-of-the-box for non-programmers, but is also extensible and customizable for developers.
+This plugin provides shortcodes and default styles for displaying social icons, sharing links, and social feeds via Curator.io.  It is written to work out-of-the-box for non-programmers, but is also extensible and customizable for developers.
 
 
 ## Installation ##
@@ -25,6 +25,20 @@ This plugin provides a shortcode, helper functions, and default styles for displ
 * FontAwesome
 
 ## Changelog ##
+
+### 3.0.0 ###
+Enhancements:
+- Refactored how social feed widgets are generated via the `[ucf-social-feed]` shortcode, and how customization options are applied to them.
+  - Customization options for feeds will now be fetched from Curator directly if a Curator API key is set in the plugin's settings.
+  - Individual widget settings can still be overridden using the new `options_file` shortcode attribute, and settings in the provided JSON file will take precedence over settings fetched from Curator.  The `options_file` attribute will accept either an attachment ID or a direct URL to a JSON file.  See <a href="https://github.com/curatorio/widgets#widget-options">Curator's widget documentation</a> for information on how to structure options.
+  - Added the new `type` attribute to replace what we were using previously on the `layout` attribute (for defining whether the widget should be "Waterfall", "Grid", etc). The `layout` attribute should now be used for overrides to how widget markup is generated, but we've added some backward compatibility for existing shortcodes that still use the `layout` attribute for this.
+  - 3 new layouts have been added: `scrollbox`, `scrollbox_sm`, and `scrollbox_lg`, which wrap the generated widget in a scrollable `div` at larger screen widths.
+- Added the ability to specify a default feed ID, feed type, and widget version in plugin settings.  Curator widget CSS/JS is now enqueued based on the widget version specified.
+- Added a transient flush button to the plugin settings page, which will flush and re-fetch cached Curator feed customization data from Curator's API.
+- Added basic compatibility with the WP Shortcode Interface plugin.
+
+Breaking changes:
+- The `grid-rows` and `grid-width` shortcode attributes on `[ucf-social-feed]` have been *removed*.  You should now apply these overrides within Curator directly or by using the new `options_file` attribute.
 
 ### 2.1.0 ###
 Enhancements:
