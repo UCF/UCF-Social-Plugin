@@ -26,6 +26,10 @@ This plugin provides shortcodes and default styles for displaying social icons, 
 
 ## Changelog ##
 
+### 3.0.1 ###
+Enhancements:
+- Reordered the social-icons order.
+
 ### 3.0.0 ###
 Enhancements:
 - Refactored how social feed widgets are generated via the `[ucf-social-feed]` shortcode, and how customization options are applied to them.
