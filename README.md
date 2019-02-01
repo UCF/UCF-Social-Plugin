@@ -26,6 +26,11 @@ This plugin provides shortcodes and default styles for displaying social icons, 
 
 ## Changelog ##
 
+### 3.0.2 ###
+Enhancements:
+- Update Facebook Like to Share.
+- Removed Google+ options
+
 ### 3.0.1 ###
 Enhancements:
 - Reordered the social-icons order.

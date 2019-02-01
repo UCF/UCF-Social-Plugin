@@ -53,7 +53,7 @@ Breaking changes:
 
 = 2.1.0 =
 Enhancements:
-- Added plugin options and attributes to the `[ucf-social-links]` shortcode that allow you to specify what social sharing links you'd like to include/exclude.  For backward compatibility, Facebook, Twitter, and Google+ are enabled by default.
+- Added plugin options and attributes to the `[ucf-social-links]` shortcode that allow you to specify what social sharing links you'd like to include/exclude.  For backward compatibility, Facebook, and Twitter are enabled by default.
 - Added LinkedIn and Email link options for `[ucf-social-links]`
 - Split existing plugins options out into grouped sections
 - Removed unused shortcode attr formatting hook + method (`UCF_Social_Config::format_sc_atts()`)

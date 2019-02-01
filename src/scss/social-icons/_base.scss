@@ -39,13 +39,6 @@
     width: 3.5rem;
   }
 
-  .btn-google {
-    @include social-bg-colors($color-googleplus);
-
-    padding-left: .2rem;
-    padding-top: .1rem;
-  }
-
   .btn-facebook {
     @include social-bg-colors($color-facebook);
 

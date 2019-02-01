@@ -48,12 +48,6 @@ if ( ! function_exists( 'ucf_social_links_display_default' ) ) {
 		</a>
 		<?php endif; ?>
 
-		<?php if ( $atts['google'] ): ?>
-		<a class="btn btn-google color btn-<?php echo $atts['size']; ?>" target="_blank" href="https://plus.google.com/share?url=<?php echo $permalink; ?>" title="Share this content on Google+">
-			<span class="fa fa-google-plus" aria-hidden="true"></span><span class="btn-text">Share</span>
-		</a>
-		<?php endif; ?>
-
 		<?php if ( $atts['linkedin'] ): ?>
 		<a class="btn btn-linkedin color btn-<?php echo $atts['size']; ?>" target="_blank" href="https://www.linkedin.com/shareArticle?mini=true&url=<?php echo $permalink; ?>&title=<?php echo $share_text; ?>" title="Share this content on LinkedIn">
 			<span class="fa fa-linkedin-square" aria-hidden="true"></span><span class="btn-text">Share</span>
