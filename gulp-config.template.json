@@ -1,4 +1,8 @@
 {
 	"sync": false,
-	"target": "http://localhost/"
-}
+	"syncOptions": {
+	  "server": {
+		"baseDir": "."
+	  }
+	}
+  }
