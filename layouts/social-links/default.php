@@ -37,8 +37,8 @@ if ( ! function_exists( 'ucf_social_links_display_default' ) ) {
 		ob_start();
 	?>
 		<?php if ( $atts['facebook'] ): ?>
-		<a class="btn btn-facebook color btn-<?php echo $atts['size']; ?>" target="_blank" href="https://www.facebook.com/sharer.php?u=<?php echo $permalink; ?>" title="Like this content on Facebook">
-			<span class="fa fa-facebook" aria-hidden="true"></span><span class="btn-text">Like</span>
+		<a class="btn btn-facebook color btn-<?php echo $atts['size']; ?>" target="_blank" href="https://www.facebook.com/sharer.php?u=<?php echo $permalink; ?>" title="Share this content on Facebook">
+			<span class="fa fa-facebook" aria-hidden="true"></span><span class="btn-text">Share</span>
 		</a>
 		<?php endif; ?>
 
