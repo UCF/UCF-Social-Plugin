@@ -169,10 +169,6 @@ gulp.task('watch', (done) => {
   gulp.watch(`${config.src.scssPath}/**/*.scss`, gulp.series('css', serverReload));
   gulp.watch(`${config.src.jsPath}/**/*.js`, gulp.series('js', serverReload));
   gulp.watch(`./**/*.php`, serverReload);
-  gulp.watch([
-    `${config.examplesPath}/**/*`,
-    `!${config.examplesPath}/_config_local.yml`
-  ]);
 });
 
 //
