@@ -28,7 +28,6 @@ add_filter( 'ucf_social_icons_display_default_before', 'ucf_social_icons_display
 **/
 if ( ! function_exists( 'ucf_social_icons_display_default' ) ) {
 	function ucf_social_icons_display_default( $content='', $atts ) {
-		$google_url     = UCF_Social_Config::get_option_or_default( 'google_url' );
 		$linkedin_url   = UCF_Social_Config::get_option_or_default( 'linkedin_url' );
 		$twitter_url    = UCF_Social_Config::get_option_or_default( 'twitter_url' );
 		$facebook_url   = UCF_Social_Config::get_option_or_default( 'facebook_url' );
@@ -65,12 +64,6 @@ if ( ! function_exists( 'ucf_social_icons_display_default' ) ) {
 			<a class="ucf-social-link btn-youtube <?php echo $atts['size'] . ' ' . $atts['color']; ?>" target="_blank" href="<?php echo $youtube_url; ?>">
 				<span class="fa fa-youtube" aria-hidden="true"></span>
 				<p class="sr-only">Follow us on YouTube</p>
-			</a>
-		<?php endif; ?>
-		<?php if ( $google_url ) : ?>
-			<a class="ucf-social-link btn-google <?php echo $atts['size'] . ' ' . $atts['color']; ?>" target="_blank" href="<?php echo $google_url; ?>">
-				<span class="fa fa-google-plus" aria-hidden="true"></span>
-				<p class="sr-only">Follow us on Google+</p>
 			</a>
 		<?php endif; ?>
 	<?php

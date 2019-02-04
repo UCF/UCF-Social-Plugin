@@ -8,10 +8,6 @@
     margin-left: .25rem;
   }
 
-  .btn-google {
-    @include social-bg-colors($color-googleplus);
-  }
-
   .btn-facebook {
     @include social-bg-colors($color-facebook);
   }
