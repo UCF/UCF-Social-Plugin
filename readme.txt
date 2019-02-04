@@ -37,6 +37,8 @@ This plugin provides shortcodes and default styles for displaying social icons, 
 Enhancements:
 - Update Facebook Like to Share.
 - Removed Google+ options.
+- Updated gulpfile.js and package.json
+- Ported over social css from WordPress Theme
 
 = 3.0.1 =
 Enhancements:
