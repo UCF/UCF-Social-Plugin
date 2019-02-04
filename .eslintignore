@@ -2,8 +2,3 @@
 package.json
 .eslintrc.json
 gulp-config.template.json
-
-# Ignore vendor files
-src/js/bootstrap/*
-src/js/objectFitPolyfill/*
-src/js/Stickyfill/*
