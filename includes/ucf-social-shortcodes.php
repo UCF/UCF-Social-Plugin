@@ -79,7 +79,6 @@ if ( ! class_exists( 'UCF_Social_Shortcode' ) ) {
 				'share_text' => $share_text,
 				'facebook'   => UCF_Social_Config::get_option_or_default( 'include_facebook_sharing' ),
 				'twitter'    => UCF_Social_Config::get_option_or_default( 'include_twitter_sharing' ),
-				'google'     => UCF_Social_Config::get_option_or_default( 'include_google_sharing' ),
 				'linkedin'   => UCF_Social_Config::get_option_or_default( 'include_linkedin_sharing' ),
 				'email'      => UCF_Social_Config::get_option_or_default( 'include_email_sharing' ),
 			), $atts, 'ucf-social-links' );
@@ -89,7 +88,6 @@ if ( ! class_exists( 'UCF_Social_Shortcode' ) ) {
 				array(
 					'facebook' => UCF_Social_Config::format_option( $atts['facebook'], 'include_facebook_sharing' ),
 					'twitter'  => UCF_Social_Config::format_option( $atts['twitter'], 'include_twitter_sharing' ),
-					'google'   => UCF_Social_Config::format_option( $atts['google'], 'include_google_sharing' ),
 					'linkedin' => UCF_Social_Config::format_option( $atts['linkedin'], 'include_linkedin_sharing' ),
 					'email'    => UCF_Social_Config::format_option( $atts['email'], 'include_email_sharing' ),
 				)
@@ -144,13 +142,6 @@ if ( ! class_exists( 'UCF_Social_Shortcode' ) ) {
 						'desc'      => 'Whether Twitter should be included in the list of share buttons.',
 						'type'      => 'checkbox',
 						'default'   => UCF_Social_Config::get_option_or_default( 'include_twitter_sharing' )
-					),
-					array(
-						'name'      => 'Include Google+',
-						'param'     => 'google',
-						'desc'      => 'Whether Google+ should be included in the list of share buttons.',
-						'type'      => 'checkbox',
-						'default'   => UCF_Social_Config::get_option_or_default( 'include_google_sharing' )
 					),
 					array(
 						'name'      => 'Include LinkedIn',

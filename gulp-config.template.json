@@ -1,4 +1,6 @@
 {
-	"sync": false,
-	"target": "http://localhost/"
+	"sync": true,
+	"syncOptions": {
+		"proxy": "localhost"
+	}
 }
