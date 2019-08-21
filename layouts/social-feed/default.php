@@ -10,7 +10,7 @@ if ( ! function_exists( 'ucf_social_feed_display_default_before' ) ) {
 	function ucf_social_feed_display_default_before( $content='', $atts ) {
 		ob_start();
 	?>
-		<aside class="ucf-social-feed ucf-social-feed-default <?php echo $atts['class']; ?>">
+		<aside role="note" class="ucf-social-feed ucf-social-feed-default <?php echo $atts['class']; ?>">
 	<?php
 		return ob_get_clean();
 	}
