@@ -11,7 +11,7 @@ if ( ! function_exists( 'ucf_social_links_display_default_before' ) ) {
 	function ucf_social_links_display_default_before( $content='', $atts ) {
 		ob_start();
 	?>
-		<aside class="ucf-social-links ucf-social-links-default">
+		<aside role="note" class="ucf-social-links ucf-social-links-default">
 	<?php
 		return ob_get_clean();
 	}
