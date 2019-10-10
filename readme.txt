@@ -3,7 +3,7 @@ Contributors: ucfwebcom
 Tags: ucf, social
 Requires at least: 4.7.3
 Tested up to: 5.2.2
-Stable tag: 3.0.3
+Stable tag: 3.0.4
 License: GPLv3 or later
 License URI: http://www.gnu.org/copyleft/gpl-3.0.html
 
@@ -32,6 +32,10 @@ This plugin provides shortcodes and default styles for displaying social icons, 
 * FontAwesome
 
 == Changelog ==
+
+= 3.0.4 =
+Bug fixes:
+- Removed duplicate ID attribute from wrapper element surrounding scrollbox layouts.
 
 = 3.0.3 =
 Bug fixes:
