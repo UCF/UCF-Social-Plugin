@@ -71,4 +71,12 @@
 
     padding-top: .05rem;
   }
+
+  .btn-tiktok {
+    @include social-bg-colors($color-tiktok);
+
+    img {
+      height: 70%;
+    }
+  }
 }
