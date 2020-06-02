@@ -15,6 +15,7 @@ if ( !class_exists( 'UCF_Social_Config' ) ) {
 				'linkedin_url' => '',
 				'instagram_url' => '',
 				'youtube_url' => '',
+				'tiktok_url' => '',
 				'include_facebook_sharing' => true,
 				'include_twitter_sharing' => true,
 				'include_linkedin_sharing' => false,
@@ -97,6 +98,7 @@ if ( !class_exists( 'UCF_Social_Config' ) ) {
 			add_option( self::$option_prefix . 'linkedin_url', $defaults['linkedin_url'] );
 			add_option( self::$option_prefix . 'instagram_url', $defaults['instagram_url'] );
 			add_option( self::$option_prefix . 'youtube_url', $defaults['youtube_url'] );
+			add_option( self::$option_prefix . 'tiktok_url', $defaults['tiktok_url'] );
 			add_option( self::$option_prefix . 'include_facebook_sharing', $defaults['include_facebook_sharing'] );
 			add_option( self::$option_prefix . 'include_twitter_sharing', $defaults['include_twitter_sharing'] );
 			add_option( self::$option_prefix . 'include_linkedin_sharing', $defaults['include_linkedin_sharing'] );
@@ -120,6 +122,7 @@ if ( !class_exists( 'UCF_Social_Config' ) ) {
 			delete_option( self::$option_prefix . 'linkedin_url' );
 			delete_option( self::$option_prefix . 'instagram_url' );
 			delete_option( self::$option_prefix . 'youtube_url' );
+			delete_option( self::$option_prefix . 'tiktok_url' );
 			delete_option( self::$option_prefix . 'include_facebook_sharing' );
 			delete_option( self::$option_prefix . 'include_twitter_sharing' );
 			delete_option( self::$option_prefix . 'include_linkedin_sharing' );
@@ -147,6 +150,7 @@ if ( !class_exists( 'UCF_Social_Config' ) ) {
 				'linkedin_url'             => get_option( self::$option_prefix . 'linkedin_url', $defaults['linkedin_url'] ),
 				'instagram_url'            => get_option( self::$option_prefix . 'instagram_url', $defaults['instagram_url'] ),
 				'youtube_url'              => get_option( self::$option_prefix . 'youtube_url', $defaults['youtube_url'] ),
+				'tiktok_url'              => get_option( self::$option_prefix . 'tiktok_url', $defaults['tiktok_url'] ),
 				'include_facebook_sharing' => get_option( self::$option_prefix . 'include_facebook_sharing', $defaults['include_facebook_sharing'] ),
 				'include_twitter_sharing'  => get_option( self::$option_prefix . 'include_twitter_sharing', $defaults['include_twitter_sharing'] ),
 				'include_linkedin_sharing' => get_option( self::$option_prefix . 'include_linkedin_sharing', $defaults['include_linkedin_sharing'] ),
@@ -234,6 +238,7 @@ if ( !class_exists( 'UCF_Social_Config' ) ) {
 			register_setting( 'ucf_social', self::$option_prefix . 'linkedin_url' );
 			register_setting( 'ucf_social', self::$option_prefix . 'instagram_url' );
 			register_setting( 'ucf_social', self::$option_prefix . 'youtube_url' );
+			register_setting( 'ucf_social', self::$option_prefix . 'tiktok_url' );
 			register_setting( 'ucf_social', self::$option_prefix . 'include_facebook_sharing' );
 			register_setting( 'ucf_social', self::$option_prefix . 'include_twitter_sharing' );
 			register_setting( 'ucf_social', self::$option_prefix . 'include_linkedin_sharing' );
@@ -341,6 +346,18 @@ if ( !class_exists( 'UCF_Social_Config' ) ) {
 				array(  // extra arguments to pass to the callback function
 					'label_for'   => self::$option_prefix . 'youtube_url',
 					'description' => 'The YouTube URL to use in the [ucf-social-icons] shortcode output.',
+					'type'        => 'text'
+				)
+			);
+			add_settings_field(
+				self::$option_prefix . 'tiktok_url',
+				'TikTok URL',  // formatted field title
+				array( 'UCF_Social_Config', 'display_settings_field' ), // display callback
+				'ucf_social',  // settings page slug
+				'ucf_social_section_icons',  // option section slug
+				array(  // extra arguments to pass to the callback function
+					'label_for'   => self::$option_prefix . 'tiktok_url',
+					'description' => 'The TikTok URL to use in the [ucf-social-icons] shortcode output.',
 					'type'        => 'text'
 				)
 			);
