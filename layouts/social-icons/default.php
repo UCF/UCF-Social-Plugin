@@ -33,6 +33,7 @@ if ( ! function_exists( 'ucf_social_icons_display_default' ) ) {
 		$facebook_url   = UCF_Social_Config::get_option_or_default( 'facebook_url' );
 		$instagram_url  = UCF_Social_Config::get_option_or_default( 'instagram_url' );
 		$youtube_url    = UCF_Social_Config::get_option_or_default( 'youtube_url' );
+		$tiktok_url     = UCF_Social_Config::get_option_or_default( 'tiktok_url' );
 
 		ob_start();
 	?>
@@ -64,6 +65,16 @@ if ( ! function_exists( 'ucf_social_icons_display_default' ) ) {
 			<a class="ucf-social-link btn-youtube <?php echo $atts['size'] . ' ' . $atts['color']; ?>" target="_blank" href="<?php echo $youtube_url; ?>">
 				<span class="fa fa-youtube" aria-hidden="true"></span>
 				<p class="sr-only">Follow us on YouTube</p>
+			</a>
+		<?php endif; ?>
+		<?php if ( $tiktok_url ) : ?>
+			<a class="ucf-social-link btn-tiktok <?php echo $atts['size'] . ' ' . $atts['color']; ?>" target="_blank" href="<?php echo $tiktok_url; ?>">
+				<?php if ( $atts['color'] === 'grey' ) : ?>
+				<img src="<?php echo UCF_SOCIAL__STATIC_URL . '/img/tiktok-icon-white.svg'; ?>" alt="" aria-hidden="true">
+				<?php else : ?>
+				<img src="<?php echo UCF_SOCIAL__STATIC_URL . '/img/tiktok-icon.svg'; ?>" alt="" aria-hidden="true">
+				<?php endif; ?>
+				<p class="sr-only">Follow us on TikTok</p>
 			</a>
 		<?php endif; ?>
 	<?php
