@@ -33,6 +33,10 @@ This plugin provides shortcodes and default styles for displaying social icons, 
 
 == Changelog ==
 
+= 3.0.5 =
+Enhancements:
+- Adds TikTok.
+
 = 3.0.4 =
 Bug fixes:
 - Removed duplicate ID attribute from wrapper element surrounding scrollbox layouts.
