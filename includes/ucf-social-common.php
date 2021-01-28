@@ -108,15 +108,12 @@ if ( ! class_exists( 'UCF_Social_Common' ) ) {
 		 */
 		public static function has_social_feed( $content ) {
 			$has_feed = false;
-			ob_start();
-			echo do_shortcode( $content );
-			$content_processed = ob_get_clean();
 
 			// Check against unprocessed string contents for the
 			// [ucf-social-feed] shortcode, as well as processed string
 			// contents for substrings that are likely to be present in social
 			// feed templates
-			if ( has_shortcode( $content, 'ucf-social-feed' ) || strpos( $content_processed, 'ucf-social-feed' ) !== false ) {
+			if ( has_shortcode( $content, 'ucf-social-feed' ) || strpos( $content, 'ucf-social-feed' ) !== false ) {
 				$has_feed = true;
 			}
 
