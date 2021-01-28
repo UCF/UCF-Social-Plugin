@@ -1,6 +1,4 @@
 {
 	"sync": true,
-	"syncOptions": {
-		"proxy": "localhost"
-	}
+	"syncTarget": "http://localhost/wordpress/"
 }
