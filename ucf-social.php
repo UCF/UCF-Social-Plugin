@@ -11,9 +11,6 @@ GitHub Plugin URI: https://github.com/UCF/UCF-Social-Plugin
 if ( ! defined( 'WPINC' ) ) {
 	die;
 }
-
-define( 'UCF_SOCIAL__PLUGIN_URL', plugins_url( basename( dirname( __FILE__ ) ) ) );
-define( 'UCF_SOCIAL__STATIC_URL', UCF_SOCIAL__PLUGIN_URL . '/static' );
 define( 'UCF_SOCIAL__PLUGIN_FILE', __FILE__ );
 define( 'UCF_SOCIAL__PLUGIN_URL', plugins_url( basename( dirname( __FILE__ ) ) ) );
 define( 'UCF_SOCIAL__PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
