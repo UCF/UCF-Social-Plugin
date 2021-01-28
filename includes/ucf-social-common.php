@@ -14,20 +14,9 @@ if ( ! class_exists( 'UCF_Social_Common' ) ) {
 		 * @return string
 		 **/
 		public static function display_social_icons( $atts ) {
-			$before = ucf_social_icons_display_default_before( '', $atts );
-			if ( has_filter( 'ucf_social_icons_display_' . $atts['layout'] . '_before' ) ) {
-				$before = apply_filters( 'ucf_social_icons_display_' . $atts['layout'] . '_before', $before, $atts );
-			}
-
-			$content = ucf_social_icons_display_default( '', $atts );
-			if ( has_filter( 'ucf_social_icons_display_' . $atts['layout'] ) ) {
-				$content = apply_filters( 'ucf_social_icons_display_' . $atts['layout'], $content, $atts );
-			}
-
-			$after = ucf_social_icons_display_default_after( '', $atts );
-			if ( has_filter( 'ucf_social_icons_display_' . $atts['layout'] . '_after' ) ) {
-				$after = apply_filters( 'ucf_social_icons_display_' . $atts['layout'] . '_after', $after, $atts );
-			}
+			$before  = apply_filters( 'ucf_social_icons_display_' . $atts['layout'] . '_before', '', $atts );
+			$content = apply_filters( 'ucf_social_icons_display_' . $atts['layout'], '', $atts );
+			$after   = apply_filters( 'ucf_social_icons_display_' . $atts['layout'] . '_after', '', $atts );
 
 			return $before . $content . $after;
 		}
@@ -40,20 +29,9 @@ if ( ! class_exists( 'UCF_Social_Common' ) ) {
 		* @return string
 		**/
 		public static function display_social_links( $atts ) {
-			$before = ucf_social_links_display_default_before( '', $atts );
-			if ( has_filter( 'ucf_social_links_display_' . $atts['layout'] . '_before' ) ) {
-				$before = apply_filters( 'ucf_social_links_display_' . $atts['layout'] . '_before', $before, $atts );
-			}
-
-			$content = ucf_social_links_display_default( '', $atts );
-			if ( has_filter( 'ucf_social_links_display_' . $atts['layout'] ) ) {
-				$content = apply_filters( 'ucf_social_links_display_' . $atts['layout'], $content, $atts );
-			}
-
-			$after = ucf_social_links_display_default_after( '', $atts );
-			if ( has_filter( 'ucf_social_links_display_' . $atts['layout'] . '_after' ) ) {
-				$after = apply_filters( 'ucf_social_links_display_' . $atts['layout'] . '_after', $after, $atts );
-			}
+			$before  = apply_filters( 'ucf_social_links_display_' . $atts['layout'] . '_before', '', $atts );
+			$content = apply_filters( 'ucf_social_links_display_' . $atts['layout'], '', $atts );
+			$after   = apply_filters( 'ucf_social_links_display_' . $atts['layout'] . '_after', '', $atts );
 
 			return $before . $content . $after;
 		}
@@ -66,20 +44,11 @@ if ( ! class_exists( 'UCF_Social_Common' ) ) {
 		* @return string
 		**/
 		public static function display_social_feed( $atts ) {
-			$before = ucf_social_feed_display_default_before( '', $atts );
-			if ( has_filter( 'ucf_social_feed_display_' . $atts['layout'] . '_before' ) ) {
-				$before = apply_filters( 'ucf_social_feed_display_' . $atts['layout'] . '_before', $before, $atts );
-			}
+			self::enqueue_feed_scripts();
 
-			$content = ucf_social_feed_display_default( '', $atts );
-			if ( has_filter( 'ucf_social_feed_display_' . $atts['layout'] ) ) {
-				$content = apply_filters( 'ucf_social_feed_display_' . $atts['layout'], $content, $atts );
-			}
-
-			$after = ucf_social_feed_display_default_after( '', $atts );
-			if ( has_filter( 'ucf_social_feed_display_' . $atts['layout'] . '_after' ) ) {
-				$after = apply_filters( 'ucf_social_feed_display_' . $atts['layout'] . '_after', $after, $atts );
-			}
+			$before  = apply_filters( 'ucf_social_feed_display_' . $atts['layout'] . '_before', '', $atts );
+			$content = apply_filters( 'ucf_social_feed_display_' . $atts['layout'], '', $atts );
+			$after   = apply_filters( 'ucf_social_feed_display_' . $atts['layout'] . '_after', '', $atts );
 
 			return $before . $content . $after;
 		}
@@ -108,15 +77,12 @@ if ( ! class_exists( 'UCF_Social_Common' ) ) {
 		 */
 		public static function has_social_feed( $content ) {
 			$has_feed = false;
-			ob_start();
-			echo do_shortcode( $content );
-			$content_processed = ob_get_clean();
 
 			// Check against unprocessed string contents for the
 			// [ucf-social-feed] shortcode, as well as processed string
 			// contents for substrings that are likely to be present in social
 			// feed templates
-			if ( has_shortcode( $content, 'ucf-social-feed' ) || strpos( $content_processed, 'ucf-social-feed' ) !== false ) {
+			if ( has_shortcode( $content, 'ucf-social-feed' ) || strpos( $content, 'ucf-social-feed' ) !== false ) {
 				$has_feed = true;
 			}
 
@@ -256,11 +222,93 @@ if ( ! class_exists( 'UCF_Social_Common' ) ) {
 		}
 
 		/**
+		 * Registers frontend static assets
+		 *
+		 * @since 3.0.6
+		 * @author Jo Dickson
+		 * @return void
+		 */
+		public static function register_assets() {
+			// Backward compatibility: if this function is defined
+			// (plugged) in a theme/plugin, just call it instead:
+			if ( function_exists( 'ucf_social_enqueue_assets' ) ) return ucf_social_enqueue_assets();
+
+			global $post;
+
+			$plugin_data = get_plugin_data( UCF_SOCIAL__PLUGIN_FILE, false, false );
+			$version     = $plugin_data['Version'];
+
+			$css_deps = array();
+			$js_deps  = array( 'jquery' );
+
+			$curator_widget_version = UCF_Social_Config::get_option_or_default( 'curator_widget_version' );
+			$curator_widget_version = trim( $curator_widget_version );
+			if ( ! empty( $curator_widget_version ) ) {
+				$curator_css_url = 'https://cdn.curator.io/' . $curator_widget_version . '/css/curator.css';
+				$curator_js_url  = 'https://cdn.curator.io/' . $curator_widget_version . '/js/curator.js';
+
+				// Try to conditionally load Curator CSS as best as we can.
+				// NOTE: we currently *only* check post content
+				// for social feeds.
+				if ( is_a( $post, 'WP_Post' ) && self::has_social_feed( $post->post_content ) ) {
+					$css_deps[] = 'ucf_social_curator_css';
+					wp_register_style( 'ucf_social_curator_css', $curator_css_url, false, false, 'all' );
+				}
+
+				// JS is late-enqueued, so, always register here regardless of
+				// has_social_feed() value:
+				$js_deps[] = 'ucf_social_curator';
+				wp_register_script( 'ucf_social_curator', $curator_js_url, false, false, true );
+			}
+
+			$include_css = UCF_Social_Config::get_option_or_default( 'include_css' );
+			if ( $include_css ) {
+				wp_register_style( 'ucf_social_css', UCF_SOCIAL__STYLES_URL . '/ucf-social.min.css', $css_deps, $version, 'all' );
+			}
+
+			wp_register_script( 'ucf_social_curator_js', UCF_SOCIAL__SCRIPT_URL . '/ucf-social.min.js', $js_deps, $version, true );
+		}
+
+		/**
+		 * Enqueues frontend CSS
+		 *
+		 * @since 3.0.6
+		 * @author Jo Dickson
+		 * @return void
+		 */
+		public static function enqueue_styles() {
+			// Backward compatibility: if this function is defined
+			// (plugged) in a theme/plugin, back out early:
+			if ( function_exists( 'ucf_social_enqueue_assets' ) ) return;
+
+			if ( wp_style_is( 'ucf_social_css', 'registered' ) ) {
+				wp_enqueue_style( 'ucf_social_css' );
+			}
+		}
+
+		/**
+		 * Enqueues frontend JS for social feeds.
+		 *
+		 * @since 3.0.6
+		 * @author Jo Dickson
+		 * @return void
+		 */
+		public static function enqueue_feed_scripts() {
+			// Backward compatibility: if this function is defined
+			// (plugged) in a theme/plugin, back out early:
+			if ( function_exists( 'ucf_social_enqueue_assets' ) ) return;
+
+			wp_enqueue_script( 'ucf_social_curator_js' );
+		}
+
+		/**
 		 * Enqueues Curator.io widget CSS and JS. Does not include
 		 * plugin-specific JS.
 		 *
 		 * @author Jo Dickson
 		 * @since 3.0.0
+		 * @deprecated Deprecated since 3.0.6; UCF_Social_Common::register_assets() takes care of this for you
+		 * @return void
 		 */
 		public static function enqueue_curator_widget_assets() {
 			$widget_version = UCF_Social_Config::get_option_or_default( 'curator_widget_version' );
@@ -278,30 +326,12 @@ if ( ! class_exists( 'UCF_Social_Common' ) ) {
 }
 
 /**
+ * Register assets
+ */
+add_action( 'wp_enqueue_scripts', array( 'UCF_Social_Common', 'register_assets' ), 10, 0 );
+add_action( 'wp_enqueue_scripts', array( 'UCF_Social_Common', 'enqueue_styles' ), 11, 0 );
+
+/**
  * Add hook to allow for json uploads
  */
 add_filter( 'upload_mimes', array( 'UCF_Social_Common', 'custom_mimes' ), 10, 1 );
-
-
-/**
- * Enqueue css assets for the plugin
- * @author RJ Bruneel
- * @since 1.0
- **/
-if ( ! function_exists( 'ucf_social_enqueue_assets' ) ) {
-	function ucf_social_enqueue_assets() {
-		global $post;
-
-		$include_css = UCF_Social_Config::get_option_or_default( 'include_css' );
-		if ( $include_css ) {
-			wp_enqueue_style( 'ucf_social_css', plugins_url( 'static/css/ucf-social.min.css', UCF_SOCIAL__PLUGIN_FILE ), false, false, 'all' );
-		}
-
-		if ( is_a( $post, 'WP_Post' ) && UCF_Social_Common::has_social_feed( $post->post_content ) ) {
-			UCF_Social_Common::enqueue_curator_widget_assets();
-			wp_enqueue_script( 'ucf_social_curator_js', plugins_url( 'static/js/ucf-social.min.js', UCF_SOCIAL__PLUGIN_FILE ), array( 'ucf_social_curator' ), false, true );
-		}
-	}
-}
-
-add_action( 'wp_enqueue_scripts', 'ucf_social_enqueue_assets' );
