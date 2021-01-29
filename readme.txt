@@ -3,7 +3,7 @@ Contributors: ucfwebcom
 Tags: ucf, social
 Requires at least: 4.7.3
 Tested up to: 5.2.2
-Stable tag: 3.0.4
+Stable tag: 3.0.6
 License: GPLv3 or later
 License URI: http://www.gnu.org/copyleft/gpl-3.0.html
 
@@ -27,11 +27,25 @@ This plugin provides shortcodes and default styles for displaying social icons, 
 2. Configure plugin settings from the WordPress admin under "Settings > UCF Social".
 
 == Dependencies ==
-
-* Athena-Framework or Bootstrap 4
-* FontAwesome
+- jQuery (for Curator social feeds)
+- Athena Framework or Bootstrap 4
+- Font Awesome 4
 
 == Changelog ==
+
+= 3.0.6 =
+Enhancements:
+- Added late enqueuing of JS for social feeds
+- Removed redundant `has_filter()` checks when generating markup for shortcode layouts
+- Added Github issue/PR templates and contributing doc; updated linter configs and gulpfile + gulp config
+- Upgraded packages
+- Updated plugin dependencies for clarity
+
+Bug fixes:
+- Removed `do_shortcode()` call on content in `UCF_Social_Common::has_social_feed()` to avoid unnecessary 2x shortcode execution
+
+Deprecated:
+- Deprecated `UCF_Social_Common::enqueue_curator_widget_assets()` and `ucf_social_enqueue_assets()`
 
 = 3.0.5 =
 Enhancements:
@@ -143,12 +157,12 @@ Enhancements:
 
 == Upgrade Notice ==
 
-n/a
+- v3.0.6: Deprecated `UCF_Social_Common::enqueue_curator_widget_assets()` and `ucf_social_enqueue_assets()`.  These functions will be removed in a future release and should be removed from themes/other plugins that depend on them.
 
 
 == Installation Requirements ==
 
-None
+n/a
 
 
 == Development & Contributing ==
