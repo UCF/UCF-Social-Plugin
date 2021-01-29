@@ -12,27 +12,29 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
-define( 'UCF_SOCIAL__PLUGIN_URL', plugins_url( basename( dirname( __FILE__ ) ) ) );
-define( 'UCF_SOCIAL__STATIC_URL', UCF_SOCIAL__PLUGIN_URL . '/static' );
 define( 'UCF_SOCIAL__PLUGIN_FILE', __FILE__ );
-
+define( 'UCF_SOCIAL__PLUGIN_URL', plugins_url( basename( dirname( __FILE__ ) ) ) );
+define( 'UCF_SOCIAL__PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
+define( 'UCF_SOCIAL__STATIC_URL', UCF_SOCIAL__PLUGIN_URL . '/static' );
+define( 'UCF_SOCIAL__SCRIPT_URL', UCF_SOCIAL__STATIC_URL . '/js' );
+define( 'UCF_SOCIAL__STYLES_URL', UCF_SOCIAL__STATIC_URL . '/css' );
 
 // Layouts - social feed
-require_once 'layouts/social-feed/default.php';
-require_once 'layouts/social-feed/scrollbox.php';
-require_once 'layouts/social-feed/scrollbox_sm.php';
-require_once 'layouts/social-feed/scrollbox_lg.php';
+require_once UCF_SOCIAL__PLUGIN_DIR . 'layouts/social-feed/default.php';
+require_once UCF_SOCIAL__PLUGIN_DIR . 'layouts/social-feed/scrollbox.php';
+require_once UCF_SOCIAL__PLUGIN_DIR . 'layouts/social-feed/scrollbox_sm.php';
+require_once UCF_SOCIAL__PLUGIN_DIR . 'layouts/social-feed/scrollbox_lg.php';
 
 // Layouts - social icons
-require_once 'layouts/social-icons/default.php';
+require_once UCF_SOCIAL__PLUGIN_DIR . 'layouts/social-icons/default.php';
 
 // Layouts - social links
-require_once 'layouts/social-links/default.php';
+require_once UCF_SOCIAL__PLUGIN_DIR . 'layouts/social-links/default.php';
 
 // Core plugin files
-require_once 'includes/ucf-social-config.php';
-require_once 'includes/ucf-social-common.php';
-require_once 'includes/ucf-social-shortcodes.php';
+require_once UCF_SOCIAL__PLUGIN_DIR . 'includes/ucf-social-config.php';
+require_once UCF_SOCIAL__PLUGIN_DIR . 'includes/ucf-social-common.php';
+require_once UCF_SOCIAL__PLUGIN_DIR . 'includes/ucf-social-shortcodes.php';
 
 
 if ( ! function_exists( 'ucf_social_activate' ) ) {
