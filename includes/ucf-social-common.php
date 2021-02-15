@@ -14,9 +14,21 @@ if ( ! class_exists( 'UCF_Social_Common' ) ) {
 		 * @return string
 		 **/
 		public static function display_social_icons( $atts ) {
-			$before  = apply_filters( 'ucf_social_icons_display_' . $atts['layout'] . '_before', '', $atts );
-			$content = apply_filters( 'ucf_social_icons_display_' . $atts['layout'], '', $atts );
-			$after   = apply_filters( 'ucf_social_icons_display_' . $atts['layout'] . '_after', '', $atts );
+			$before  = apply_filters(
+				'ucf_social_icons_display_' . $atts['layout'] . '_before',
+				ucf_social_icons_display_default_before( '', $atts ),
+				$atts
+			);
+			$content = apply_filters(
+				'ucf_social_icons_display_' . $atts['layout'],
+				ucf_social_icons_display_default( '', $atts ),
+				$atts
+			);
+			$after   = apply_filters(
+				'ucf_social_icons_display_' . $atts['layout'] . '_after',
+				ucf_social_icons_display_default_after( '', $atts ),
+				$atts
+			);
 
 			return $before . $content . $after;
 		}
@@ -29,9 +41,21 @@ if ( ! class_exists( 'UCF_Social_Common' ) ) {
 		* @return string
 		**/
 		public static function display_social_links( $atts ) {
-			$before  = apply_filters( 'ucf_social_links_display_' . $atts['layout'] . '_before', '', $atts );
-			$content = apply_filters( 'ucf_social_links_display_' . $atts['layout'], '', $atts );
-			$after   = apply_filters( 'ucf_social_links_display_' . $atts['layout'] . '_after', '', $atts );
+			$before  = apply_filters(
+				'ucf_social_links_display_' . $atts['layout'] . '_before',
+				ucf_social_links_display_default_before( '', $atts ),
+				$atts
+			);
+			$content = apply_filters(
+				'ucf_social_links_display_' . $atts['layout'],
+				ucf_social_links_display_default( '', $atts ),
+				$atts
+			);
+			$after   = apply_filters(
+				'ucf_social_links_display_' . $atts['layout'] . '_after',
+				ucf_social_links_display_default_after( '', $atts ),
+				$atts
+			);
 
 			return $before . $content . $after;
 		}
@@ -46,9 +70,21 @@ if ( ! class_exists( 'UCF_Social_Common' ) ) {
 		public static function display_social_feed( $atts ) {
 			self::enqueue_feed_scripts();
 
-			$before  = apply_filters( 'ucf_social_feed_display_' . $atts['layout'] . '_before', '', $atts );
-			$content = apply_filters( 'ucf_social_feed_display_' . $atts['layout'], '', $atts );
-			$after   = apply_filters( 'ucf_social_feed_display_' . $atts['layout'] . '_after', '', $atts );
+			$before  = apply_filters(
+				'ucf_social_feed_display_' . $atts['layout'] . '_before',
+				ucf_social_feed_display_default_before( '', $atts ),
+				$atts
+			);
+			$content = apply_filters(
+				'ucf_social_feed_display_' . $atts['layout'],
+				ucf_social_feed_display_default( '', $atts ),
+				$atts
+			);
+			$after   = apply_filters(
+				'ucf_social_feed_display_' . $atts['layout'] . '_after',
+				ucf_social_feed_display_default_after( '', $atts ),
+				$atts
+			);
 
 			return $before . $content . $after;
 		}
