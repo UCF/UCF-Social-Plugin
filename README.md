@@ -26,6 +26,10 @@ This plugin provides shortcodes and default styles for displaying social icons, 
 
 ## Changelog ##
 
+### 3.0.7 ###
+Bug fixes:
+- Re-added default markup strings for layout filters, fixing a bug introduced in v3.0.6 with custom layouts that don't define custom functions for all parts of the layout.
+
 ### 3.0.6 ###
 Enhancements:
 - Added late enqueuing of JS for social feeds
@@ -155,7 +159,7 @@ Enhancements:
 
 ## Installation Requirements ##
 
-None
+n/a
 
 
 ## Development & Contributing ##
