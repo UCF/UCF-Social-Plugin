@@ -31,16 +31,9 @@ if ( ! function_exists( 'ucf_social_feed_display_default' ) ) {
 		global $post;
 		if ( !$post ) { return; }  // back out if there's no post data to reference
 
-		$options = UCF_Social_Common::get_social_feed_options( $atts );
-
 		ob_start();
 	?>
 		<div id="<?php echo $atts['container']; ?>"></div>
-		<script type="text/javascript">
-		$(function() {
-			socialFeedInit('<?php echo $atts['container']; ?>', <?php echo $options; ?>);
-		});
-		</script>
 	<?php
 		return ob_get_clean();
 	}
