@@ -68,7 +68,7 @@ if ( ! class_exists( 'UCF_Social_Common' ) ) {
 		* @return string
 		**/
 		public static function display_social_feed( $atts ) {
-			self::enqueue_feed_scripts();
+			self::enqueue_feed_scripts( $atts );
 
 			$before  = apply_filters(
 				'ucf_social_feed_display_' . $atts['layout'] . '_before',
@@ -327,14 +327,27 @@ if ( ! class_exists( 'UCF_Social_Common' ) ) {
 		 *
 		 * @since 3.0.6
 		 * @author Jo Dickson
+		 * @param array $sc_atts Assoc. array of shortcode options
 		 * @return void
 		 */
-		public static function enqueue_feed_scripts() {
+		public static function enqueue_feed_scripts( $sc_atts=null ) {
 			// Backward compatibility: if this function is defined
 			// (plugged) in a theme/plugin, back out early:
 			if ( function_exists( 'ucf_social_enqueue_assets' ) ) return;
 
 			wp_enqueue_script( 'ucf_social_curator_js' );
+
+			if ( $sc_atts ) {
+				$options = self::get_social_feed_options( $sc_atts );
+				ob_start();
+			?>
+				$(function() {
+					socialFeedInit('<?php echo $sc_atts['container']; ?>', <?php echo $options; ?>);
+				});
+			<?php
+				$inline_script = trim( ob_get_clean() );
+				wp_add_inline_script( 'ucf_social_curator_js', $inline_script );
+			}
 		}
 
 		/**
