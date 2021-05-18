@@ -1,11 +1,11 @@
 <?php
 
 /**
-* Display the content before the social icons
-* @author RJ Bruneel
-* @since 1.0
-* @return string
-**/
+ * Display the content before the social icons
+ * @author RJ Bruneel
+ * @since 1.0
+ * @return string
+ */
 if ( ! function_exists( 'ucf_social_icons_display_default_before' ) ) {
 	function ucf_social_icons_display_default_before( $content='', $atts ) {
 		ob_start();
@@ -20,12 +20,12 @@ add_filter( 'ucf_social_icons_display_default_before', 'ucf_social_icons_display
 
 
 /**
-* Display the social icons content
-* @author RJ Bruneel
-* @since 1.0
-* @param array $atts | Assoc. array of shortcode options
-* @return string
-**/
+ * Display the social icons content
+ * @author RJ Bruneel
+ * @since 1.0
+ * @param array $atts | Assoc. array of shortcode options
+ * @return string
+ */
 if ( ! function_exists( 'ucf_social_icons_display_default' ) ) {
 	function ucf_social_icons_display_default( $content='', $atts ) {
 		$linkedin_url   = UCF_Social_Config::get_option_or_default( 'linkedin_url' );
@@ -39,42 +39,50 @@ if ( ! function_exists( 'ucf_social_icons_display_default' ) ) {
 	?>
 		<?php if ( $facebook_url ) : ?>
 			<a class="ucf-social-link btn-facebook <?php echo $atts['size'] . ' ' . $atts['color']; ?>" target="_blank" href="<?php echo $facebook_url; ?>">
-				<span class="fa fa-facebook" aria-hidden="true"></span>
-				<p class="sr-only">Like us on Facebook</p>
+				<svg class="ucf-social-icon" height="80px" width="80px" aria-hidden="true">
+					<use href="#ucf-social-icons--circle-facebook" />
+				</svg>
+				<span class="sr-only">Like us on Facebook</span>
 			</a>
 		<?php endif; ?>
 		<?php if ( $twitter_url ) : ?>
 			<a class="ucf-social-link btn-twitter <?php echo $atts['size'] . ' ' . $atts['color']; ?>" target="_blank" href="<?php echo $twitter_url; ?>">
-				<span class="fa fa-twitter" aria-hidden="true"></span>
-				<p class="sr-only">Follow us on Twitter</p>
+				<svg class="ucf-social-icon" height="80px" width="80px" aria-hidden="true">
+					<use href="#ucf-social-icons--circle-twitter" />
+				</svg>
+				<span class="sr-only">Follow us on Twitter</span>
 			</a>
 		<?php endif; ?>
 		<?php if ( $instagram_url ) : ?>
 			<a class="ucf-social-link btn-instagram <?php echo $atts['size'] . ' ' . $atts['color']; ?>" target="_blank" href="<?php echo $instagram_url; ?>">
-				<span class="fa fa-instagram" aria-hidden="true"></span>
-				<p class="sr-only">Find us on Instagram</p>
+				<svg class="ucf-social-icon" height="80px" width="80px" aria-hidden="true">
+					<use href="#ucf-social-icons--circle-instagram" />
+				</svg>
+				<span class="sr-only">Find us on Instagram</span>
 			</a>
 		<?php endif; ?>
 		<?php if ( $linkedin_url ) : ?>
 			<a class="ucf-social-link btn-linkedin <?php echo $atts['size'] . ' ' . $atts['color']; ?>" target="_blank" href="<?php echo $linkedin_url; ?>">
-				<span class="fa fa-linkedin" aria-hidden="true"></span>
-				<p class="sr-only">View our LinkedIn page</p>
+				<svg class="ucf-social-icon" height="80px" width="80px" aria-hidden="true">
+					<use href="#ucf-social-icons--circle-linkedin" />
+				</svg>
+				<span class="sr-only">View our LinkedIn page</span>
 			</a>
 		<?php endif; ?>
 		<?php if ( $youtube_url ) : ?>
 			<a class="ucf-social-link btn-youtube <?php echo $atts['size'] . ' ' . $atts['color']; ?>" target="_blank" href="<?php echo $youtube_url; ?>">
-				<span class="fa fa-youtube" aria-hidden="true"></span>
-				<p class="sr-only">Follow us on YouTube</p>
+				<svg class="ucf-social-icon" height="80px" width="80px" aria-hidden="true">
+					<use href="#ucf-social-icons--circle-youtube" />
+				</svg>
+				<span class="sr-only">Follow us on YouTube</span>
 			</a>
 		<?php endif; ?>
 		<?php if ( $tiktok_url ) : ?>
 			<a class="ucf-social-link btn-tiktok <?php echo $atts['size'] . ' ' . $atts['color']; ?>" target="_blank" href="<?php echo $tiktok_url; ?>">
-				<?php if ( $atts['color'] === 'grey' ) : ?>
-				<img src="<?php echo UCF_SOCIAL__STATIC_URL . '/img/tiktok-icon-white.svg'; ?>" alt="" aria-hidden="true">
-				<?php else : ?>
-				<img src="<?php echo UCF_SOCIAL__STATIC_URL . '/img/tiktok-icon.svg'; ?>" alt="" aria-hidden="true">
-				<?php endif; ?>
-				<p class="sr-only">Follow us on TikTok</p>
+				<svg class="ucf-social-icon" height="80px" width="80px" aria-hidden="true">
+					<use href="#ucf-social-icons--circle-tiktok" />
+				</svg>
+				<span class="sr-only">Follow us on TikTok</span>
 			</a>
 		<?php endif; ?>
 	<?php
@@ -86,11 +94,11 @@ add_filter( 'ucf_social_icons_display_default', 'ucf_social_icons_display_defaul
 
 
 /**
-* Display the content after the social icons
-* @author RJ Bruneel
-* @since 1.0
-* @return string
-**/
+ * Display the content after the social icons
+ * @author RJ Bruneel
+ * @since 1.0
+ * @return string
+ */
 if ( ! function_exists( 'ucf_social_icons_display_default_after' ) ) {
 	function ucf_social_icons_display_default_after( $content='', $atts ) {
 		ob_start();

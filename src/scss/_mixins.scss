@@ -1,9 +1,15 @@
-@mixin social-bg-colors ($color) {
+@mixin social-bg-colors ($color, $property: background-color, $hover: darken) {
   &.color {
-    background-color: $color;
+    #{$property}: $color;
 
-    &:hover {
-      background-color: darken($color, 10%);
+    &:hover,
+    &:focus,
+    &:active {
+      @if $hover == darken {
+        #{$property}: darken($color, 10%);
+      } @else {
+        #{$property}: lighten($color, 20%);
+      }
     }
   }
 }
