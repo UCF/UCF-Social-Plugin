@@ -19,13 +19,8 @@ if ( !class_exists( 'UCF_Social_Config' ) ) {
 				'include_facebook_sharing' => true,
 				'include_twitter_sharing' => true,
 				'include_linkedin_sharing' => false,
-				'include_email_sharing' => false,
-				'curator_default_feed' => '',
-				'curator_default_type' => 'Waterfall',
-				'curator_api_key' => '',
-				'curator_widget_version' => '3.1'
-			),
-			$curator_data_transient = 'ucf_social_curator_api_data';
+				'include_email_sharing' => false
+			);
 
 		public static function get_social_icon_layouts() {
 			$layouts = array(
@@ -72,17 +67,6 @@ if ( !class_exists( 'UCF_Social_Config' ) ) {
 			return $options;
 		}
 
-		public static function get_social_feed_layouts() {
-			$layouts = array(
-				'default'      => 'Default Layout',
-				'scrollbox_sm' => 'Scrollbox - Small',
-				'scrollbox'    => 'Scrollbox - Medium',
-				'scrollbox_lg' => 'Scrollbox - Large'
-			);
-			$layouts = apply_filters( self::$option_prefix . 'get_social_feed_layouts', $layouts );
-			return $layouts;
-		}
-
 		/**
 		 * Creates options via the WP Options API that are utilized by the
 		 * plugin.  Intended to be run on plugin activation.
@@ -103,10 +87,6 @@ if ( !class_exists( 'UCF_Social_Config' ) ) {
 			add_option( self::$option_prefix . 'include_twitter_sharing', $defaults['include_twitter_sharing'] );
 			add_option( self::$option_prefix . 'include_linkedin_sharing', $defaults['include_linkedin_sharing'] );
 			add_option( self::$option_prefix . 'include_email_sharing', $defaults['include_email_sharing'] );
-			add_option( self::$option_prefix . 'curator_default_feed', $defaults['curator_default_feed'] );
-			add_option( self::$option_prefix . 'curator_default_type', $defaults['curator_default_type'] );
-			add_option( self::$option_prefix . 'curator_api_key', $defaults['curator_api_key'] );
-			add_option( self::$option_prefix . 'curator_widget_version', $defaults['curator_widget_version'] );
 		}
 
 		/**
@@ -127,6 +107,7 @@ if ( !class_exists( 'UCF_Social_Config' ) ) {
 			delete_option( self::$option_prefix . 'include_twitter_sharing' );
 			delete_option( self::$option_prefix . 'include_linkedin_sharing' );
 			delete_option( self::$option_prefix . 'include_email_sharing' );
+			// Delete settings prior to v4.0.0:
 			delete_option( self::$option_prefix . 'curator_default_feed' );
 			delete_option( self::$option_prefix . 'curator_default_type' );
 			delete_option( self::$option_prefix . 'curator_api_key' );
@@ -155,10 +136,6 @@ if ( !class_exists( 'UCF_Social_Config' ) ) {
 				'include_twitter_sharing'  => get_option( self::$option_prefix . 'include_twitter_sharing', $defaults['include_twitter_sharing'] ),
 				'include_linkedin_sharing' => get_option( self::$option_prefix . 'include_linkedin_sharing', $defaults['include_linkedin_sharing'] ),
 				'include_email_sharing'    => get_option( self::$option_prefix . 'include_email_sharing', $defaults['include_email_sharing'] ),
-				'curator_default_feed'     => get_option( self::$option_prefix . 'curator_default_feed', $defaults['curator_default_feed'] ),
-				'curator_default_type'     => get_option( self::$option_prefix . 'curator_default_type', $defaults['curator_default_type'] ),
-				'curator_api_key'          => get_option( self::$option_prefix . 'curator_api_key', $defaults['curator_api_key'] ),
-				'curator_widget_version'   => get_option( self::$option_prefix . 'curator_widget_version', $defaults['curator_widget_version'] ),
 			);
 
 			// Force configurable options to override $defaults, even if they are empty:
@@ -243,10 +220,6 @@ if ( !class_exists( 'UCF_Social_Config' ) ) {
 			register_setting( 'ucf_social', self::$option_prefix . 'include_twitter_sharing' );
 			register_setting( 'ucf_social', self::$option_prefix . 'include_linkedin_sharing' );
 			register_setting( 'ucf_social', self::$option_prefix . 'include_email_sharing' );
-			register_setting( 'ucf_social', self::$option_prefix . 'curator_api_key' );
-			register_setting( 'ucf_social', self::$option_prefix . 'curator_default_feed' );
-			register_setting( 'ucf_social', self::$option_prefix . 'curator_default_type' );
-			register_setting( 'ucf_social', self::$option_prefix . 'curator_widget_version' );
 
 			// Register setting sections
 			add_settings_section(
@@ -411,62 +384,6 @@ if ( !class_exists( 'UCF_Social_Config' ) ) {
 					'type'        => 'checkbox'
 				)
 			);
-
-			// Register fields - social feed settings
-			add_settings_field(
-				self::$option_prefix . 'curator_api_key',
-				'Curator API Key',  // formatted field title
-				array( 'UCF_Social_Config', 'display_settings_field' ), // display callback
-				'ucf_social',  // settings page slug
-				'ucf_social_section_feed',  // option section slug
-				array(  // extra arguments to pass to the callback function
-					'label_for'   => self::$option_prefix . 'curator_api_key',
-					'description' => 'API key for Curator API access. If provided, feed customization settings will be retrieved and applied to feeds referenced via the [ucf-social-feed] shortcode.',
-					'type'        => 'password'
-				)
-			);
-			add_settings_field(
-				self::$option_prefix . 'curator_default_feed',
-				'Curator Default Feed ID',  // formatted field title
-				array( 'UCF_Social_Config', 'display_settings_field' ), // display callback
-				'ucf_social',  // settings page slug
-				'ucf_social_section_feed',  // option section slug
-				array(  // extra arguments to pass to the callback function
-					'label_for'   => self::$option_prefix . 'curator_default_feed',
-					'description' => 'A default feed ID to use in [ucf-social-feed] shortcodes when an explicit <code>feed</code> attribute isn\'t provided.',
-					'type'        => 'text'
-				)
-			);
-			add_settings_field(
-				self::$option_prefix . 'curator_default_type',
-				'Curator Default Feed Type',  // formatted field title
-				array( 'UCF_Social_Config', 'display_settings_field' ), // display callback
-				'ucf_social',  // settings page slug
-				'ucf_social_section_feed',  // option section slug
-				array(  // extra arguments to pass to the callback function
-					'label_for'   => self::$option_prefix . 'curator_default_type',
-					'description' => 'The type of feed to use by default in [ucf-social-feed] when an explicit <code>type</code> attribute or option override isn\'t provided.',
-					'type'        => 'select',
-					'choices'     => array(
-						'Waterfall' => 'Waterfall',
-						'Carousel'  => 'Carousel',
-						'Grid'      => 'Grid',
-						'Panel'     => 'Panel'
-					)
-				)
-			);
-			add_settings_field(
-				self::$option_prefix . 'curator_widget_version',
-				'Curator Widget Version',  // formatted field title
-				array( 'UCF_Social_Config', 'display_settings_field' ), // display callback
-				'ucf_social',  // settings page slug
-				'ucf_social_section_feed',  // option section slug
-				array(  // extra arguments to pass to the callback function
-					'label_for'   => self::$option_prefix . 'curator_widget_version',
-					'description' => 'Version of Curator.io\'s widget CSS and JS to use for all feeds on this site.<br>Note that feeds may be generated and published under different version numbers, and may need to be upgraded within Curator.io to work with the widget version specified here. You can upgrade your feed\'s widget version from the "Publish" view in the Curator.io admin if a newer version is available.',
-					'type'        => 'smalltext'
-				)
-			);
 		}
 
 		/**
@@ -590,53 +507,10 @@ if ( !class_exists( 'UCF_Social_Config' ) ) {
 				submit_button();
 				?>
 			</form>
-			<hr>
-			<form method="post" action="admin-post.php">
-				<h2>Flush Curator.io Transient Data</h2>
-				<p class="description">
-					If a Curator API key is provided above, feed customization settings will be imported from Curator and applied to feeds embedded via the [ucf-social-feed] shortcode. Those settings are then saved as transient data, and will be referenced until the transient either expires, or is flushed using the button below.
-				</p>
-				<p class="description">
-					If you make changes to your feed's customization settings within Curator, you'll need to flush this transient data to immediately see your changes on this site.
-				</p>
-
-				<br>
-
-				<p class="description">
-					Click the button below to flush any existing Curator feed data and re-request fresh data.
-				</p>
-
-				<?php if ( isset( $_GET['ucf_social_transient_data_flushed'] ) && $_GET['ucf_social_transient_data_flushed'] === '1' ): ?>
-				<div class="notice notice-success is-dismissible">
-					<p>Curator transient data was flushed successfully.</p>
-				</div>
-				<?php endif; ?>
-
-				<input type="hidden" name="action" value="ucf_social_flush_transient_data">
-
-				<br>
-				<button class="button" id="ucf_social_flush_transient_data">Flush Transient Data</button>
-			</form>
 		</div>
 
 		<?php
 			echo ob_get_clean();
-		}
-
-
-		/**
-		 * Plugin settings page action that flushes Curator.io transient data.
-		 *
-		 * @since 3.0.0
-		 * @return void
-		 */
-		public static function flush_transient_data() {
-			delete_transient( self::$curator_data_transient );
-
-			$data = UCF_Social_Common::get_social_feed_data();
-
-			wp_redirect( admin_url( 'options-general.php?page=ucf_social&ucf_social_transient_data_flushed=1' ) );
-			exit;
 		}
 
 	}
@@ -647,7 +521,6 @@ if ( !class_exists( 'UCF_Social_Config' ) ) {
 // Register settings and options.
 add_action( 'admin_init', array( 'UCF_Social_Config', 'settings_init' ) );
 add_action( 'admin_menu', array( 'UCF_Social_Config', 'add_options_page' ) );
-add_action( 'admin_post_ucf_social_flush_transient_data', array( 'UCF_Social_Config', 'flush_transient_data' ) );
 
 // Apply custom formatting to shortcode attributes and options.
 UCF_Social_Config::add_option_formatting_filters();

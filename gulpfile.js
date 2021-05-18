@@ -1,28 +1,21 @@
 const autoprefixer = require('gulp-autoprefixer');
-const babel        = require('gulp-babel');
 const browserSync  = require('browser-sync').create();
 const cleanCSS     = require('gulp-clean-css');
-const include      = require('gulp-include');
-const eslint       = require('gulp-eslint');
 const fs           = require('fs');
 const gulp         = require('gulp');
-const isFixed      = require('gulp-eslint-if-fixed');
 const merge        = require('merge');
 const readme       = require('gulp-readme-to-markdown');
 const rename       = require('gulp-rename');
 const sass         = require('gulp-sass');
 const sassLint     = require('gulp-sass-lint');
-const uglify       = require('gulp-uglify');
 
 let config = {
   src: {
     scssPath: './src/scss',
-    jsPath: './src/js',
     fontPath: './src/fonts'
   },
   dist: {
-    cssPath: './static/css',
-    jsPath: './static/js'
+    cssPath: './static/css'
   },
   packagesPath: './node_modules',
   sync: false,
@@ -69,35 +62,6 @@ function buildCSS(src, dest) {
     .pipe(gulp.dest(dest));
 }
 
-// Base JS linting function (with eslint). Fixes problems in-place.
-function lintJS(src, dest) {
-  dest = dest || config.src.jsPath;
-
-  return gulp.src(src)
-    .pipe(eslint({
-      fix: true
-    }))
-    .pipe(eslint.format())
-    .pipe(isFixed(dest));
-}
-
-// Base JS compile function
-function buildJS(src, dest) {
-  dest = dest || config.dist.jsPath;
-
-  return gulp.src(src)
-    .pipe(include({
-      includePaths: [config.packagesPath, config.src.jsPath]
-    }))
-    .on('error', console.log) // eslint-disable-line no-console
-    .pipe(babel())
-    .pipe(uglify())
-    .pipe(rename({
-      extname: '.min.js'
-    }))
-    .pipe(gulp.dest(dest));
-}
-
 // BrowserSync reload function
 function serverReload(done) {
   if (config.sync) {
@@ -138,25 +102,6 @@ gulp.task('css', gulp.series('scss-lint-plugin', 'scss-build-plugin'));
 
 
 //
-// JavaScript
-//
-
-// Run eslint on js files in src.jsPath. Do not perform linting
-// on vendor js files. See .eslintignore for globally ignored files.
-gulp.task('es-lint-plugin', () => {
-  return lintJS([`${config.src.jsPath}/*.js`], config.src.jsPath);
-});
-
-// Concat and uglify framework js files through babel
-gulp.task('js-build-plugin', () => {
-  return buildJS(`${config.src.jsPath}/ucf-social.js`, config.dist.jsPath);
-});
-
-// All js-related tasks
-gulp.task('js', gulp.series('es-lint-plugin', 'js-build-plugin'));
-
-
-//
 // Documentation
 //
 
@@ -178,7 +123,6 @@ gulp.task('watch', (done) => {
   serverServe(done);
 
   gulp.watch(`${config.src.scssPath}/**/*.scss`, gulp.series('css', serverReload));
-  gulp.watch(`${config.src.jsPath}/**/*.js`, gulp.series('js', serverReload));
   gulp.watch('./**/*.php', serverReload);
 });
 
@@ -186,4 +130,4 @@ gulp.task('watch', (done) => {
 //
 // Default task
 //
-gulp.task('default', gulp.series('css', 'js', 'readme'));
+gulp.task('default', gulp.series('css', 'readme'));
