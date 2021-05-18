@@ -184,7 +184,7 @@ if ( !class_exists( 'UCF_Social_Config' ) ) {
 			// Options
 			$defaults = self::$option_defaults;
 			foreach ( $defaults as $option => $default ) {
-				add_filter( 'option_{$option}', array( 'UCF_Social_Config', 'format_option' ), 10, 2 );
+				add_filter( "option_{$option}", array( 'UCF_Social_Config', 'format_option' ), 10, 2 );
 			}
 		}
 
