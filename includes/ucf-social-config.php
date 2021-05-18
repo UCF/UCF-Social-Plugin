@@ -240,12 +240,6 @@ if ( !class_exists( 'UCF_Social_Config' ) ) {
 				'', // callback that echoes any content at the top of the section
 				'ucf_social' // settings page slug
 			);
-			add_settings_section(
-				'ucf_social_section_feed', // option section slug
-				'Social Feed (Curator.io) Settings', // formatted title
-				'', // callback that echoes any content at the top of the section
-				'ucf_social' // settings page slug
-			);
 
 			// Register fields - general
 			add_settings_field(
