@@ -1,11 +1,19 @@
 .ucf-social-links {
   .btn {
+    align-items: center;
     color: $white;
+    display: inline-flex;
+    flex-direction: row;
     margin-bottom: .25rem;
   }
 
   .btn-text {
-    margin-left: .25rem;
+    margin-left: .5em;
+  }
+
+  .ucf-social-icon {
+    height: 1em;
+    width: auto;
   }
 
   .btn-facebook {
