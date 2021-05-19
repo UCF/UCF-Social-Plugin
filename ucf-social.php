@@ -17,7 +17,8 @@ define( 'UCF_SOCIAL__PLUGIN_URL', plugins_url( basename( dirname( __FILE__ ) ) )
 define( 'UCF_SOCIAL__PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'UCF_SOCIAL__STATIC_URL', UCF_SOCIAL__PLUGIN_URL . '/static' );
 define( 'UCF_SOCIAL__STYLES_URL', UCF_SOCIAL__STATIC_URL . '/css' );
-define( 'UCF_SOCIAL__IMAGES_URL', UCF_SOCIAL__STATIC_URL . '/img' );
+define( 'UCF_SOCIAL__STATIC_DIR', UCF_SOCIAL__PLUGIN_DIR . '/static' );
+define( 'UCF_SOCIAL__IMAGES_DIR', UCF_SOCIAL__STATIC_DIR . '/img' );
 
 // Layouts - social icons
 require_once UCF_SOCIAL__PLUGIN_DIR . 'layouts/social-icons/default.php';
