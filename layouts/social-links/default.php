@@ -37,38 +37,38 @@ if ( ! function_exists( 'ucf_social_links_display_default' ) ) {
 		ob_start();
 	?>
 		<?php if ( $atts['facebook'] ): ?>
-		<a class="btn btn-facebook color btn-<?php echo $atts['size']; ?>" target="_blank" href="https://www.facebook.com/sharer.php?u=<?php echo $permalink; ?>" title="Share this content on Facebook">
+		<a class="btn btn-facebook color btn-<?php echo $atts['size']; ?>" target="_blank" href="https://www.facebook.com/sharer.php?u=<?php echo $permalink; ?>">
 			<svg class="ucf-social-icon" height="80px" width="43px" aria-hidden="true">
 				<use href="#ucf-social-icons--facebook" />
 			</svg>
-			<span class="btn-text">Share</span>
+			<span class="btn-text">Share<span class="sr-only"> this content on Facebook</span></span>
 		</a>
 		<?php endif; ?>
 
 		<?php if ( $atts['twitter'] ): ?>
-		<a class="btn btn-twitter color btn-<?php echo $atts['size']; ?>" target="_blank" href="https://twitter.com/intent/tweet?text=<?php echo $share_text; ?>&amp;url=<?php echo $permalink; ?>" title="Tweet this content">
+		<a class="btn btn-twitter color btn-<?php echo $atts['size']; ?>" target="_blank" href="https://twitter.com/intent/tweet?text=<?php echo $share_text; ?>&amp;url=<?php echo $permalink; ?>">
 			<svg class="ucf-social-icon" height="80px" width="98px" aria-hidden="true">
 				<use href="#ucf-social-icons--twitter" />
 			</svg>
-			<span class="btn-text">Tweet</span>
+			<span class="btn-text">Tweet<span class="sr-only"> this content</span></span>
 		</a>
 		<?php endif; ?>
 
 		<?php if ( $atts['linkedin'] ): ?>
-		<a class="btn btn-linkedin color btn-<?php echo $atts['size']; ?>" target="_blank" href="https://www.linkedin.com/shareArticle?mini=true&url=<?php echo $permalink; ?>&title=<?php echo $share_text; ?>" title="Share this content on LinkedIn">
+		<a class="btn btn-linkedin color btn-<?php echo $atts['size']; ?>" target="_blank" href="https://www.linkedin.com/shareArticle?mini=true&url=<?php echo $permalink; ?>&title=<?php echo $share_text; ?>">
 			<svg class="ucf-social-icon" height="80px" width="80px" aria-hidden="true">
 				<use href="#ucf-social-icons--linkedin" />
 			</svg>
-			<span class="btn-text">Share</span>
+			<span class="btn-text">Share<span class="sr-only"> this content on LinkedIn</span></span>
 		</a>
 		<?php endif; ?>
 
 		<?php if ( $atts['email'] ): ?>
-		<a class="btn btn-email color btn-<?php echo $atts['size']; ?>" target="_blank" href="mailto:?subject=<?php echo $share_text_email; ?>&amp;body=Check out this page from <?php echo $site_title_email; ?>:%0A%0A<?php echo $share_text_email; ?>%0A<?php echo $permalink; ?>" title="Share this content via email">
+		<a class="btn btn-email color btn-<?php echo $atts['size']; ?>" target="_blank" href="mailto:?subject=<?php echo $share_text_email; ?>&amp;body=Check out this page from <?php echo $site_title_email; ?>:%0A%0A<?php echo $share_text_email; ?>%0A<?php echo $permalink; ?>">
 			<svg class="ucf-social-icon" height="80px" width="116px" aria-hidden="true">
 				<use href="#ucf-social-icons--email" />
 			</svg>
-			<span class="btn-text">Email</span>
+			<span class="btn-text">Email<span class="sr-only"> this content</span></span>
 		</a>
 		<?php endif; ?>
 	<?php
