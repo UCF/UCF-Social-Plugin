@@ -57,7 +57,7 @@ if ( ! function_exists( 'ucf_social_links_display_default' ) ) {
 		<?php if ( $atts['linkedin'] ): ?>
 		<a class="btn btn-linkedin color btn-<?php echo $atts['size']; ?>" target="_blank" href="https://www.linkedin.com/shareArticle?mini=true&url=<?php echo $permalink; ?>&title=<?php echo $share_text; ?>">
 			<svg class="ucf-social-icon" height="80px" width="80px" aria-hidden="true">
-				<use href="#ucf-social-icons--linkedin" />
+				<use href="#ucf-social-icons--linkedin-sq" />
 			</svg>
 			<span class="btn-text">Share<span class="sr-only"> this content on LinkedIn</span></span>
 		</a>

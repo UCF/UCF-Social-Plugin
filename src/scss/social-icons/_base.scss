@@ -1,57 +1,131 @@
 .ucf-social-icons {
 
   .ucf-social-link {
+    background-color: currentColor;
+    border-radius: 100%;
     display: inline-block;
-    height: auto;
-    max-width: 2.3rem;
+    height: 2.3rem;
+    line-height: 0;
+    overflow: hidden;
+    padding: 0;
+    position: relative;
     transition: all .2s ease-in-out;
     vertical-align: middle;
+    width: 2.3rem;
 
     &.sm {
-      max-width: 1.6rem;
+      height: 1.6rem;
+      width: 1.6rem;
     }
 
     &.lg {
-      max-width: 3.5rem;
+      height: 3.5rem;
+      width: 3.5rem;
     }
 
     &.grey {
-      color: $grey;
+      background-color: $grey;
 
       &:hover,
       &:focus,
       &:active {
-        color: lighten($grey, 20%);
+        background-color: lighten($grey, 20%);
       }
     }
   }
 
   .ucf-social-icon {
+    color: $white;
     height: auto;
-    width: 100%;
+    position: absolute;
   }
 
   .btn-facebook {
-    @include social-bg-colors($color-facebook, color);
+    @include social-bg-colors($color-facebook);
+
+    .ucf-social-icon {
+      bottom: -20%;
+      left: 0;
+      margin: auto;
+      right: 0;
+      top: 0;
+      width: 80%;
+    }
   }
 
   .btn-linkedin {
-    @include social-bg-colors($color-linkedin, color);
+    @include social-bg-colors($color-linkedin);
+
+    .ucf-social-icon {
+      bottom: 0;
+      left: 0;
+      margin: auto;
+      right: 0;
+      top: 0;
+      width: 55%;
+    }
   }
 
   .btn-twitter {
-    @include social-bg-colors($color-twitter, color);
+    @include social-bg-colors($color-twitter);
+
+    .ucf-social-icon {
+      bottom: 0;
+      left: 0;
+      margin: auto;
+      right: 0;
+      top: 5%;
+      width: 64%;
+    }
   }
 
   .btn-instagram {
-    @include social-bg-colors($color-instagram, color);
+    @include social-bg-colors($color-instagram);
+
+    .ucf-social-icon {
+      bottom: 0;
+      left: 0;
+      margin: auto;
+      right: 0;
+      top: 0;
+      width: 66%;
+    }
   }
 
   .btn-youtube {
-    @include social-bg-colors($color-youtube, color);
+    @include social-bg-colors($color-youtube);
+
+    .ucf-social-icon {
+      bottom: 0;
+      left: 0;
+      margin: auto;
+      right: 0;
+      top: 0;
+      width: 70%;
+    }
   }
 
   .btn-tiktok {
-    @include social-bg-colors($color-tiktok, color, lighten);
+    @include social-bg-colors($color-tiktok, lighten);
+
+    .ucf-social-icon {
+      bottom: 0;
+      left: 0;
+      margin: auto;
+      right: 0;
+      top: 0;
+      width: 66%;
+    }
+  }
+
+  .btn-share {
+    .ucf-social-icon {
+      bottom: 0;
+      left: -5%;
+      margin: auto;
+      right: 0;
+      top: 0;
+      width: 62%;
+    }
   }
 }

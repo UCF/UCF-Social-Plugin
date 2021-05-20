@@ -376,11 +376,10 @@ if ( ! class_exists( 'UCF_Social_Common' ) ) {
 		 * @return void
 		 */
 		public static function inline_svg_symbols() {
-			if ( filter_var( apply_filters( 'ucf_social_has_social_icons', false ), FILTER_VALIDATE_BOOLEAN ) ) {
-				echo file_get_contents( UCF_SOCIAL__IMAGES_DIR . '/social-icons-circle.svg' );
-			}
-
-			if ( filter_var( apply_filters( 'ucf_social_has_social_links', false ), FILTER_VALIDATE_BOOLEAN ) ) {
+			if (
+				filter_var( apply_filters( 'ucf_social_has_social_icons', false ), FILTER_VALIDATE_BOOLEAN )
+				|| filter_var( apply_filters( 'ucf_social_has_social_links', false ), FILTER_VALIDATE_BOOLEAN )
+			) {
 				echo file_get_contents( UCF_SOCIAL__IMAGES_DIR . '/social-icons.svg' );
 			}
 		}
