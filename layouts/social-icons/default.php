@@ -39,7 +39,7 @@ if ( ! function_exists( 'ucf_social_icons_display_default' ) ) {
 	?>
 		<?php if ( $facebook_url ) : ?>
 			<a class="ucf-social-link btn-facebook <?php echo $atts['size'] . ' ' . $atts['color']; ?>" target="_blank" href="<?php echo $facebook_url; ?>">
-				<svg class="ucf-social-icon <?php echo $atts['icon_class']; ?>" height="80px" width="80px" aria-hidden="true">
+				<svg class="ucf-social-icon" height="80px" width="80px" aria-hidden="true">
 					<use href="#ucf-social-icons--facebook" />
 				</svg>
 				<span class="sr-only">Like us on Facebook</span>
@@ -47,7 +47,7 @@ if ( ! function_exists( 'ucf_social_icons_display_default' ) ) {
 		<?php endif; ?>
 		<?php if ( $twitter_url ) : ?>
 			<a class="ucf-social-link btn-twitter <?php echo $atts['size'] . ' ' . $atts['color']; ?>" target="_blank" href="<?php echo $twitter_url; ?>">
-				<svg class="ucf-social-icon <?php echo $atts['icon_class']; ?>" height="80px" width="80px" aria-hidden="true">
+				<svg class="ucf-social-icon" height="80px" width="80px" aria-hidden="true">
 					<use href="#ucf-social-icons--twitter" />
 				</svg>
 				<span class="sr-only">Follow us on Twitter</span>
@@ -55,7 +55,7 @@ if ( ! function_exists( 'ucf_social_icons_display_default' ) ) {
 		<?php endif; ?>
 		<?php if ( $instagram_url ) : ?>
 			<a class="ucf-social-link btn-instagram <?php echo $atts['size'] . ' ' . $atts['color']; ?>" target="_blank" href="<?php echo $instagram_url; ?>">
-				<svg class="ucf-social-icon <?php echo $atts['icon_class']; ?>" height="80px" width="80px" aria-hidden="true">
+				<svg class="ucf-social-icon" height="80px" width="80px" aria-hidden="true">
 					<use href="#ucf-social-icons--instagram" />
 				</svg>
 				<span class="sr-only">Find us on Instagram</span>
@@ -63,7 +63,7 @@ if ( ! function_exists( 'ucf_social_icons_display_default' ) ) {
 		<?php endif; ?>
 		<?php if ( $linkedin_url ) : ?>
 			<a class="ucf-social-link btn-linkedin <?php echo $atts['size'] . ' ' . $atts['color']; ?>" target="_blank" href="<?php echo $linkedin_url; ?>">
-				<svg class="ucf-social-icon <?php echo $atts['icon_class']; ?>" height="80px" width="80px" aria-hidden="true">
+				<svg class="ucf-social-icon" height="80px" width="80px" aria-hidden="true">
 					<use href="#ucf-social-icons--linkedin" />
 				</svg>
 				<span class="sr-only">View our LinkedIn page</span>
@@ -71,7 +71,7 @@ if ( ! function_exists( 'ucf_social_icons_display_default' ) ) {
 		<?php endif; ?>
 		<?php if ( $youtube_url ) : ?>
 			<a class="ucf-social-link btn-youtube <?php echo $atts['size'] . ' ' . $atts['color']; ?>" target="_blank" href="<?php echo $youtube_url; ?>">
-				<svg class="ucf-social-icon <?php echo $atts['icon_class']; ?>" height="80px" width="80px" aria-hidden="true">
+				<svg class="ucf-social-icon" height="80px" width="80px" aria-hidden="true">
 					<use href="#ucf-social-icons--youtube" />
 				</svg>
 				<span class="sr-only">Follow us on YouTube</span>
@@ -79,7 +79,7 @@ if ( ! function_exists( 'ucf_social_icons_display_default' ) ) {
 		<?php endif; ?>
 		<?php if ( $tiktok_url ) : ?>
 			<a class="ucf-social-link btn-tiktok <?php echo $atts['size'] . ' ' . $atts['color']; ?>" target="_blank" href="<?php echo $tiktok_url; ?>">
-				<svg class="ucf-social-icon <?php echo $atts['icon_class']; ?>" height="80px" width="80px" aria-hidden="true">
+				<svg class="ucf-social-icon" height="80px" width="80px" aria-hidden="true">
 					<use href="#ucf-social-icons--tiktok" />
 				</svg>
 				<span class="sr-only">Follow us on TikTok</span>
