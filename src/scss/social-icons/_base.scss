@@ -1,7 +1,6 @@
 .ucf-social-icons {
 
   .ucf-social-link {
-    background-color: currentColor;
     border-radius: 100%;
     display: inline-block;
     height: 2.3rem;
@@ -25,6 +24,7 @@
 
     &.grey {
       background-color: $grey;
+      color: $white;
 
       &:hover,
       &:focus,
@@ -35,7 +35,6 @@
   }
 
   .ucf-social-icon {
-    color: $white;
     height: auto;
     position: absolute;
   }

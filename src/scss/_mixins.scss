@@ -1,6 +1,7 @@
 @mixin social-bg-colors ($color, $hover: darken) {
   &.color {
     background-color: $color;
+    color: $white;
 
     &:hover,
     &:focus,
