@@ -14,6 +14,8 @@ if ( ! class_exists( 'UCF_Social_Common' ) ) {
 		 * @return string
 		 **/
 		public static function display_social_icons( $atts ) {
+			add_filter( 'ucf_social_has_social_icons', '__return_true' );
+
 			$before  = apply_filters(
 				'ucf_social_icons_display_' . $atts['layout'] . '_before',
 				ucf_social_icons_display_default_before( '', $atts ),
@@ -41,6 +43,8 @@ if ( ! class_exists( 'UCF_Social_Common' ) ) {
 		* @return string
 		**/
 		public static function display_social_links( $atts ) {
+			add_filter( 'ucf_social_has_social_links', '__return_true' );
+
 			$before  = apply_filters(
 				'ucf_social_links_display_' . $atts['layout'] . '_before',
 				ucf_social_links_display_default_before( '', $atts ),
@@ -358,6 +362,28 @@ if ( ! class_exists( 'UCF_Social_Common' ) ) {
 			}
 		}
 
+		/**
+		 * Conditionally includes SVG symbols in the document when
+		 * a dependent shortcode is used.  Conditions to load SVG symbols
+		 * can be overridden by themes/other plugins using the
+		 * `ucf_social_has_social_icons` and `ucf_social_has_social_links`
+		 * filters.
+		 *
+		 * For use with the `wp_footer` action.
+		 *
+		 * @since 4.0.0
+		 * @author Jo Dickson
+		 * @return void
+		 */
+		public static function inline_svg_symbols() {
+			if (
+				filter_var( apply_filters( 'ucf_social_has_social_icons', false ), FILTER_VALIDATE_BOOLEAN )
+				|| filter_var( apply_filters( 'ucf_social_has_social_links', false ), FILTER_VALIDATE_BOOLEAN )
+			) {
+				echo file_get_contents( UCF_SOCIAL__IMAGES_DIR . '/social-icons.svg' );
+			}
+		}
+
 	}
 }
 
@@ -366,6 +392,7 @@ if ( ! class_exists( 'UCF_Social_Common' ) ) {
  */
 add_action( 'wp_enqueue_scripts', array( 'UCF_Social_Common', 'register_assets' ), 10, 0 );
 add_action( 'wp_enqueue_scripts', array( 'UCF_Social_Common', 'enqueue_styles' ), 11, 0 );
+add_action( 'wp_footer', array( 'UCF_Social_Common', 'inline_svg_symbols' ), 9, 0 );
 
 /**
  * Add hook to allow for json uploads

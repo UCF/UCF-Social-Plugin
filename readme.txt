@@ -29,7 +29,6 @@ This plugin provides shortcodes and default styles for displaying social icons, 
 == Dependencies ==
 - jQuery (for Curator social feeds)
 - Athena Framework or Bootstrap 4
-- Font Awesome 4
 
 == Changelog ==
 
