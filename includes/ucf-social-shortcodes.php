@@ -11,10 +11,9 @@ if ( ! class_exists( 'UCF_Social_Shortcode' ) ) {
 	class UCF_Social_Shortcode {
 		public static function icons_shortcode( $atts ) {
 			$atts = shortcode_atts( array(
-				'layout'     => 'default',
-				'color'      => 'color',
-				'icon_class' => '',
-				'size'       => 'md'
+				'layout' => 'default',
+				'color'  => 'color',
+				'size'   => 'md'
 			), $atts, 'ucf-social-icons' );
 
 			ob_start();
@@ -34,19 +33,12 @@ if ( ! class_exists( 'UCF_Social_Shortcode' ) ) {
 						'default'   => 'default'
 					),
 					array(
-						'name'      => 'Circle Color Scheme',
+						'name'      => 'Color Scheme',
 						'param'     => 'color',
 						'desc'      => 'The color scheme to apply to the icons.',
 						'type'      => 'select',
 						'options'   => UCF_Social_Config::get_social_icon_colors(),
 						'default'   => 'color'
-					),
-					array(
-						'name'      => 'Icon Class(es)',
-						'param'     => 'icon_class',
-						'desc'      => 'CSS class(es) apply to each inner icon.',
-						'type'      => 'text',
-						'default'   => ''
 					),
 					array(
 						'name'      => 'Size',
