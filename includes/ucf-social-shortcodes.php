@@ -173,91 +173,6 @@ if ( ! class_exists( 'UCF_Social_Shortcode' ) ) {
 			}
 		}
 
-		public static function feed_shortcode( $atts ) {
-			$atts = shortcode_atts( array(
-				'feed'         => UCF_Social_Config::get_option_or_default( 'curator_default_feed' ), // feed ID
-				'layout'       => 'default', // layout for social feed parent elem
-				'type'         => '', // override the feed type to use
-				'class'        => '', // classes to be applied to parent elem
-				'container'    => 'ucf-social-feed-' . wp_rand(), // ID to be applied to the feed container elem
-				'options_file' => '', // attachment ID of a JSON file that contains widget options
-			), $atts, 'ucf-social-feed' );
-
-			// START backward compatibility
-			switch ( $atts['layout'] ) {
-				case 'grid':
-					$atts['layout'] = 'default';
-					$atts['type'] = 'Grid';
-					break;
-				case 'waterfall':
-					$atts['layout'] = 'default';
-					$atts['type'] = 'Waterfall';
-					break;
-			}
-			// END backward compatibility
-
-			ob_start();
-			echo UCF_Social_Common::display_social_feed( $atts );
-			return ob_get_clean();
-		}
-
-		public static function feed_shortcode_interface( $registered_shortcodes ) {
-			if ( class_exists( 'WP_SCIF_Config' ) ) {
-				$fields = array(
-					array(
-						'name'      => 'Feed ID',
-						'param'     => 'feed',
-						'desc'      => 'Specify a unique feed to display by its ID.',
-						'type'      => 'text',
-						'default'   => UCF_Social_Config::get_option_or_default( 'curator_default_feed' )
-					),
-					array(
-						'name'      => 'Layout',
-						'param'     => 'layout',
-						'desc'      => 'The layout to display this social feed',
-						'type'      => 'select',
-						'options'   => UCF_Social_Config::get_social_feed_layouts(),
-						'default'   => 'default'
-					),
-					array(
-						'name'      => 'Type',
-						'param'     => 'type',
-						'desc'      => 'Overrides the <a href="https://github.com/curatorio/widgets#widgets" target="_blank">type of widget</a> to use for this feed.',
-						'type'      => 'text'
-					),
-					array(
-						'name'      => 'CSS Class(es)',
-						'param'     => 'class',
-						'desc'      => 'CSS classes to be applied to the wrapper element surrounding the widget.',
-						'type'      => 'text'
-					),
-					array(
-						'name'      => 'Container ID',
-						'param'     => 'container',
-						'desc'      => 'ID to apply to the widget\'s container element. Must be unique. Defaults to a randomized value.',
-						'type'      => 'text'
-					),
-					array(
-						'name'      => 'Options File',
-						'param'     => 'options_file',
-						'desc'      => 'Either an attachment ID or direct URL that points to a JSON file containing widget configuration overrides. See <a href="https://github.com/curatorio/widgets#customisation" target="_blank">Curator\'s widget documentation</a> for available options. The JSON file should contain only the options object.',
-						'type'      => 'text'
-					),
-				);
-				$shortcode = array(
-					'command' => 'ucf-social-feed',
-					'name'    => 'UCF Social Feed',
-					'desc'    => 'Displays a Curator.io social feed widget.',
-					'content' => false,
-					'fields'  => $fields,
-					'preview' => false,
-					'group'   => 'UCF Social'
-				);
-
-				$registered_shortcodes[] = $shortcode;
-				return $registered_shortcodes;
-			}
-		}
 	}
 
 }
@@ -265,4 +180,3 @@ if ( ! class_exists( 'UCF_Social_Shortcode' ) ) {
 // Register shortcodes and shortcode interface options
 add_shortcode( 'ucf-social-icons', array( 'UCF_Social_Shortcode', 'icons_shortcode' ) );
 add_shortcode( 'ucf-social-links', array( 'UCF_Social_Shortcode', 'links_shortcode' ) );
-add_shortcode( 'ucf-social-feed', array( 'UCF_Social_Shortcode', 'feed_shortcode' ) );

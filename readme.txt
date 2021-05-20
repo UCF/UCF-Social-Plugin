@@ -12,7 +12,7 @@ Provides a shortcode, functions, and default styles for displaying UCF social as
 
 == Description ==
 
-This plugin provides shortcodes and default styles for displaying social icons, sharing links, and social feeds via Curator.io.  It is written to work out-of-the-box for non-programmers, but is also extensible and customizable for developers.
+This plugin provides shortcodes and default styles for displaying social icons and sharing links.  It is written to work out-of-the-box for non-programmers, but is also extensible and customizable for developers.
 
 
 == Installation ==
@@ -27,10 +27,17 @@ This plugin provides shortcodes and default styles for displaying social icons, 
 2. Configure plugin settings from the WordPress admin under "Settings > UCF Social".
 
 == Dependencies ==
-- jQuery (for Curator social feeds)
 - Athena Framework or Bootstrap 4
 
 == Changelog ==
+
+= 4.0.0 =
+Breaking changes:
+- Removed the `[ucf-social-feed]` shortcode.  If your site still requires Curator social feeds, we recommend adding Curator widgets to pages manually using embed snippets provided by Curator, or by using the [UCF Page Assets Plugin](https://github.com/UCF/UCF-Page-Assets-Plugin) to upload Curator JavaScript per-page where feeds are needed.
+- Dropped IE support from generated CSS.
+
+Bug Fixes:
+- Fixed `"option_${option}"` filter name string interpolation, so option formatting should work as expected now
 
 = 3.0.7 =
 Bug fixes:
@@ -160,6 +167,7 @@ Enhancements:
 
 == Upgrade Notice ==
 
+- v4.0.0: Removed `[ucf-social-feed]` shortcode and related functions and assets.
 - v3.0.6: Deprecated `UCF_Social_Common::enqueue_curator_widget_assets()` and `ucf_social_enqueue_assets()`.  These functions will be removed in a future release and should be removed from themes/other plugins that depend on them.
 
 
