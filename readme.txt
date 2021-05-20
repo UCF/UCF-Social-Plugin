@@ -28,7 +28,6 @@ This plugin provides shortcodes and default styles for displaying social icons a
 
 == Dependencies ==
 - Athena Framework or Bootstrap 4
-- Font Awesome 4
 
 == Changelog ==
 
