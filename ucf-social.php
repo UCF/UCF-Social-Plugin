@@ -16,14 +16,9 @@ define( 'UCF_SOCIAL__PLUGIN_FILE', __FILE__ );
 define( 'UCF_SOCIAL__PLUGIN_URL', plugins_url( basename( dirname( __FILE__ ) ) ) );
 define( 'UCF_SOCIAL__PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'UCF_SOCIAL__STATIC_URL', UCF_SOCIAL__PLUGIN_URL . '/static' );
-define( 'UCF_SOCIAL__SCRIPT_URL', UCF_SOCIAL__STATIC_URL . '/js' );
 define( 'UCF_SOCIAL__STYLES_URL', UCF_SOCIAL__STATIC_URL . '/css' );
-
-// Layouts - social feed
-require_once UCF_SOCIAL__PLUGIN_DIR . 'layouts/social-feed/default.php';
-require_once UCF_SOCIAL__PLUGIN_DIR . 'layouts/social-feed/scrollbox.php';
-require_once UCF_SOCIAL__PLUGIN_DIR . 'layouts/social-feed/scrollbox_sm.php';
-require_once UCF_SOCIAL__PLUGIN_DIR . 'layouts/social-feed/scrollbox_lg.php';
+define( 'UCF_SOCIAL__STATIC_DIR', UCF_SOCIAL__PLUGIN_DIR . '/static' );
+define( 'UCF_SOCIAL__IMAGES_DIR', UCF_SOCIAL__STATIC_DIR . '/img' );
 
 // Layouts - social icons
 require_once UCF_SOCIAL__PLUGIN_DIR . 'layouts/social-icons/default.php';
@@ -58,7 +53,6 @@ add_action( 'plugins_loaded', function() {
 	if ( class_exists( 'WP_SCIF_Config' ) ) {
 		add_filter( 'wp_scif_add_shortcode', array( 'UCF_Social_Shortcode', 'icons_shortcode_interface' ), 10, 1 );
 		add_filter( 'wp_scif_add_shortcode', array( 'UCF_Social_Shortcode', 'links_shortcode_interface' ), 10, 1 );
-		add_filter( 'wp_scif_add_shortcode', array( 'UCF_Social_Shortcode', 'feed_shortcode_interface' ), 10, 1 );
 	}
 
 } );
