@@ -24,6 +24,10 @@ This plugin provides shortcodes and default styles for displaying social icons a
 
 ## Changelog ##
 
+### 4.0.1 ###
+Enhancements:
+- Added composer file.
+
 ### 4.0.0 ###
 Breaking changes:
 - Removed the `[ucf-social-feed]` shortcode.  If your site still requires Curator social feeds, we recommend adding Curator widgets to pages manually using embed snippets provided by Curator, or by using the [UCF Page Assets Plugin](https://github.com/UCF/UCF-Page-Assets-Plugin) to upload Curator JavaScript per-page where feeds are needed.

@@ -1,0 +1,8 @@
+{
+    "name": "ucf/ucf-social-plugin",
+    "description": "Provides a shortcode, functions, and default styles for displaying UCF social assets.",
+    "type": "wordpress-plugin",
+    "require": {
+        "composer/installers": "~1.0"
+    }
+}
