@@ -50,7 +50,7 @@ if ( ! function_exists( 'ucf_social_links_display_default' ) ) {
 			<svg class="ucf-social-icon" height="80px" width="98px" aria-hidden="true">
 				<use href="#ucf-social-icons--twitter" />
 			</svg>
-			<span class="btn-text">Tweet<span class="sr-only"> this content</span></span>
+			<span class="btn-text">Post<span class="sr-only"> this content</span></span>
 		</a>
 		<?php endif; ?>
 
