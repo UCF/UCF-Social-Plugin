@@ -50,7 +50,7 @@ if ( ! function_exists( 'ucf_social_icons_display_default' ) ) {
 				<svg class="ucf-social-icon" height="80px" width="80px" aria-hidden="true">
 					<use href="#ucf-social-icons--twitter" />
 				</svg>
-				<span class="sr-only">Follow us on Twitter</span>
+				<span class="sr-only">Follow us on X</span>
 			</a>
 		<?php endif; ?>
 		<?php if ( $instagram_url ) : ?>
