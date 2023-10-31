@@ -6,7 +6,7 @@ const gulp         = require('gulp');
 const merge        = require('merge');
 const readme       = require('gulp-readme-to-markdown');
 const rename       = require('gulp-rename');
-const sass         = require('gulp-sass');
+const sass         = require('gulp-dart-sass');
 const sassLint     = require('gulp-sass-lint');
 
 let config = {
