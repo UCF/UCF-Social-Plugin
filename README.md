@@ -24,6 +24,10 @@ This plugin provides shortcodes and default styles for displaying social icons a
 
 ## Changelog ##
 
+### 4.0.3 ###
+Enhancements:
+* Updated the background color of the X icon.
+
 ### 4.0.2 ###
 Enhancements:
 * Replaced twitter bird logo with the X logo within the SVG and appropriately updated text and styles.
