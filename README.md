@@ -24,9 +24,13 @@ This plugin provides shortcodes and default styles for displaying social icons a
 
 ## Changelog ##
 
+### 4.0.2 ###
+Enhancements:
+* Replaced twitter bird logo with the X logo within the SVG and appropriately updated text and styles.
+
 ### 4.0.1 ###
 Enhancements:
-- Added composer file.
+* Added composer file.
 
 ### 4.0.0 ###
 Breaking changes:
