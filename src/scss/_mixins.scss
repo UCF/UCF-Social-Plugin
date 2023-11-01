@@ -9,7 +9,7 @@
       @if $hover == darken {
         background-color: darken($color, 10%);
       } @else {
-        background-color: lighten($color, 20%);
+        background-color: lighten($color, 30%);
       }
     }
   }
