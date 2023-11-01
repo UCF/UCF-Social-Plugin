@@ -3,7 +3,7 @@ Contributors: ucfwebcom
 Tags: ucf, social
 Requires at least: 4.7.3
 Tested up to: 6.1
-Stable tag: 4.0.3
+Stable tag: 4.0.4
 License: GPLv3 or later
 License URI: http://www.gnu.org/copyleft/gpl-3.0.html
 
@@ -30,6 +30,10 @@ This plugin provides shortcodes and default styles for displaying social icons a
 - Athena Framework or Bootstrap 4
 
 == Changelog ==
+
+= 4.0.4 =
+Bug Fixes:
+* Updated hover state on twitter/X logo.
 
 = 4.0.3 =
 Enhancements:

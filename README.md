@@ -24,6 +24,10 @@ This plugin provides shortcodes and default styles for displaying social icons a
 
 ## Changelog ##
 
+### 4.0.4 ###
+Bug Fixes:
+* Updated hover state on twitter/X logo.
+
 ### 4.0.3 ###
 Enhancements:
 * Updated the background color of the X icon.
